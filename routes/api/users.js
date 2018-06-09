@@ -62,12 +62,12 @@ router.post('/users', function(req, res, next) {
 
     if(process.env.DEVELOPMENT_MODE != "development") {
         // send the e-mail for newly registered account
-        var transporter = nodemailer.createTransport(mail.nodemailer.options);
+        var transporter = nodemailer.createTransport(mail.nodemailer.mailgun.options);
         var mailOptions = {
             from: process.env.SMTP_USERNAME,
             to: user.email,
             subject: 'Vahvista reksiteröintisi sivustolle ' + process.env.APP_NAME,
-            text: process.env.APP_DOMAIN + '/auth/activate/' + user.activation_token
+            text: process.env.APP_DOMAIN + '/account/activate/' + user.activation_token
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
@@ -75,10 +75,12 @@ router.post('/users', function(req, res, next) {
                 console.log(error);
             } else {
                 console.log(info);
+                return res.status(200).json( { status: "OK" } )
             }
         });
+    } else {
+        return res.status(200).json( { status: "OK" });
     }
-    return res.status(200).json( { status: "OK" } )
 });
 
 module.exports = router;

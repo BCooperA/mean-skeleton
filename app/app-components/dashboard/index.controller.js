@@ -5,7 +5,7 @@
         .module('app')
         .controller('Dashboard.IndexController', Controller);
 
-    function Controller($rootScope, $http, $localStorage, AuthenticationService, $state) {
+    function Controller($rootScope, $http, $localStorage, AuthenticationService, $state, $location) {
         var vm = this;
         initController();
 
@@ -40,7 +40,7 @@
         function logOut() {
             AuthenticationService.Logout();
             $rootScope.loggedOut = true;
-            $state.go('login');
+            $location.path('/account/login');
         }
     }
 
