@@ -13,7 +13,7 @@
         function signUp() {
             AuthenticationService.SignUp(vm.email, vm.name, vm.password, function (result) {
                 if (result === true) {
-                    $location.path('/signup/verify');
+                    $location.path('/account/verify');
                 }
             });
         }
