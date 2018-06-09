@@ -58,27 +58,29 @@ router.post('/users', function(req, res, next) {
     user.activation_token = (process.env.DEVELOPMENT_MODE == 'development') ? '' : randtoken.generate(32);
     user.active = (process.env.DEVELOPMENT_MODE == 'development') ? 1 : 0;
 
-    user.save();
+    user.save().then(function() {
 
-    if(process.env.DEVELOPMENT_MODE !== "development") {
-        // send the e-mail for newly registered account
-        var transporter = nodemailer.createTransport(mail.nodemailer.options);
-        var mailOptions = {
-            from: process.env.SMTP_USERNAME,
-            to: user.email,
-            subject: 'Vahvista reksiteröintisi sivustolle ' + process.env.APP_NAME,
-            text: process.env.APP_DOMAIN + '/auth/activate/' + user.activation_token
-        };
+        if(process.env.DEVELOPMENT_MODE !== "development") {
+            // send the e-mail for newly registered account
+            var transporter = nodemailer.createTransport(mail.nodemailer.options);
+            var mailOptions = {
+                from: process.env.SMTP_USERNAME,
+                to: user.email,
+                subject: 'Vahvista reksiteröintisi sivustolle ' + process.env.APP_NAME,
+                text: process.env.APP_DOMAIN + '/auth/activate/' + user.activation_token
+            };
 
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(info);
-            }
-        });
-    }
-    return res.status(200).json( { status: "OK" } )
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(info);
+                }
+            });
+        }
+        return res.status(200).json( { status: "OK" } )
+    });
+
 });
 
 module.exports = router;
