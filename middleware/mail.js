@@ -2,10 +2,10 @@ var mail = {
     // nodemailer configuration
     nodemailer: {
         options: {
-            debug: true,
+            debug: false,
             requireTLS: true,
             host: process.env.SMTP_HOSTNAME,
-            secureConnection: true,
+            secureConnection: false,
             auth: {
                 user: process.env.SMTP_USERNAME,
                 pass: process.env.SMTP_PASSWORD
