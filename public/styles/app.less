@@ -1,0 +1,203 @@
+/* Glyph Icons */
+
+// Import the fonts from "node_modules" folder
+@icon-font-path: "../../node_modules/bootstrap-less/fonts/";
+@icon-font-name: "glyphicons-halflings-regular";
+
+/* Import Glyphicons font-family */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('@{icon-font-path}@{icon-font-name}.eot');
+  src: url('@{icon-font-path}@{icon-font-name}.eot?#iefix') format('embedded-opentype'),
+  url('@{icon-font-path}@{icon-font-name}.woff') format('woff'),
+  url('@{icon-font-path}@{icon-font-name}.ttf') format('truetype'),
+  url('@{icon-font-path}@{icon-font-name}.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/* Import Boostrap  */
+@import "../../node_modules/bootstrap-less/bootstrap/variables.less";
+@import "../../node_modules/bootstrap-less/bootstrap/index.less";
+@import "../../node_modules/bootstrap-less/bootstrap/glyphicons.less";
+@import "../../node_modules/bootstrap-less/bootstrap/responsive-utilities.less";
+
+
+/* Font Awesome */
+@fa_path: "../../node_modules/font-awesome/less";
+
+@import "@{fa_path}/variables.less";
+@import "@{fa_path}/core.less";
+@import "@{fa_path}/path.less";
+@import "@{fa_path}/mixins.less";
+@import "@{fa_path}/icons.less";
+
+/* Custom */
+@import "./components/buttons.less";
+@import "./components/signin-form.less";
+@import "./components/signup-form.less";
+@import "./components/dashboard.less";
+@import "./components/post.less";
+
+/**
+    No Script (header block when javascript is turned off)
+ */
+noscript {
+  background-color: red;
+  color: #fdfdfd;
+  text-align: center;
+  min-height: 60px;
+  width: 100%;
+}
+
+/* The background noise bit is below */
+body {
+  background: #ededed;
+  font-family: 'Oxygen', sans-serif !important;
+}
+body.unauth {
+  //background:rgb(38, 41, 45);
+  //background-color: transparent !important;
+  //background-image: url(data:image/png;base64,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) !important;
+  //background: -webkit-radial-gradient(#26292d, #151719) !important;
+  //background: radial-gradient(#26292d, #151719) !important;
+  background: rgb(12, 153, 214);
+}
+body.search-bg {
+  background-color: #006bd6 !important;
+}
+.noise:before, body:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0%;
+  right: 0;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMV…HwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==);
+}
+i.fa {
+  font-size: 2rem;
+  vertical-align: middle;
+  line-height: 1.3em;
+}
+a:hover, a:focus {
+  text-decoration: none !important;
+}
+//
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+/* Password Toggler */
+.password-toggle {
+  position:relative;
+  display:block;
+  user-select: none;
+}
+.password-toggle  a {
+  cursor:pointer;
+  display:inline-block;
+  position:absolute;
+  width:45px;
+  height:45px;
+  font-size:0;
+  background-repeat:no-repeat;
+  background-size:50%;
+  background-position:center;
+  top:-10px;
+  right: -10px;
+  z-index:1;
+  -webkit-tap-highlight-color:transparent;
+}
+.password-toggle [type="text"] + a {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23444' d='M29.6.4C29 0 28 0 27.4.4L21 6.8c-1.4-.5-3-.8-5-.8C9 6 3 10 0 16c1.3 2.6 3 4.8 5.4 6.5l-5 5c-.5.5-.5 1.5 0 2 .3.4.7.5 1 .5s1 0 1.2-.4l27-27C30 2 30 1 29.6.4zM13 10c1.3 0 2.4 1 2.8 2L12 15.8c-1-.4-2-1.5-2-2.8 0-1.7 1.3-3 3-3zm-9.6 6c1.2-2 2.8-3.5 4.7-4.7l.7-.2c-.4 1-.6 2-.6 3 0 1.8.6 3.4 1.6 4.7l-2 2c-1.6-1.2-3-2.7-4-4.4zM24 13.8c0-.8 0-1.7-.4-2.4l-10 10c.7.3 1.6.4 2.4.4 4.4 0 8-3.6 8-8z'/%3E%3Cpath fill='%23444' d='M26 9l-2.2 2.2c2 1.3 3.6 3 4.8 4.8-1.2 2-2.8 3.5-4.7 4.7-2.7 1.5-5.4 2.3-8 2.3-1.4 0-2.6 0-3.8-.4L10 25c2 .6 4 1 6 1 7 0 13-4 16-10-1.4-2.8-3.5-5.2-6-7z'/%3E%3C/svg%3E");
+}
+.password-toggle [type="password"] + a {
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23444' d='M16 6C9 6 3 10 0 16c3 6 9 10 16 10s13-4 16-10c-3-6-9-10-16-10zm8 5.3c1.8 1.2 3.4 2.8 4.6 4.7-1.2 2-2.8 3.5-4.7 4.7-3 1.5-6 2.3-8 2.3s-6-.8-8-2.3C6 19.5 4 18 3 16c1.5-2 3-3.5 5-4.7l.6-.2C8 12 8 13 8 14c0 4.5 3.5 8 8 8s8-3.5 8-8c0-1-.3-2-.6-2.6l.4.3zM16 13c0 1.7-1.3 3-3 3s-3-1.3-3-3 1.3-3 3-3 3 1.3 3 3z'/%3E%3C/svg%3E");
+}
+.round {
+  border-radius: 50%;
+}
+
+/* Media Queries */
+@media(min-width: @screen-lg-min) {
+  #form-views, #status-buttons, #signin-form {
+      margin: 20px auto 0 auto;
+  }
+  #form-views {
+    max-width: 50%;
+  }
+  #signin-form {
+    max-width: 45%;
+  }
+  #status-buttons {
+    max-width: 50%;
+  }
+}
+.pw-recovery-container {
+  i.fa {
+    text-align: center;
+    font-size: 7rem;
+    color: #fdfdfd;
+    display: block;
+  }
+}
+
+/* Verify  */
+.vrf {
+  margin-top: 100px;
+  color: #fdfdfd;
+  text-align: center;
+
+  h1 {
+    font-size: 2em;
+    font-weight: 700;
+  }
+  p {
+    font-size: 1.1em;
+    padding-bottom: 1em;
+  }
+
+  i {
+    font-size: 4em;
+  }
+}
+
+footer {
+  background: #098ac1;
+  position: fixed;
+  height: 50px;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+
+  a {
+    color: #fdfdfd;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 15px;
+  }
+}
+/* AngularJS Transitions */
+[ui-view] {
+  /* start 'enter' transition */
+  &.ng-enter {
+    /* transition on enter for .5s */
+    transition: .5s;
+
+    /* start with opacity 0 (invisible) */
+    opacity: 0;
+  }
+
+  /* end 'enter' transition */
+  &.ng-enter-active {
+    /* end with opacity 1 (fade in) */
+    opacity: 1;
+  }
+}

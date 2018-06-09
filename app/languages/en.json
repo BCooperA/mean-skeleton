@@ -1,0 +1,30 @@
+{
+  "forms": {
+    "auth": {
+      "name": "Name",
+      "email": "Email address",
+      "password": "Password",
+      "keep_logged_in": "Keep me logged in",
+      "forgot_pwd": "Forgot your password?",
+      "sign_in_btn": "Sign in",
+      "sign_up_btn": "Sign up",
+      "go_back": "Back to previous page",
+
+      "signin_form": {
+        "headline": "Sign in"
+      },
+      "signup_form": {
+        "headline": "Sign up",
+        "sign_in_btn": "Sign in",
+        "sign_up_btn": "Sign up"
+      }
+    }
+  },
+
+  "footer": {
+    "languages": {
+      "en": "In English",
+      "fi": "Suomeksi"
+    }
+  }
+}

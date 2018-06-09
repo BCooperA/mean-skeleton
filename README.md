@@ -1,0 +1,1 @@
+Example application to demonstrate signin process using Json Web Tokens (JWT)

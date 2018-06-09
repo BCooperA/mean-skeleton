@@ -1,0 +1,56 @@
+﻿<!-- Main Navigation for Dashboard -->
+<nav class="dashboard-nav navbar navbar-default navbar-fixed-top">
+    <button type="button" class="navbar-toggle offcanvas-profile-btn" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- Left Aside Navigation -->
+            <aside id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas">
+
+                <div class="aside">
+                    <!-- Search Form -->
+                    <div id="search" class="input-group navbar-form aside-search-form" role="search">
+                        <input ng-model="vm.searchText" ng-change="vm.search(text)" class="form-control" placeholder="Search" name="srch-term" id="search-term" type="text">
+                    </div>
+
+                    <!-- Profile Picture / Name -->
+                    <div class="aside-profile-pic overlay">
+                        <img src="{{ vm.user.image }}" alt="{{ vm.user.image }}" class="img-responsive" />
+                        <span class="aside-profile-name">{{ vm.user.name }}</span>
+                    </div>
+
+                    <ul id="aside-links">
+                        <li>
+                            <a ui-sref="dashboard">
+                                <span class="glyphicon glyphicon-home"></span>  Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a ui-sref="dashboard.messages">
+                                <span class="glyphicon glyphicon-envelope"></span> Messages
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="" ng-click="vm.logOut()">
+                                <span class="glyphicon glyphicon-lock"></span> Log out
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </aside>
+        </div> <!-- /.col-sm-3 -->
+
+        <div class="col-xs-12 col-sm-12 col-md-4" role="main">
+            <ui-view></ui-view>
+        </div> <!-- /.col-sm-6 -->
+    </div>
+</div>

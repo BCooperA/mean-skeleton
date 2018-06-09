@@ -1,0 +1,14 @@
+<div class="search-results">
+    <i class="fa fa-search"></i>
+    <p>Yhteensä {{ vm.searchResults ? vm.searchResults.users.length + vm.searchResults.articles.length : 0 }} hakutulosta hakusanalla {{ vm.searchText }}</p>
+
+    <h3 ng-show="vm.searchResults.users.length > 0">Users</h3>
+    <div data-ng-repeat="user in vm.searchResults.users" class="">
+        <div> {{ user.name }} </div>
+    </div>
+
+    <h3 ng-show="vm.searchResults.articles.length > 0">Articles</h3>
+    <div data-ng-repeat="article in vm.searchResults.articles" class="">
+        <div> {{ article.title }} </div>
+    </div>
+</div>

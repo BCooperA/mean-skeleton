@@ -1,0 +1,189 @@
+/* Dashboard Styles */
+.dashboard-nav {
+  background-color: #14375a;
+  background-image: -webkit-gradient(linear,left top,right top,from(#14375a),to(#002143));
+  background-image: linear-gradient(to right,#14375a,#002143);
+  position: relative;
+
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  border: 0 !important;
+}
+#conversationMenu {
+  background-color: #225e9b;
+}
+#myNavmenu {
+  background-color: #14375a;
+}
+.offcanvas, .aside {
+  width: 197px;
+}
+.offcanvas {
+  z-index: 9999 !important;
+  overflow: hidden;
+}
+.offcanvas::-webkit-scrollbar {
+  width: 1em;
+}
+
+.offcanvas::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.offcanvas::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.offcanvas-profile-btn {
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+.navmenu-default {
+  border: 0 !important;
+}
+.aside {
+  width: 100% !important;
+}
+.aside {
+  position: relative;
+  width: 305px;
+  top: 0px;
+  bottom: 0px;
+  height: 100vh;
+  color: #fdfdfd;
+
+  .navbar-form {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  #search {
+    position: relative;
+
+    .form-control {
+      background-color: #225e9b !important;
+      width: 100%;
+      height: 50px;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border: 0 !important;
+      font-size: 1.5rem;
+    }
+
+    .form-control::placeholder {
+      font-size: 1.5rem;
+      color: #0c99d6;
+    }
+    .form-control::-webkit-input-placeholder {
+      font-size: 1.5rem;
+      color: #0c99d6;
+    }
+    .form-control::-moz-placeholder {
+      font-size: 1.5rem;
+      color: #0c99d6;
+    }
+    .form-control:-ms-input-placeholder {
+      font-size: 1.5rem;
+      color: #0c99d6;
+    }
+  }
+  #search:after {
+    content: "\f002";
+    font-family: 'FontAwesome';
+    font-size: 20px;
+    position: absolute;
+    top: 7px;
+    left: 80%;
+    color: #fdfdfd;
+    z-index: 9999;
+  }
+
+  .aside-profile-pic {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    span.aside-profile-name {
+      position: relative;
+      top: -90px;
+      left: 20px;
+      font-size: 3rem;
+      font-family: 'Oxygen', sans-serif;
+      color: #fdfdfd;
+      word-spacing: 100vw;
+    }
+
+  }
+  ul#aside-links {
+    list-style: none;
+    display: block;
+    padding: 0;
+    margin-top: -50px;
+    width: 100%;
+
+    li {
+      width: 100%;
+      cursor:pointer;
+
+      a {
+        padding: 10px 0 20px 20px;
+        display: block;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: 'Oxygen', sans-serif;
+      }
+      span, a {
+        color: #98A3B6;
+      }
+      span.glyphicon:after {
+        content: '';
+        padding-right: 10px;
+      }
+    }
+
+    li:first-child {
+      border-bottom: 0 !important;
+    }
+
+    li:hover {
+      background-color: #333;
+    }
+  }
+}
+
+.center-content {
+  margin-top: 50px;
+}
+@media(min-width: 768px) {
+  .offcanvas {
+    //
+    display: block !important;
+  }
+  aside {
+    width: 17.8% !important;
+  }
+  .offcanvas {
+    width: 17.8% !important;
+  }
+}
+
+/* Search Results */
+.search-results {
+  text-align: center;
+  color: #fdfdfd;
+
+  i.fa {
+    font-size: 6rem;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+}

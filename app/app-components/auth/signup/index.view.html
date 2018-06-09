@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row login-container">
+        <form name="signupForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="vm.signUp()" novalidate>
+            <a href="/signup" class="signin-header">{{ 'forms.auth.signup_form.headline' | translate }}</a>
+
+            <div class="form-input-fields">
+                <!-- errors -->
+                <div ng-show="signupForm.$submitted" inform></div>
+
+                <!-- e-mail -->
+                <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
+                <input ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
+                <span class="fa fa-envelope errspan"></span>
+
+                <!-- e-mail -->
+                <label for="inputName" class="sr-only">{{ 'forms.auth.name' | translate }}</label>
+                <input ng-model="vm.name" required autocomplete="off" type="text" id="inputName" class="form-control" placeholder="{{ 'forms.auth.name' | translate }}" autofocus>
+                <span class="fa fa-user-circle errspan"></span>
+
+                <!-- password -->
+                <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
+                <input data-password-toggle ng-model="vm.password" required type="password" id="inputPassword" class="form-control" placeholder="Password">
+            </div> <!-- /form-input-fields -->
+
+            <!-- Sign In Button -->
+            <input type="submit"  id="signup" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.sign_up_btn' | translate }}">
+
+            <button class="secondary-btn btn-block" onclick="window.history.go(-1);">{{ 'forms.auth.go_back' | translate }}</button>
+        </form>
+    </div> <!-- /container -->
+</div>

@@ -1,0 +1,27 @@
+{
+  "forms": {
+    "auth": {
+      "name": "Nimi",
+      "email": "Sähköpostiosoite",
+      "password": "Salasana",
+      "keep_logged_in": "Pidä minut kirjautuneena",
+      "forgot_pwd": "Unohditko salasanasi?",
+      "sign_in_btn": "Kirjaudu",
+      "sign_up_btn": "Rekisteröidy",
+      "go_back": "Takaisin",
+
+      "signin_form": {
+        "headline": "Kirjaudu"
+      },
+      "signup_form": {
+        "headline": "Rekisteröidy"
+      }
+    }
+  },
+  "footer": {
+    "languages": {
+      "en": "In English",
+      "fi": "Suomeksi"
+    }
+  }
+}
