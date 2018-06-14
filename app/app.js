@@ -2,27 +2,29 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'ngAnimate', 'ngStorage', 'ngCookies', 'angular-jwt', 'inform', 'pascalprecht.translate'])
+        .module('app', [ 'ui.router', 'ngAnimate', 'ngStorage', 'ngCookies', 'angular-jwt', 'inform', 'pascalprecht.translate' ])
         .config(config)
         .run(run);
 
-    function config($qProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $translateProvider) {
-
+    function config($qProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $translateProvider, stateList) {
+        // retrieves or overrides whether to generate an error when a rejected promise is not handled.
         $qProvider.errorOnUnhandledRejections(false);
 
-        // interceptors
+        // status interceptor for errors sent by server via HTTP
         $httpProvider.interceptors.push("StatusInterceptor");
 
-        // default route
-        $urlRouterProvider.otherwise("/");
-
-        // use the HTML5 History API
+        /**
+         * use the HTML5 History API
+         * See: https://docs.angularjs.org/guide/$location#html5-mode
+         */
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         /**
+         * ************************************************
          * Translation & Localization
+         * ************************************************
          */
-        //$translateProvider.useLocalStorage();
+        // load translation texts from respective json files found in the "languages" directory
         $translateProvider.useStaticFilesLoader({
             prefix: '/angular/languages/',
             suffix: '.json'
@@ -31,107 +33,33 @@
         // set default language from the "lang" key of the item we stored in our localStorage
         $translateProvider.preferredLanguage(localStorage.getItem('lang'));
 
-
-
-        // Application routes { states since we are using $stateProvider instead or $routeProvider }
+        /**
+         * enable escape sanitize strategy for translation content
+         * // See: https://angular-translate.github.io/docs/#/guide/19_security
+         */
+        $translateProvider.useSanitizeValueStrategy('escape');
 
         /**
-         * NOTE! Since we are declaring how we serve static files in our server file,
-         * we need to prepend our templateUrl values with "angular/"
+         * ************************************************
+         * Front-end routes & templates (states since we are using $stateProvider instead or $routeProvider)
+         *
+         * NOTE! Since we are declaring how we serve static files in our express server file,
+         * we need to prepend our templateUrl values with "angular/" -prefix
          * see reference: https://stackoverflow.com/questions/25833675/angular-renders-the-main-view-twice-instead-of-loading-the-correct-template
+         * ************************************************
          */
-        $stateProvider
-            .state('dashboard', {
-                title: 'Dashboard',
-                url: '/',
-                templateUrl: '/angular/app-components/dashboard/index.view.html',
-                controller: 'Dashboard.IndexController',
-                controllerAs: 'vm'
-            })
-            .state('dashboard.search', {
-                title: 'Search',
-                url: 'search',
-                templateUrl: '/angular/app-components/dashboard/search/index.view.html',
-                controllerAs: 'vm',
-                data : {
-                    cssClassnames : 'search-bg'
-                }
-            })
-            .state('dashboard.profile', {
-                title: 'Profile',
-                url: 'profile',
-                templateUrl: '/angular/app-components/dashboard/profile/index.view.html',
-                controllerAs: 'vm'
-            })
-            .state('dashboard.messages', {
-                title: 'Messages',
-                url: 'messages',
-                templateUrl: '/angular/app-components/dashboard/messages/index.view.html',
-                controllerAs: 'vm'
-            })
+        // default route
+        $urlRouterProvider.otherwise("/");
 
-
-            .state('account', {
-                url: '/account',
-                templateUrl: '/angular/app-components/auth/index.view.html',
-                abstract: true //<-- Declare parent as an abstract state.
-            })
-            // nested account routes
-            .state('account.login', {
-                title: 'Sign in',
-                url: '/login',
-                templateUrl: '/angular/app-components/auth/login/index.view.html',
-                controller: 'Login.IndexController',
-                controllerAs: 'vm',
-                data: {
-                    cssClassnames: 'unauth'
-                }
-            })
-
-            .state('account.signup', {
-                title: 'Sign Up',
-                url: '/signup',
-                templateUrl: '/angular/app-components/auth/signup/index.view.html',
-                controller: 'SignUp.IndexController',
-                controllerAs: 'vm',
-                data: {
-                    cssClassnames: 'unauth'
-                }
-            })
-
-            .state('account.verify', {
-                title: 'Verify your account',
-                url: '/verify',
-                templateUrl: '/angular/app-components/auth/signup/verify-email/index.view.html',
-                data: {
-                    cssClassnames: 'unauth'
-                }
-            })
-
-            .state('account.password_recover', {
-                title: 'Recover your password',
-                url: '/password/recover',
-                templateUrl: '/angular/app-components/auth/password/recover/index.view.html',
-                controller: 'Password.IndexController',
-                controllerAs: 'vm',
-                data : {
-                    cssClassnames : 'unauth'
-                }
-            })
-            .state('account.password_reset', {
-                title: 'Reset your password',
-                url: '/password/reset/:key',
-                templateUrl: '/angular/app-components/auth/password/reset/index.view.html',
-                controller: 'Password.IndexController',
-                controllerAs: 'vm',
-                data : {
-                    cssClassnames : 'unauth'
-                }
-            })
+        // Loop through states that will be passed in the configuration as a constant array
+        for(var i = 0; i < stateList.length; i++ ) {
+            $stateProvider.state(stateList[i].name, stateList[i].value);
+        }
     }
 
     function run($rootScope, $http, $localStorage, $cookies, $state, $stateParams, jwtHelper, $location) {
 
+        console.log($state.get());
         // let javascript detect the browsing language and save it to local storage
         var userLang = navigator.language.substring(0, 2) || navigator.userLanguage.substring(0, 2);
 
@@ -170,8 +98,8 @@
                 '/account/',
                 '/account/signup',
                 '/account/verify',
-                '/account/password/recover',
-                '/account/password/reset/:key'
+                '/account/recover',
+                '/account/reset/:key'
             ];
             // secured routes (all the pages that are not inside the publicPages array
             var restrictedPage = publicPages.indexOf($location.path()) === -1;

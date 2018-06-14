@@ -19,12 +19,5 @@
         "sign_up_btn": "Sign up"
       }
     }
-  },
-
-  "footer": {
-    "languages": {
-      "en": "In English",
-      "fi": "Suomeksi"
-    }
   }
 }

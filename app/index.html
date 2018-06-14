@@ -32,7 +32,7 @@
 
 
 </head>
-<body class="ng-cloak noise unauth" route-css-classnames>
+<body class="ng-cloak noise unauth">
     <noscript>
         <div style="position: fixed; top: 0px; left: 0px; z-index: 3000;
             height: 100%; width: 100%; background-color: rgba(255,255,255,0.3); padding-top: 100px;">
@@ -83,7 +83,9 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDUJ8xBvSKQF90FfG3aeaRM0lLpEbVHa-E&libraries=places"></script>
 
     <!-- application scripts for angularJS -->
+    <!--<script src="angular/app-providers/router.provider.js"></script> -->
     <script src="angular/app.js"></script>
+    <script src="angular/app-constants/states.js"></script>
     <script src="angular/utils.js"></script>
     <script src="angular/MainCtrl.js"></script>
     <script src="angular/app-components/auth/login/index.controller.js"></script>
@@ -94,5 +96,7 @@
     <script src="angular/app-directives/route-class-names.directive.js"></script>
     <script src="angular/app-services/authentication.service.js"></script>
     <script src="angular/app-services/error.service.js"></script>
+
+
 </body>
 </html>

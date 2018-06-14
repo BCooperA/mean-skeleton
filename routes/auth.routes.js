@@ -107,6 +107,8 @@ router.get('/signin/google', passport.authenticate('google', { scope: [
 router.get('/signin/google/callback', function(req, res, next) {
     passport.authenticate('google', { failureRedirect: '/login' }, function(err, user) {
         // The token we have created on FacebookStrategy above
+        console.log(user);
+
         if(err)
             return next(err);
 
