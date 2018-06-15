@@ -1,17 +1,16 @@
 (function() {
     'use strict';
-    // states
+
     var stateList =
         [
             {
                 name: "dashboard",
                 value: {
                     title: "Dashboard",
-                    url: "/",
+                    url: "/dashboard",
                     templateUrl: "/angular/app-components/dashboard/index.view.html",
                     controller: "Dashboard.IndexController",
                     controllerAs: "vm",
-                    abstract: true
                 }
             },
             {

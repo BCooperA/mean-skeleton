@@ -7,10 +7,13 @@
         .run(run);
 
     function config($qProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $translateProvider, stateList) {
+
         // retrieves or overrides whether to generate an error when a rejected promise is not handled.
         $qProvider.errorOnUnhandledRejections(false);
 
-        // status interceptor for errors sent by server via HTTP
+        /**
+         * Intercept and modify HTTP statuses with `StatusInterceptor`
+         */
         $httpProvider.interceptors.push("StatusInterceptor");
 
         /**
@@ -21,10 +24,10 @@
 
         /**
          * ************************************************
-         * Translation & Localization
+         * Frontend translations & localization
          * ************************************************
          */
-        // load translation texts from respective json files found in the "languages" directory
+        // load translation texts from respective json files found in the "/languages" directory
         $translateProvider.useStaticFilesLoader({
             prefix: '/angular/languages/',
             suffix: '.json'
@@ -58,8 +61,6 @@
     }
 
     function run($rootScope, $http, $localStorage, $cookies, $state, $stateParams, jwtHelper, $location) {
-
-        console.log($state.get());
         // let javascript detect the browsing language and save it to local storage
         var userLang = navigator.language.substring(0, 2) || navigator.userLanguage.substring(0, 2);
 
@@ -70,7 +71,7 @@
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
-        // removes the hash created by Facebook Login
+        // removes the hash from URL created by Facebook Login
         if (window.location.hash == '#_=_'){
             history.replaceState
                 ? history.replaceState(null, null, window.location.href.split('#')[0])
@@ -85,14 +86,15 @@
             $cookies.remove('user');
         }
 
-        // if user is found from the Local Storage, keep user logged in by automatically setting the "Authorization" header
+        // if user is found from the Local Storage, keep user logged in by automatically setting the "Authorization" header in future requests
         if ($localStorage.currentUser) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
         }
 
         // check authentication on every page request
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // all the public routes
+
+            // declare public states (routes that are available without authentication)
             var publicPages = [
                 '/account/login',
                 '/account/',
@@ -101,7 +103,7 @@
                 '/account/recover',
                 '/account/reset/:key'
             ];
-            // secured routes (all the pages that are not inside the publicPages array
+            // secured states (all the pages that are not inside the publicPages array)
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
 
 
@@ -119,6 +121,7 @@
             $rootScope.previousState_params = fromParams;
 
             $rootScope.title = toState.title;
+            //$rootScope.lang = localStorage.getItem("lang");
         });
     }
 })();

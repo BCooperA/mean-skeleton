@@ -23,7 +23,7 @@
 
             AuthenticationService.Login(vm.email, vm.password, function (result) {
                 if (result === true) {
-                    $location.path('/');
+                    $location.path('/dashboard');
                 }
             });
             // enable login btn
