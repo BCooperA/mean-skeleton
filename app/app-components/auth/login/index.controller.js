@@ -17,13 +17,12 @@
         };
 
         function login() {
-            //
             // disable login btn before authentication
             vm.loading = true;
 
             AuthenticationService.Login(vm.email, vm.password, function (result) {
                 if (result === true) {
-                    $location.path('/dashboard');
+                    $location.path('/');
                 }
             });
             // enable login btn

@@ -65,7 +65,7 @@ router.get('/signin/facebook/callback', function(req, res, next) {
 
         // send user data as JSON in cookie and redirect
         res.cookie('user', userCookie);
-        res.redirect('/');
+        res.redirect('/app');
     })(req, res, next);
 });
 
@@ -90,7 +90,7 @@ router.get('/signin/twitter/callback', function(req, res, next) {
 
         // send user data as JSON in cookie and redirect
         res.cookie('user', userCookie);
-        res.redirect('/');
+        res.redirect('/app');
     })(req, res, next);
 });
 
@@ -145,7 +145,7 @@ router.get('/activate/:activation_token', function(req, res, next) {
         user.active = 1;
         user.save();
 
-        return res.redirect('/');
+        return res.redirect('/app');
 
     }).catch(next);
 });

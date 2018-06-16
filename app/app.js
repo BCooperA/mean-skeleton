@@ -51,13 +51,13 @@
          * see reference: https://stackoverflow.com/questions/25833675/angular-renders-the-main-view-twice-instead-of-loading-the-correct-template
          * ************************************************
          */
-        // default route
-        $urlRouterProvider.otherwise("/");
-
         // Loop through states that will be passed in the configuration as a constant array
         for(var i = 0; i < stateList.length; i++ ) {
             $stateProvider.state(stateList[i].name, stateList[i].value);
         }
+
+        // default route
+        $urlRouterProvider.otherwise("/");
     }
 
     function run($rootScope, $http, $localStorage, $cookies, $state, $stateParams, jwtHelper, $location) {

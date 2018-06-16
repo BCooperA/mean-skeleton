@@ -7,10 +7,11 @@
                 name: "dashboard",
                 value: {
                     title: "Dashboard",
-                    url: "/dashboard",
+                    url: "/",
                     templateUrl: "/angular/app-components/dashboard/index.view.html",
                     controller: "Dashboard.IndexController",
                     controllerAs: "vm",
+                    abstract: true
                 }
             },
             {
@@ -32,7 +33,6 @@
             {
                 name: "account",
                 value: {
-                    url: "",
                     templateUrl: "/angular/app-components/auth/index.view.html",
                     abstract: true
                 }
