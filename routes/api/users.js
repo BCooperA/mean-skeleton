@@ -51,6 +51,23 @@ router.put('/user', auth.required, function(req, res, next) {
 router.post('/users', function(req, res, next) {
 
     // validation
+    if(!req.body.user.email) {
+        return res.status(422).json({ errors: { email: "can't be blank" } });
+    }
+
+    if(!req.body.user.name) {
+        return res.status(422).json({ errors: { name: "can't be blank" } });
+    }
+
+    if(!req.body.user.password) {
+        return res.status(422).json({ errors: { password: "can't be blank" } });
+    }
+
+    if(req.body.user.password.length <= 6) {
+        return res.status(422).json({ errors: { password: "is too short" } });
+    }
+
+
     var user = new User();
     user.email = req.body.user.email;
     user.name = req.body.user.name;

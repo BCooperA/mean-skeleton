@@ -13,14 +13,14 @@
         service.SignUp = SignUp;
         service.recoverPassword = recoverPassword;
         service.GetById = GetById;
-
         return service;
-        // test
+
         function Login(email, password, callback) {
             $http.post('/auth/signin', { user: { email: email, password: password } })
                 .then(function (response) {
                     // login successful if there's a token in the response
                     if (response.data.user.token) {
+
                         // store username and token in local storage to keep user logged in between page refreshes
                         $localStorage.currentUser = {
                             id: response.data.user._id,

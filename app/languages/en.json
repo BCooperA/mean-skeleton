@@ -1,7 +1,8 @@
 {
   "forms": {
     "auth": {
-      "name": "Name",
+      "firstName": "First name",
+      "lastName": "Surname",
       "email": "Email address",
       "password": "Password",
       "keep_logged_in": "Keep me logged in",

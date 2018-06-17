@@ -1,9 +1,9 @@
 var     router          = require('express').Router(),
-        mongoose        = require('mongoose'),
-        User            = mongoose.model('User'),
-        passport        = require('passport'),
-        cookieParser    = require('cookie-parser'),
-        randtoken       = require('rand-token');
+    mongoose        = require('mongoose'),
+    User            = mongoose.model('User'),
+    passport        = require('passport'),
+    cookieParser    = require('cookie-parser'),
+    randtoken       = require('rand-token');
 
 /**
  * *********************************************************************
@@ -39,6 +39,15 @@ router.post('/signin', function(req, res, next) {
     })(req, res, next);
 });
 
+router.post('/signin/email', function(req, res, next) {
+    User.findOne({ email: req.body.user.email }, function(err, user) {
+        if(err) {
+            next(err);
+        }
+
+        return res.status(200).json({ valid: (user) ? true : false, message: (!user) ? err.message : '' });
+    });
+});
 
 /**
  * *********************************************************************
@@ -65,7 +74,7 @@ router.get('/signin/facebook/callback', function(req, res, next) {
 
         // send user data as JSON in cookie and redirect
         res.cookie('user', userCookie);
-        res.redirect('/app');
+        res.redirect('/app/dashboard');
     })(req, res, next);
 });
 
@@ -90,7 +99,7 @@ router.get('/signin/twitter/callback', function(req, res, next) {
 
         // send user data as JSON in cookie and redirect
         res.cookie('user', userCookie);
-        res.redirect('/app');
+        res.redirect('/app/dashboard');
     })(req, res, next);
 });
 
@@ -120,7 +129,7 @@ router.get('/signin/google/callback', function(req, res, next) {
 
         // send user data as JSON in cookie and redirect
         res.cookie('user', userCookie);
-        res.redirect('/');
+        res.redirect('/app/dashboard');
     })(req, res, next);
 });
 
@@ -135,7 +144,6 @@ router.get('/activate/:activation_token', function(req, res, next) {
         return res.status(422).json({ errors: { activation_token:  'activation token not found'} });
     }
 
-    //
     User.findOne({ activation_token: new RegExp('^'+ req.params.activation_token +'$', "i")}, function( err, user ) {
         if (err)
             return next(err);
@@ -145,7 +153,7 @@ router.get('/activate/:activation_token', function(req, res, next) {
         user.active = 1;
         user.save();
 
-        return res.redirect('/app');
+        return res.redirect('/account/login');
 
     }).catch(next);
 });

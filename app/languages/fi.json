@@ -1,7 +1,8 @@
 {
   "forms": {
     "auth": {
-      "name": "Nimi",
+      "firstName": "Etunimi",
+      "lastName": "Sukunimi",
       "email": "Sähköpostiosoite",
       "password": "Salasana",
       "keep_logged_in": "Pidä minut kirjautuneena",

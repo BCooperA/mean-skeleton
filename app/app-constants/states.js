@@ -6,12 +6,17 @@
             {
                 name: "dashboard",
                 value: {
-                    title: "Dashboard",
-                    url: "/",
                     templateUrl: "/angular/app-components/dashboard/index.view.html",
                     controller: "Dashboard.IndexController",
                     controllerAs: "vm",
                     abstract: true
+                }
+            },
+            {
+                name: "dashboard.app",
+                value: {
+                    title: "Dashboard",
+                    url: "/app/dashboard"
                 }
             },
             {

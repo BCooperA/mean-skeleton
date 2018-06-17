@@ -38,7 +38,7 @@
 
         /**
          * enable escape sanitize strategy for translation content
-         * // See: https://angular-translate.github.io/docs/#/guide/19_security
+         * See: https://angular-translate.github.io/docs/#/guide/19_security
          */
         $translateProvider.useSanitizeValueStrategy('escape');
 
