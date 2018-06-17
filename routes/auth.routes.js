@@ -45,7 +45,7 @@ router.post('/signin/email', function(req, res, next) {
             next(err);
         }
 
-        return res.status(200).json({ valid: (user) ? true : false, message: (!user) ? err.message : '' });
+        return res.status(200).json({ valid: (user) ? true : false });
     });
 });
 

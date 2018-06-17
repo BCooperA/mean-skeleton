@@ -17,7 +17,7 @@
                     return $http.post('/auth/signin/email', { user: { email: viewValue} })
                         .then(function(response) {
                             if (!response.data.valid === false) {
-                                return $q.reject(response.data.message);
+                                return $q.reject();
                             }
                             return true;
                         }
