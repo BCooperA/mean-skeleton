@@ -5,6 +5,7 @@
       "lastName": "Surname",
       "email": "Email address",
       "password": "Password",
+      "password_again": "Re-type password",
       "keep_logged_in": "Keep me logged in",
       "forgot_pwd": "Forgot your password?",
       "sign_in_btn": "Sign in",
@@ -17,7 +18,23 @@
       "signup_form": {
         "headline": "Sign up",
         "sign_in_btn": "Sign in",
-        "sign_up_btn": "Sign up"
+        "sign_up_btn": "Sign up",
+
+        "errors": {
+          "firstName_required": "First name is required",
+          "lastName_required": "Last name is required",
+          "name_alpha": "Provide your real name",
+          "email_required": "E-mail address is required",
+          "emailAddr_exists": "E-mail address is already taken",
+          "password_required": "Password is required",
+          "password_minlength": "Password is too short",
+          "password_nomatch": "Passwords doesn't match"
+        }
+      },
+      "recover_form": {
+        "headline": "Forgot your password?",
+        "text": "Enter the email address you used when you joined and we’ll send you instructions to reset your password.",
+        "submit_btn": "Send instructions by email"
       }
     }
   }

@@ -1,75 +1,68 @@
 ﻿<div class="container">
     <div class="row login-container">
         <form name="loginForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="vm.login()" novalidate>
-            <a href="/login" class="signin-header">{{ 'forms.auth.signin_form.headline' | translate }}</a>
+            <div ng-class="{ 'shake animated' : loginForm.$submitted && loginForm.$invalid }">
+                <!-- header link -->
+                <a href="/login" class="signin-header">{{ 'forms.auth.signin_form.headline' | translate }}</a>
 
-            <!-- Loading Spinner -->
-            <i class="fa fa-circle-o-notch fa-spin" id="mySpinner" ng-show="vm.loading"></i>
+                <!-- Loading Spinner -->
+                <i class="fa fa-circle-o-notch fa-spin" id="mySpinner" ng-show="vm.loading"></i>
 
-            <!-- Social Login -->
-            <div class="login-wrap" ng-hide="vm.loading">
-                <div class="social-login-wrapper">
-                    <ul>
-                        <!-- Facebook -->
-                        <li>
-                            <a href="/auth/signin/facebook" target="_self" class="btn btn-default btn-social btn-facebook">
-                                <i class="fa fa-facebook-square"></i>
-                            </a>
-                        </li>
+                <!-- Social Login -->
+                <div class="login-wrap" ng-hide="vm.loading">
+                    <div class="social-login-wrapper">
+                        <ul>
+                            <!-- Facebook -->
+                            <li>
+                                <a href="/auth/signin/facebook" target="_self" class="btn btn-default btn-social btn-facebook">
+                                    <i class="fa fa-facebook-square"></i>
+                                </a>
+                            </li>
 
-                        <!-- Twitter -->
-                        <li>
-                            <a href="/auth/signin/twitter" target="_self" class="btn btn-default btn-social btn-twitter">
-                                <i class="fa fa-twitter-square"></i>
-                            </a>
-                        </li>
+                            <!-- Twitter -->
+                            <li>
+                                <a href="/auth/signin/twitter" target="_self" class="btn btn-default btn-social btn-twitter">
+                                    <i class="fa fa-twitter-square"></i>
+                                </a>
+                            </li>
 
-                        <!-- Google -->
-                        <li>
-                            <a href="/auth/signin/google" target="_self" class="btn btn-default btn-social btn-google-plus">
-                                <i class="fa fa-google-plus-square"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="form-input-fields">
-                    <!-- errors -->
-                    <div ng-show="loginForm.$submitted" inform></div>
-
-                    <!-- e-mail -->
-                    <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
-                    <input ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}<" autofocus>
-                    <span class="fa fa-envelope errspan"></span>
-
-                    <!-- password -->
-                    <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
-                    <input data-password-toggle ng-model="vm.password" required type="password" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}<">
-                </div> <!-- /form-input-fields -->
-
-                <!-- Remember Me Switch -->
-                <div class="row login-rm-wrapper">
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="remember-me-switch">
-                            <label class="switch">
-                                <input type="checkbox" value="remember-me">
-                                <span class="slider round"></span>
-                            </label>
-                            <span class="remember-text">{{ 'forms.auth.keep_logged_in' | translate }}</span>
-                        </div> <!-- /remember-me-switch -->
+                            <!-- Google -->
+                            <li>
+                                <a href="/auth/signin/google" target="_self" class="btn btn-default btn-social btn-google-plus">
+                                    <i class="fa fa-google-plus-square"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- Forgot password link -->
-                    <div class="col-xs-12 col-sm-6">
-                        <a href="/account/recover" class="login-link">{{ 'forms.auth.forgot_pwd' | translate }} &nbsp; <i class="fa fa-question-circle"></i></a>
+
+                    <div class="form-input-fields">
+                        <!-- errors -->
+                        <div ng-show="loginForm.$submitted && loginForm.$invalid" inform></div>
+
+                        <!-- e-mail -->
+                        <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
+                        <input ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
+                        <span class="fa fa-envelope errspan"></span>
+
+                        <!-- password -->
+                        <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
+                        <input data-password-toggle ng-model="vm.password" required type="password" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
+                    </div> <!-- /form-input-fields -->
+
+                    <div class="row login-rm-wrapper">
+                        <!-- Forgot password link -->
+                        <div class="col-xs-12">
+                            <a href="/account/recover" class="login-link">{{ 'forms.auth.forgot_pwd' | translate }} &nbsp; <i class="fa fa-question-circle"></i></a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Sign In Button -->
-                <input type="submit"  id="login" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.sign_in_btn' | translate }}">
+                    <!-- Sign In Button -->
+                    <input type="submit"  id="login" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.sign_in_btn' | translate }}">
 
-                <!-- Sign Up Button -->
-                <a ng-disabled="vm.loading" class="secondary-btn btn-block"  href="/account/signup">{{ 'forms.auth.sign_up_btn' | translate }}</a>
-            </div> <!-- /.login-wrap -->
+                    <!-- Sign Up Button -->
+                    <a ng-disabled="vm.loading" class="secondary-btn btn-block"  href="/account/signup">{{ 'forms.auth.sign_up_btn' | translate }}</a>
+                </div> <!-- /.login-wrap -->
+            </div>
         </form>
     </div> <!-- /login-container -->
 </div>

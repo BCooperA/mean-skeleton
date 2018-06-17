@@ -5,6 +5,7 @@
       "lastName": "Sukunimi",
       "email": "Sähköpostiosoite",
       "password": "Salasana",
+      "password_again": "Salasana uudelleen",
       "keep_logged_in": "Pidä minut kirjautuneena",
       "forgot_pwd": "Unohditko salasanasi?",
       "sign_in_btn": "Kirjaudu",
@@ -15,7 +16,23 @@
         "headline": "Kirjaudu"
       },
       "signup_form": {
-        "headline": "Rekisteröidy"
+        "headline": "Rekisteröidy",
+
+        "errors": {
+          "firstName_required": "Etunimi on pakollinen",
+          "lastName_required": "Sukunimi on pakollinen",
+          "name_alpha": "Anna oikea nimesi",
+          "email_required": "Sähköpostiosoite on pakollinen",
+          "emailAddr_exists": "Sähköpostisoite on jo rekisteröity",
+          "password_required": "Salasana on pakollinen",
+          "password_minlength": "Salasana on liian lyhyt",
+          "password_nomatch": "Salasanat eivät täsmää"
+        }
+      },
+      "recover_form": {
+        "headline": "Unohditko salasanasi?",
+        "text": "Syötä sähköpostiosoite, jolla rekisteröidyit sivustolle. Lähetämme ohjeet antamaasi sähköpostiosoitteeseen.",
+        "submit_btn": "Lähetä ohjeet sähköpostiini"
       }
     }
   }
