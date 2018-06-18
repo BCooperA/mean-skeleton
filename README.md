@@ -12,7 +12,9 @@ Getting started with your next project can be tricky and time consuming. The obj
 ## How to install ?
 
 *1.* Clone the starter app to your desktop using `clone` command:
-`git clone https://github.com/BCooperA/mean-skeleton.git`
+```
+git clone https://github.com/BCooperA/mean-skeleton.git
+```
 
 *2.* Download and [install](https://docs.mongodb.com/manual/installation/) MongoDB to your desktop
 
