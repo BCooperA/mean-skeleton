@@ -1,6 +1,6 @@
 # MEAN Starter App
 
-Getting started with your next project can be tricky and time consuming. The objective of this Starter App is to reduce the time and effort it takes to set up a base application for your next project. I'd like to call it a "Micro Framework".
+Getting started with your next project can be tricky and time consuming. The objective of this Starter App is to reduce the time and effort it takes to set up a base application for your next project. I'd like to call it a `"Micro Framework"`.
 
 ## What's included ?
 
@@ -11,22 +11,27 @@ Getting started with your next project can be tricky and time consuming. The obj
 
 ## How to install ?
 
-1. Clone the starter app to your desktop using `clone` command:
-`git clone https://github.comoBCooperA/mean-skeleton.git`
+*1.* Clone the starter app to your desktop using `clone` command:
+`git clone https://github.com/BCooperA/mean-skeleton.git`
 
-2. Download and [install](https://docs.mongodb.com/manual/installation/) MongoDB to your desktop
+*2.* Download and [install](https://docs.mongodb.com/manual/installation/) MongoDB to your desktop
 
-3. After installing MongoDB, create a new database `(TEST_DB)` for our application
-` > use TEST_DB`
+*3.* After installing MongoDB, create a new database `(TEST_DB)` for our application
+```
+> use TEST_DB`
+```
+*4.* Create a `.env` file from `.env.example` and add environment variables
 
-4. Create a `.env` file from `.env.example` and add environment variables
+*5.* Install required dependencies for the application
+```
+npm install
+```
 
-5. Install dependencies for the application
-`npm install`
+*6.* Run application & enjoy
 
-6. Run application
-`node server`
-
+```
+node server
+```
 
 ## Directory structure
 
