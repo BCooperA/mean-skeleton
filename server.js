@@ -12,22 +12,32 @@ const   express             = require('express'),
         config              = require('./config/index');
 
 /**
+ |--------------------------------------------------------------------------
+ | Main server file
+ |--------------------------------------------------------------------------
+ |
+ | This file is where you may define all the application middlewares, database connection and finally
+ | start the server
+ |
+ */
+
+/**
  * Create global app object
  * @type {*|Function}
  */
 const app = express();
 var isProduction = process.env.NODE_ENV === 'production';
 
+/**
+ |--------------------------------------------------------------------------
+ | Configuration
+ |--------------------------------------------------------------------------
+ */
 app.use(helmet());
 app.use(cors());
 app.use(cookieParser());
 app.use(require('morgan')('dev'));
 
-/**
- * *********************************************************************
- *  Configuration
- * **********************************************************************
- */
 // Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies.
 app.use(bodyParser.json()); // returns middleware that only parses json.
@@ -38,73 +48,67 @@ app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, s
 if (!isProduction) {
     app.use(errorhandler());
 }
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
- * **********************************************************************
- * Connect to a Mongo database
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Database Connection
+ |--------------------------------------------------------------------------
  */
 mongoose.connect(config.mongodb.url, {
     useMongoClient: true,
     promiseLibrary: require('bluebird')
 });
 
-
 /**
- * **********************************************************************
- * Require Database Models
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Database Models
+ |--------------------------------------------------------------------------
  */
 require('./models/User');
 require('./models/Article');
 require('./models/Comment');
 require('./config/passport');
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 /**
- * **********************************************************************
- * Serve static files
- * reference: https://expressjs.com/en/starter/static-files.html
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Static files for frontend
+ |--------------------------------------------------------------------------
  */
-
-// serve all asset files from necessary directories
 app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/fonts", express.static(__dirname + "/public/fonts"));
 app.use("/css", express.static(__dirname + "/public/styles"));
 app.use("/img", express.static(__dirname + "/public/img"));
 app.use("/angular", express.static(__dirname + "/app"));
 
-// front end framework files
+// front end framework files (angularJS)
 app.use("/app", express.static(__dirname + "/public/app"));
 
 /**
- * **********************************************************************
- * Require application routes for our API
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Routes
+ |--------------------------------------------------------------------------
  */
 app.use(require('./routes'));
 
 /**
- * **********************************************************************
- * Serve frontend routes
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Front-end routes
+ |--------------------------------------------------------------------------
+ | NOTE! use this only if you are developing an SPA (single page application)
+ |--------------------------------------------------------------------------
  */
-// use this only if you are developing an SPA (single page application)
 app.get('*', function(req, res) {
-    res.sendFile("./app/index.html", {root: __dirname});
+    res.sendFile("./app/index.html", { root: __dirname });
 });
 
 /**
- * **********************************************************************
- * Response Headers
- * see reference:
- * https://stackoverflow.com/questions/32500073/request-header-field-access-control-allow-headers-is-not-allowed-by-itself-in-pr
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Response headers
+ |--------------------------------------------------------------------------
+ | See: https://stackoverflow.com/questions/32500073/request-header-field-access-control-allow-headers-is-not-allowed-by-itself-in-pr
+ |--------------------------------------------------------------------------
  */
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -114,17 +118,15 @@ app.use(function(req, res, next) {
 });
 
 /**
- * **********************************************************************
- *
- *  Error Handlers
- *
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Error Handlers
+ |--------------------------------------------------------------------------
  */
 
 /**
- * **********************************************************************
- *  catch 404 and forward to error handler
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | 404
+ |--------------------------------------------------------------------------
  */
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -133,9 +135,10 @@ app.use(function(req, res, next) {
 });
 
 /**
- * **********************************************************************
- *  development error handler - will print stacktrace
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Development Error Handler
+ | Prints stacktrace
+ |--------------------------------------------------------------------------
  */
 if (!isProduction) {
     app.use(function(err, req, res, next) {
@@ -147,9 +150,10 @@ if (!isProduction) {
 }
 
 /**
- * **********************************************************************
- *  production error handler - no stacktraces leaked to user
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Production Error Handler
+ | No stacktraces leaked to user
+ |--------------------------------------------------------------------------
  */
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -158,11 +162,10 @@ app.use(function(err, req, res, next) {
 
 
 /**
- * *********************************************************************
- *  Start the server / application
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Start server / application
+ |--------------------------------------------------------------------------
  */
-
 var server = app.listen( process.env.PORT || 3000, function(){
     console.log('Listening on port ' + server.address().port);
 });
