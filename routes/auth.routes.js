@@ -1,15 +1,27 @@
-var     router          = require('express').Router(),
-    mongoose        = require('mongoose'),
-    User            = mongoose.model('User'),
-    passport        = require('passport'),
-    cookieParser    = require('cookie-parser'),
-    randtoken       = require('rand-token');
+const   router          = require('express').Router(),
+        mongoose        = require('mongoose'),
+        User            = mongoose.model('User'),
+        passport        = require('passport'),
+        cookieParser    = require('cookie-parser'),
+        randtoken       = require('rand-token');
 
 /**
- * *********************************************************************
- *  Local Authentication
- *  Signs user in using Passport's "Local Strategy"
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Authentication routes
+ |--------------------------------------------------------------------------
+ |
+ | This file is where you may define all of your auth based routes, including
+ | local authentication route and social authentication routes.
+ | Note! Authentication strategies are still found in config/passport.js
+ |
+ */
+
+
+/**
+ |--------------------------------------------------------------------------
+ | Local Authentication
+ |--------------------------------------------------------------------------
+ | Authenticates user using Local Strategy by Passport
  */
 router.post('/signin', function(req, res, next) {
     if(!req.body.user.email){
@@ -25,12 +37,12 @@ router.post('/signin', function(req, res, next) {
             next(err);
         }
         if(user) {
-            // account is not activated
             if(user.activation_token !== '' || user.active === 0) {
+                // account is not activated
                 return res.status(422).json({ errors: { user: 'Account is not been activated.' } });
             }
 
-            // generate JSWON web token to user
+            // generate JSON web token to user
             user.token = user.generateJWT();
             return res.json({ user: user.toAuthJSON() });
         } else {
@@ -39,74 +51,67 @@ router.post('/signin', function(req, res, next) {
     })(req, res, next);
 });
 
-router.post('/signin/email', function(req, res, next) {
-    User.findOne({ email: req.body.user.email }, function(err, user) {
-        if(err) {
-            next(err);
-        }
-
-        return res.status(200).json({ valid: (user) ? true : false });
-    });
-});
-
 /**
- * *********************************************************************
- *
- *  Social Authentication
- *
- *  Facebook Authentication
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Social Authentication - Facebook
+ |--------------------------------------------------------------------------
+ | Authenticates user using Facebook Strategy by Passport
  */
 router.get('/signin/facebook', passport.authenticate('facebook', {
     scope: [ 'email', 'public_profile' ]
 }), function(req, res){});
 
 router.get('/signin/facebook/callback', function(req, res, next) {
-    passport.authenticate('facebook', { scope : ['email', 'public_profile'], session: false, failureRedirect: '/'}, function (err, user) {
+    passport.authenticate('facebook', { scope : ['email', 'public_profile'], session: false, failureRedirect: '/'},
+        function (err, user) {
+            if(err)
+                return next(err);
 
-        // The token we have created on FacebookStrategy above
-        user.token = user.generateJWT();
+            user.token = user.generateJWT();
+            var userCookie = JSON.stringify({
+                'id': user._id,
+                'token': user.token
+            });
 
-        var userCookie = JSON.stringify({
-            'id': user._id,
-            'token': user.token
-        });
-
-        // send user data as JSON in cookie and redirect
-        res.cookie('user', userCookie);
-        res.redirect('/app/dashboard');
-    })(req, res, next);
+            // send user data as JSON in cookie and redirect
+            res.cookie('user', userCookie);
+            res.redirect('/app/dashboard');
+        })(req, res, next);
 });
 
 /**
- * *********************************************************************
- *  Twitter Authentication
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Social Authentication - Twitter
+ |--------------------------------------------------------------------------
+ | Authenticates user using Twitter Strategy by Passport
  */
 router.get('/signin/twitter', passport.authenticate('twitter'),
     function(req, res){});
 
 // handle the callback after twitter has authenticated the user
 router.get('/signin/twitter/callback', function(req, res, next) {
-    passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }, function (err, user) {
-        // The token we have created on FacebookStrategy above
-        user.token = user.generateJWT();
+    passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' },
+        function (err, user) {
+            if(err)
+                return next(err);
 
-        var userCookie = JSON.stringify({
-            'id': user._id,
-            'token': user.token
-        });
+            user.token = user.generateJWT();
+            var userCookie = JSON.stringify({
+                'id': user._id,
+                'token': user.token
+            });
 
-        // send user data as JSON in cookie and redirect
-        res.cookie('user', userCookie);
-        res.redirect('/app/dashboard');
-    })(req, res, next);
+            // save user data as JSON in cookie and redirect
+            res.cookie('user', userCookie);
+            res.redirect('/app/dashboard');
+        })(req, res, next);
 });
 
 /**
- * *********************************************************************
- *  Google Authentication
- * **********************************************************************
+ |--------------------------------------------------------------------------
+ | Social Authentication - Google
+ |--------------------------------------------------------------------------
+ | Authenticates user using Google Strategy by Passport
  */
 router.get('/signin/google', passport.authenticate('google', { scope: [
         'https://www.googleapis.com/auth/plus.login',
@@ -114,107 +119,21 @@ router.get('/signin/google', passport.authenticate('google', { scope: [
     ]}), function(req, res) {});
 
 router.get('/signin/google/callback', function(req, res, next) {
-    passport.authenticate('google', { failureRedirect: '/login' }, function(err, user) {
-        // The token we have created on FacebookStrategy above
-        console.log(user);
+    passport.authenticate('google', { failureRedirect: '/login' },
+        function(err, user) {
+            if(err)
+                return next(err);
 
-        if(err)
-            return next(err);
-
-        user.token = user.generateJWT();
-        var userCookie = JSON.stringify({
-            'id': user._id,
-            'token': user.token
-        });
-
-        // send user data as JSON in cookie and redirect
-        res.cookie('user', userCookie);
-        res.redirect('/app/dashboard');
-    })(req, res, next);
-});
-
-
-/**
- * *********************************************************************
- *  Activate user
- * **********************************************************************
- */
-router.get('/activate/:activation_token', function(req, res, next) {
-    if(!req.params.activation_token){
-        return res.status(422).json({ errors: { activation_token:  'activation token not found'} });
-    }
-
-    User.findOne({ activation_token: new RegExp('^'+ req.params.activation_token +'$', "i")}, function( err, user ) {
-        if (err)
-            return next(err);
-        // console.log(user);
-
-        user.activation_token = '';
-        user.active = 1;
-        user.save();
-
-        return res.redirect('/account/login');
-
-    }).catch(next);
-});
-
-/**
- * *********************************************************************
- *  Password recovery request
- * **********************************************************************
- */
-router.put('/password/recover', function(req, res, next) {
-    User.findOne({email: new RegExp('^'+ req.body.user.email +'$', "i")}, function(err, user) {
-        if(err)
-        // handle errors
-            return next(err);
-
-        if(!req.body.user.email){
-            return res.status(422).json({ errors: { email: "can't be blank" } });
-        }
-
-        if(!user) {
-            // user was not found by the email address
-            return res.status(422).json({ errors: { email: "not found"} });
-        } else {
-            // generate a request token for password reset
-            user.request_password_token = randtoken.generate(32);
-
-            return user.save().then(function(){
-                return res.status(200).json({"error": false, "message": "OK"});
+            user.token = user.generateJWT();
+            var userCookie = JSON.stringify({
+                'id': user._id,
+                'token': user.token
             });
-        }
-    }).catch(next);
-});
 
-/**
- * *********************************************************************
- *  Password reset request
- * **********************************************************************
- */
-router.put('/password/reset/:password_request_token', function(req, res, next) {
-    User.findOne({ request_password_token: new RegExp('^'+ req.params.password_request_token +'$', "i")}, function(err, user) {
-        if(err)
-        // handle errors
-            return next(err);
-
-        if(!user) {
-            // invalid token or it does not belong to user
-            return res.status(404).json({"error": true, "message": "Invalid token"});
-        } else {
-            // reset request password token
-            user.request_password_token = '';
-
-            // store new passwords hash and salt in the database
-            if(typeof req.body.user.password !== 'undefined') {
-                user.setPassword(req.body.user.password);
-            }
-
-            return user.save().then(function() {
-                return res.status(200).json({"error": false, "message": "OK"});
-            });
-        }
-    }).catch(next);
+            // save user data as JSON in cookie and redirect
+            res.cookie('user', userCookie);
+            res.redirect('/app/dashboard');
+        })(req, res, next);
 });
 
 module.exports = router;

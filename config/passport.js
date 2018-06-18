@@ -5,10 +5,7 @@ const   passport                    = require('passport'),
         LocalStrategy               = require('passport-local').Strategy,
         FacebookStrategy            = require('passport-facebook').Strategy,
         TwitterStrategy             = require('passport-twitter').Strategy,
-        GoogleStrategy              = require('passport-google-oauth20').Strategy,
-        randtoken                   = require('rand-token');
-
-
+        GoogleStrategy              = require('passport-google-oauth20').Strategy;
 /**
  * *********************************************************************
  *  Serialize & deserialize users
@@ -37,6 +34,7 @@ passport.use(new LocalStrategy({
 }, function(email, password, done) {
     User.findOne({email: email}).then(function(user){
         if(!user || !user.validPassword(password)){
+            // if user is not found
             return done(null, false, { errors: {'email or password': 'is invalid' }});
         }
         return done(null, user);
@@ -49,23 +47,20 @@ passport.use(new LocalStrategy({
  * **********************************************************************
  */
 passport.use(new FacebookStrategy(authProviders.facebook, function(accessToken, refreshToken, profile, done) {
+
     // make the code asynchronous
     // User.findOne won't fire until we have all our data back from Twitter
     process.nextTick(function() {
-
-        //return console.log('profile: ', profile);
-
         // search for user in the database based on "oAuth" ID returned by facebook
         User.findOne({ 'auth.oauthID': profile.id, 'auth.provider': 'facebook' }, function(err, user) {
             if(err) {
                 return done(err);  // handle errors!
             }
-            // if user is found in the database
-            if (!err && user !== null) {
-                // user.token = user.generateJWT();
+
+            if (user) {
+                // if user is found in the database
                 return done(null, user);
             } else {
-
                 // if user is not found, create a new user based on their Facebook account info
                 user = new User({
                     'auth.provider': 'facebook',
@@ -74,15 +69,13 @@ passport.use(new FacebookStrategy(authProviders.facebook, function(accessToken, 
                     'email': profile.emails[0].value,
                     'image': profile.photos[0].value,
                     'active': 1
-                    //'location': profile._json.location.name
                 });
 
                 // save user in the database
                 user.save(function(err) {
                     if(err) {
-                        console.log(err);  // handle errors!
+                        return done(err);
                     } else {
-                        //console.log("saving user ...");
                         return done(null, user);
                     }
                 });
@@ -97,16 +90,16 @@ passport.use(new FacebookStrategy(authProviders.facebook, function(accessToken, 
  * **********************************************************************
  */
 passport.use(new TwitterStrategy(authProviders.twitter, function(token, tokenSecret, profile, done) {
+
     // make the code asynchronous
     // User.findOne won't fire until we have all our data back from Twitter
     process.nextTick(function() {
         User.findOne({ 'auth.oauthID' : profile.id, 'auth.provider': 'twitter' }, function(err, user) {
-            // if there is an error, stop everything and return that
-            // ie an error connecting to the database
-            if (err) return done(err);
+            if (err)
+                return done(err);
 
-            // if the user is found then log them in
             if (user) {
+                // if user is found then log them in
                 return done(null, user);
             }  else {
                 // if user is not found, create a new user based on their Twitter account info
@@ -122,7 +115,7 @@ passport.use(new TwitterStrategy(authProviders.twitter, function(token, tokenSec
                 // save user in the database
                 user.save(function (err) {
                     if (err) {
-                        console.log(err);
+                        return done(err);
                     } else {
                         return done(null, user);
                     }
@@ -137,18 +130,17 @@ passport.use(new TwitterStrategy(authProviders.twitter, function(token, tokenSec
  * **********************************************************************
  */
 passport.use(new GoogleStrategy(authProviders.google, function(accessToken, refreshToken, profile, done) {
-        // make the code asynchronous
+
+    // make the code asynchronous
         // asynchronous verification, for effect...
         process.nextTick(function () {
             // User.findOne won't fire until we have all our data back from Twitter
             User.findOne({ 'auth.oauthID': profile.id, 'auth.provider': 'google' }, function (err, user) {
                 if (err)
-                    console.log(err);
                     return done(err);
 
-                // if the user is found then log them in
                 if (user) {
-                    console.log(user);
+                    // if user is found then log them in
                     return done(null, user);
                 } else {
                     // if user is not found, create a new user based on their Google account info
@@ -164,7 +156,7 @@ passport.use(new GoogleStrategy(authProviders.google, function(accessToken, refr
                     // save user in the database
                     user.save(function (err) {
                         if (err) {
-                            console.log(err);
+                            return done(err);
                         } else {
                             return done(null, user);
                         }
