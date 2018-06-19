@@ -1,11 +1,12 @@
-var mongoose = require('mongoose');
-var router = require('express').Router();
-var passport = require('passport');
-var User = mongoose.model('User');
-var auth = require('../../middleware/auth');
-var nodemailer = require('nodemailer');
-var randtoken       = require('rand-token');
-var mail = require('../../middleware/mail');
+const router                      = require('express').Router()
+    , mongoose                    = require('mongoose')
+    , User                        = mongoose.model('User')
+    , auth                        = require('../../middleware/auth')
+    , randtoken                   = require('rand-token')
+    , mail                        = require('../../config/mail')
+    , nodemailer                  = require('nodemailer')
+    , sgTransport                 = require('nodemailer-sendgrid-transport')
+    , emailTemplates              = require('email-templates');
 
 router.get('/user', auth.required, function(req, res, next) {
     User.findById(req.payload.id).then(function(user){
@@ -26,7 +27,10 @@ router.get('/user/:id', auth.required, function(req, res, next) {
 
 router.put('/user', auth.required, function(req, res, next) {
     User.findById(req.payload.id).then(function(user){
-        if(!user){ return res.sendStatus(401); }
+
+        if(!user) {
+            return res.sendStatus(401);
+        }
 
         // only update fields that were actually passed...
         if(typeof req.body.user.username !== 'undefined'){
@@ -72,32 +76,33 @@ router.post('/users', function(req, res, next) {
     user.email = req.body.user.email;
     user.name = req.body.user.name;
     user.setPassword(req.body.user.password);
-    user.activation_token = (process.env.DEVELOPMENT_MODE == 'development') ? '' : randtoken.generate(32);
-    user.active = (process.env.DEVELOPMENT_MODE == 'development') ? 1 : 0;
+    user.activation_token = randtoken.generate(32);
+    user.active = 0;
 
     user.save();
 
-    if(process.env.DEVELOPMENT_MODE != "development") {
-        // send the e-mail for newly registered account
-        var transporter = nodemailer.createTransport(mail.nodemailer.mailgun.options);
-        var mailOptions = {
-            from: process.env.SMTP_USERNAME,
-            to: user.email,
-            subject: 'Vahvista reksiteröintisi sivustolle ' + process.env.APP_NAME,
-            text: process.env.APP_DOMAIN + '/account/activate/' + user.activation_token
-        };
+    const email = new emailTemplates ({
+        transport: nodemailer.createTransport(sgTransport(mail.nodemailer.sendgrid.options)),
+        message: {
+            from: 'tatu.kulm@gmail.com'
+        },
+        send: true // uncomment below to send emails in development/test env:
+    });
 
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(info);
-                return res.status(200).json( { status: "OK" } )
-            }
-        });
-    } else {
+    email.send({
+        template: 'signup',
+        message: {
+            to: user.email,
+            subject: process.env.APP_NAME + ' - Rekisteröinti'
+        },
+        locals: {
+            name: user.name,
+            siteName: process.env.APP_NAME,
+            activation_url: process.env.APP_DOMAIN + '/account/activate/' + user.activation_token
+        }
+    }).then(function() {
         return res.status(200).json( { status: "OK" });
-    }
+    }).catch(console.error);
 });
 
 module.exports = router;

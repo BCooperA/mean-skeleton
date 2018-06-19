@@ -57,7 +57,7 @@
         }
 
         // default route
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/account/login");
     }
 
     function run($rootScope, $http, $localStorage, $cookies, $state, $stateParams, jwtHelper, $location) {
@@ -91,27 +91,13 @@
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
         }
 
-        // check authentication on every page request
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 
-            // declare public states (routes that are available without authentication)
-            var publicPages = [
-                '/account/login',
-                '/account/',
-                '/account/signup',
-                '/account/verify',
-                '/account/recover',
-                '/account/reset/:key'
-            ];
-            // secured states (all the pages that are not inside the publicPages array)
-            var restrictedPage = publicPages.indexOf($location.path()) === -1;
-
-
-            // redirect user to login page if user is not logged in or the JWT token is expired
-            if (restrictedPage && (!$localStorage.currentUser || jwtHelper.isTokenExpired($localStorage.currentUser.token)) ) {
-                $location.path('/account/login');
+            if (toState.authenticate && (!$localStorage.currentUser || jwtHelper.isTokenExpired($localStorage.currentUser.token))){
+                // User isn’t authenticated
+                $location.path("/account/login");
+                event.preventDefault();
             }
-
         });
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -121,7 +107,6 @@
             $rootScope.previousState_params = fromParams;
 
             $rootScope.title = toState.title;
-            //$rootScope.lang = localStorage.getItem("lang");
         });
     }
 })();

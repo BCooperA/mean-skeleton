@@ -1,9 +1,8 @@
-const   router          = require('express').Router(),
-        mongoose        = require('mongoose'),
-        User            = mongoose.model('User'),
-        passport        = require('passport'),
-        cookieParser    = require('cookie-parser'),
-        randtoken       = require('rand-token');
+const router          = require('express').Router()
+    , mongoose        = require('mongoose')
+    , User            = mongoose.model('User')
+    , passport        = require('passport')
+    , cookieParser    = require('cookie-parser');
 
 /**
  |--------------------------------------------------------------------------
@@ -16,7 +15,6 @@ const   router          = require('express').Router(),
  |
  */
 
-
 /**
  |--------------------------------------------------------------------------
  | Local Authentication
@@ -24,11 +22,11 @@ const   router          = require('express').Router(),
  | Authenticates user using Local Strategy by Passport
  */
 router.post('/signin', function(req, res, next) {
-    if(!req.body.user.email){
+    if(!req.body.user.email) {
         return res.status(422).json({ errors: { email: "can't be blank" } });
     }
 
-    if(!req.body.user.password){
+    if(!req.body.user.password) {
         return res.status(422).json({ errors: { password: "can't be blank" } });
     }
 

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row login-container">
-        <form novalidate name="signupForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="signupForm.$valid && vm.signUp()">
+        <form novalidate ng-submit="signupForm.$valid && vm.signUp()" name="signupForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown">
             <div ng-class="{ 'shake animated' : signupForm.$submitted }">
                 <!-- header link -->
                 <a href="/signup" class="signin-header">{{ 'forms.auth.signup_form.headline' | translate }}</a>

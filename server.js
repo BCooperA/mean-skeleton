@@ -20,11 +20,6 @@ const   express             = require('express'),
  | start the server
  |
  */
-
-/**
- * Create global app object
- * @type {*|Function}
- */
 const app = express();
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -37,7 +32,7 @@ app.use(helmet());
 app.use(cors());
 app.use(cookieParser());
 app.use(require('morgan')('dev'));
-
+app.set('view engine','pug');
 // Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies.
 app.use(bodyParser.json()); // returns middleware that only parses json.

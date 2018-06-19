@@ -16,7 +16,8 @@
                 name: "dashboard.app",
                 value: {
                     title: "Dashboard",
-                    url: "/app/dashboard"
+                    url: "/app/dashboard",
+                    authenticate: true
                 }
             },
             {
@@ -24,7 +25,8 @@
                 value: {
                     title: "Profile",
                     url: "profile",
-                    templateUrl: "/angular/app-components/dashboard/profile/index.view.html"
+                    templateUrl: "/angular/app-components/dashboard/profile/index.view.html",
+                    authenticate: true
                 }
             },
             {
@@ -32,7 +34,8 @@
                 value: {
                     title: "Messages",
                     url: "messages",
-                    templateUrl: "/angular/app-components/dashboard/messages/index.view.html"
+                    templateUrl: "/angular/app-components/dashboard/messages/index.view.html",
+                    authenticate: true
                 }
             },
             {
@@ -96,7 +99,7 @@
                 name: "account.reset",
                 value: {
                     title: "Reset account",
-                    url: "/reset/:key",
+                    url: "/account/reset/:token",
                     templateUrl: "/angular/app-components/auth/password/reset/index.view.html",
                     controller: "Password.IndexController",
                     controllerAs: "vm",

@@ -16,7 +16,7 @@
                 ngModel.$asyncValidators.emailExists = function(modelValue, viewValue) {
                     return $http.post('/account/email', { user: { email: viewValue} })
                         .then(function(response) {
-                            if (!response.data.valid === false) {
+                            if (response.data.valid === false) {
                                 return $q.reject();
                             }
                             return true;

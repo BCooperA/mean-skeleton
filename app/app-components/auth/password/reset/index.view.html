@@ -1,25 +1,38 @@
 <div class="container">
     <div class="row pw-recovery-container">
-        <form name="passwordResetForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="vm.login()" novalidate>
+        <form novalidate ng-submit="passwordResetForm.$valid && vm.reset()" name="passwordResetForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown">
             <i class="fa fa-arrows-alt"></i>
             <a href="" class="signin-header">Reset your password!</a>
             <p>Enter your new password twice below the two input boxes.</p>
             <!-- errors -->
             <div ng-show="passwordResetForm.$submitted" inform></div>
 
-            <div class="form-input-fields">
-                <!-- password -->
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input data-password-toggle ng-model="vm.password" required type="password" id="inputPassword" class="form-control" placeholder="Password">
+            <div ng-if="vm.passwordReset" class="alert alert-success">{{ vm.passwordResetMsg }}</div>
 
-                <!-- re-type password -->
-                <label for="inputPasswordConf" class="sr-only">Password</label>
-                <input data-password-toggle ng-model="vm.password_confirm" required type="password" id="inputPasswordConf" class="form-control" placeholder="Password">
+            <div class="form-input-fields">
+                <div class="col-xs-12" ng-class="{ 'has-error' : signupForm.$submitted }">
+                    <!-- password -->
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input data-password-toggle ng-model="vm.password" name="password" required type="password" id="inputPassword" class="form-control" placeholder="Password">
+                </div>
+
+                <div class="col-xs-12" ng-class="{ 'has-error' : signupForm.$submitted }">
+                    <!-- password verify -->
+                    <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
+                    <input data-password-toggle same-as="vm.password" name="passwordVrf" required type="password" ng-model="vm.passwordVrf"  id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
+
+                    <!-- password verify / form-errors -->
+                    <span ng-show="(passwordResetForm.password.$modelValue !== passwordResetForm.passwordVrf.$modelValue) && passwordVrf.$touched" class="help-block">
+                        {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
+                    </span>
+                </div>
             </div> <!-- /form-input-fields -->
 
-            <!-- Sign In Button -->
-            <input id="login" ng-disabled="vm.loading" class="primary-btn btn-block" type="submit" value="Send reset instructions">
-            <button class="secondary-btn btn-block" onclick="window.history.go(-1);">Go back</button>
+            <!-- Reset Button -->
+            <input type="submit" id="resetPassword" ng-disabled="vm.loading" class="primary-btn btn-block" value="Reset my password">
+
+            <!-- Back to Login page -->
+            <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
         </form>
     </div> <!-- /container -->
 </div>

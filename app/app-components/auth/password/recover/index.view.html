@@ -20,8 +20,8 @@
                 <!-- Sign In Button -->
                 <input type="submit"  id="recover" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.recover_form.submit_btn' | translate }}">
 
-                <!-- Back to Previous page -->
-                <button class="secondary-btn btn-block" onclick="window.history.go(-1);">{{ 'forms.auth.go_back' | translate }}</button>
+                <!-- Back to Login page -->
+                <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
             </div>
         </form>
     </div> <!-- /container -->

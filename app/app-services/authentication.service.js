@@ -12,6 +12,7 @@
         service.Logout = Logout;
         service.SignUp = SignUp;
         service.recoverPassword = recoverPassword;
+        service.resetPassword = resetPassword;
         service.GetById = GetById;
         return service;
 
@@ -58,12 +59,23 @@
         }
 
         function recoverPassword(email, callback) {
-            $http.put('/auth/password/recover', { user : { email: email } })
+            $http.put('/account/password/recover', { user : { email: email } })
                 .then(function(response) {
-                    if (response.data.errors) {
-                        return callback(false);
-                    } else {
+                    if (response.data.status == 'OK') {
                         return callback(true);
+                    } else {
+                        return callback(false);
+                    }
+                });
+        }
+
+        function resetPassword(token, password, callback) {
+            $http.put('/account/password/reset/' + token, { user: { password: password } })
+                .then(function(response){
+                    if(response.data.status == 'OK') {
+                        return callback(true);
+                    } else {
+                        return callback(false);
                     }
                 });
         }

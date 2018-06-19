@@ -1,10 +1,9 @@
 var mail = {
-    // nodemailer configuration
     nodemailer: {
         mailgun: {
             options: {
-                debug: false,
-                requireTLS: true,
+                debug: true,
+                requireTLS: false,
                 host: process.env.SMTP_HOSTNAME,
                 secureConnection: false,
                 auth: {
@@ -15,6 +14,14 @@ var mail = {
                 tls: {
                     ciphers: 'SSLv3',
                     rejectUnauthorized: false
+                }
+            }
+        },
+        sendgrid: {
+            options: {
+                auth: {
+                    api_user: process.env.SMTP_SENDGRID_USERNAME,
+                    api_key: process.env.SMTP_SENDGRID_PASSWORD
                 }
             }
         }
