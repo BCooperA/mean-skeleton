@@ -1,13 +1,31 @@
-const router                      = require('express').Router()
-    , mongoose                    = require('mongoose')
-    , User                        = mongoose.model('User')
-    , auth                        = require('../../middleware/auth')
-    , randtoken                   = require('rand-token')
-    , mail                        = require('../../config/mail')
-    , nodemailer                  = require('nodemailer')
-    , sgTransport                 = require('nodemailer-sendgrid-transport')
-    , emailTemplates              = require('email-templates');
+const router            = require('express').Router()
+    , mongoose          = require('mongoose')
+    , User              = mongoose.model('User')
+    , auth              = require('../../middleware/auth')
+    , randtoken         = require('rand-token')
+    , mail              = require('../../config/mail')
+    , nodemailer        = require('nodemailer')
+    , sgTransport       = require('nodemailer-sendgrid-transport')
+    , emailTemplates    = require('email-templates');
 
+/**
+ |--------------------------------------------------------------------------
+ | API Routes - Users
+ |--------------------------------------------------------------------------
+ |
+ | This file is where you may define all of your user based routes
+ | for retrieving, updating, inserting and deleting users
+ |
+ */
+
+/**
+ |--------------------------------------------------------------------------
+ | HTTP GET user "/api/users/user"
+ |--------------------------------------------------------------------------
+ |
+ | Retrieves user data based on JSON Web Token saved in payload
+ |
+ */
 router.get('/user', auth.required, function(req, res, next) {
     User.findById(req.payload.id).then(function(user){
         if(!user){ return res.sendStatus(401); }
@@ -16,6 +34,14 @@ router.get('/user', auth.required, function(req, res, next) {
     }).catch(next);
 });
 
+/**
+ |--------------------------------------------------------------------------
+ | HTTP GET user "/api/users/user/1"
+ |--------------------------------------------------------------------------
+ |
+ | Retrieves user data based on user id in route parameter
+ |
+ */
 router.get('/user/:id', auth.required, function(req, res, next) {
     User.findById(req.params.id).then(function(user) {
         if (!user) {
@@ -25,6 +51,14 @@ router.get('/user/:id', auth.required, function(req, res, next) {
     }).catch(next);
 });
 
+/**
+ |--------------------------------------------------------------------------
+ | HTTP PUT user "/api/users/user"
+ |--------------------------------------------------------------------------
+ |
+ | Updates user data based on JSON Web Token saved in payload
+ |
+ */
 router.put('/user', auth.required, function(req, res, next) {
     User.findById(req.payload.id).then(function(user){
 
@@ -52,6 +86,15 @@ router.put('/user', auth.required, function(req, res, next) {
     }).catch(next);
 });
 
+/**
+ |--------------------------------------------------------------------------
+ | HTTP POST user "/api/users"
+ |--------------------------------------------------------------------------
+ |
+ | Add's new user to the database
+ | TODO: Handle validation better
+ | TODO: Create a helper function for sending mails instead of hard coding it here
+ */
 router.post('/users', function(req, res, next) {
 
     // validation

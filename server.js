@@ -1,15 +1,15 @@
 require('dotenv').config(); // load environment variables before launching the application
 
-const   express             = require('express'),
-        bodyParser          = require('body-parser'),
-        session             = require('express-session'),
-        cors                = require('cors'),
-        passport            = require('passport'),
-        errorhandler        = require('errorhandler'),
-        mongoose            = require('mongoose'),
-        helmet              = require('helmet'),
-        cookieParser        = require('cookie-parser'),
-        config              = require('./config/index');
+const express             = require('express')
+    , bodyParser          = require('body-parser')
+    , session             = require('express-session')
+    , cors                = require('cors')
+    , passport            = require('passport')
+    , errorhandler        = require('errorhandler')
+    , mongoose            = require('mongoose')
+    , helmet              = require('helmet')
+    , cookieParser        = require('cookie-parser')
+    , config              = require('./config/index');
 
 /**
  |--------------------------------------------------------------------------
@@ -28,23 +28,31 @@ var isProduction = process.env.NODE_ENV === 'production';
  | Configuration
  |--------------------------------------------------------------------------
  */
-app.use(helmet());
-app.use(cors());
-app.use(cookieParser());
-app.use(require('morgan')('dev'));
-app.set('view engine','pug');
-// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+app.use(helmet());                  // secure your Express apps by setting various HTTP headers with helmet
+app.use(cors());                    // enable CORS (See: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+app.use(cookieParser());            // Parse HTTP request cookies
+app.use(require('morgan')('dev'));  // HTTP request logger middleware for node.js
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies.
-app.use(bodyParser.json()); // returns middleware that only parses json.
+app.use(bodyParser.json()); // returns middleware that only parses json
 
-app.use(require('method-override')());
+app.use(require('method-override')()); // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
+app.use(passport.initialize()); // initialize passport strategies
+app.use(passport.session()); // initialize sessions for passport
 
+
+/**
+ * This middleware is only intended to be used in a development environment,
+ * as the full error stack traces and internal details of any object passed to this module
+ * will be sent back to the client when an error occurs.
+ * See: https://github.com/expressjs/errorhandler
+ */
 if (!isProduction) {
     app.use(errorhandler());
 }
-app.use(passport.initialize());
-app.use(passport.session());
+
+app.set('view engine','pug'); // set view engine to pug for our email templates
+
 
 /**
  |--------------------------------------------------------------------------
@@ -68,17 +76,14 @@ require('./config/passport');
 
 /**
  |--------------------------------------------------------------------------
- | Static files for frontend
+ | Static files for front end
  |--------------------------------------------------------------------------
  */
-app.use("/js", express.static(__dirname + "/public/js"));
-app.use("/fonts", express.static(__dirname + "/public/fonts"));
-app.use("/css", express.static(__dirname + "/public/styles"));
-app.use("/img", express.static(__dirname + "/public/img"));
-app.use("/angular", express.static(__dirname + "/app"));
-
-// front end framework files (angularJS)
-app.use("/app", express.static(__dirname + "/public/app"));
+app.use("/js", express.static(__dirname + "/public/js")); // javascript files
+app.use("/fonts", express.static(__dirname + "/public/fonts")); // fonts
+app.use("/css", express.static(__dirname + "/public/styles")); // stylesheets
+app.use("/img", express.static(__dirname + "/public/img")); // images
+app.use("/angular", express.static(__dirname + "/app")); // angular files
 
 /**
  |--------------------------------------------------------------------------
@@ -89,7 +94,7 @@ app.use(require('./routes'));
 
 /**
  |--------------------------------------------------------------------------
- | Front-end routes
+ | Front end routes
  |--------------------------------------------------------------------------
  | NOTE! use this only if you are developing an SPA (single page application)
  |--------------------------------------------------------------------------
@@ -154,7 +159,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.json({'errors': { message: err.message, error: {} } });
 });
-
 
 /**
  |--------------------------------------------------------------------------
