@@ -74,8 +74,8 @@
                 <!-- Sign In Button -->
                 <input type="submit"  id="signup" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.sign_up_btn' | translate }}">
 
-                <!-- Go Back button -->
-                <button class="secondary-btn btn-block" onclick="window.history.go(-1);">{{ 'forms.auth.go_back' | translate }}</button>
+                <!-- Back to Login page -->
+                <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
             </div>
         </form>
     </div> <!-- /login-container -->
