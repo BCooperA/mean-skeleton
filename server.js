@@ -53,12 +53,12 @@ if (!isProduction) {
 
 app.set('view engine','pug'); // set view engine to pug for our email templates
 
-
 /**
  |--------------------------------------------------------------------------
  | Database Connection
  |--------------------------------------------------------------------------
  */
+mongoose.Promise = global.Promise; //  mongoose's default promise library is deprecated, plug in your own promise library instead
 mongoose.connect(config.mongodb.url, {
     useMongoClient: true,
     promiseLibrary: require('bluebird')

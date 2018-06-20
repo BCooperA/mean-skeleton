@@ -34,7 +34,7 @@
         });
 
         // set default language from the "lang" key of the item we stored in our localStorage
-        $translateProvider.preferredLanguage(localStorage.getItem('lang'));
+        $translateProvider.preferredLanguage('en');
 
         /**
          * enable escape sanitize strategy for translation content

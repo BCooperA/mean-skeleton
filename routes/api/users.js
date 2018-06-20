@@ -1,14 +1,13 @@
-const router            = require('express').Router()
-    , mongoose          = require('mongoose')
-    , User              = mongoose.model('User')
-    , auth              = require('../../middleware/auth')
-    , randtoken         = require('rand-token')
-    , mail              = require('../../config/mail')
-    , nodemailer        = require('nodemailer')
-    , sgTransport       = require('nodemailer-sendgrid-transport')
-    , mgTransport       = require('nodemailer-mailgun-transport')
-    , emailTemplates    = require('email-templates');
-
+const router                        = require('express').Router()
+    , mongoose                      = require('mongoose')
+    , User                          = mongoose.model('User')
+    , auth                          = require('../../middleware/auth')
+    , randtoken                     = require('rand-token')
+    , mail                          = require('../../config/mail')
+    , nodemailer                    = require('nodemailer')
+    , mgTransport                   = require('nodemailer-mailgun-transport')
+    , emailTemplates                = require('email-templates')
+    , { check, validationResult }   = require('express-validator/check');
 /**
  |--------------------------------------------------------------------------
  | API Routes - Users
@@ -93,29 +92,35 @@ router.put('/user', auth.required, function(req, res, next) {
  |--------------------------------------------------------------------------
  |
  | Add's new user to the database
- | TODO: Handle validation better
+ | TODO: Handle helpers better
  | TODO: Create a helper function for sending mails instead of hard coding it here
  */
-router.post('/users', function(req, res, next) {
-
+router.post('/users', [
     // validation
-    if(!req.body.user.email) {
-        return res.status(422).json({ errors: { email: "can't be blank" } });
+    check('user.email')
+        .custom(function(value) {
+            return User.findOne({email: value }).then(function(user) {
+                if(user) {
+                    return Promise.reject('E-mail already in use');
+                }
+            })
+        })
+        .isEmail().withMessage('Invalid e-mail address'),
+
+    check('user.name')
+        .isLength({ min: 3 }).withMessage('Name is required'),
+
+    check('user.password')
+        .isLength({ min: 5 }).withMessage('must be at least 5 chars long')
+        .matches(/\d/).withMessage('Password must contain at least one number')
+], function(req, res, next) {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        // return validation errors
+        return res.status(422).json({ errors: errors.array() });
     }
-
-    if(!req.body.user.name) {
-        return res.status(422).json({ errors: { name: "can't be blank" } });
-    }
-
-    if(!req.body.user.password) {
-        return res.status(422).json({ errors: { password: "can't be blank" } });
-    }
-
-    if(req.body.user.password.length <= 6) {
-        return res.status(422).json({ errors: { password: "is too short" } });
-    }
-
-
     var user = new User();
     user.email = req.body.user.email;
     user.name = req.body.user.name;
@@ -123,30 +128,31 @@ router.post('/users', function(req, res, next) {
     user.activation_token = randtoken.generate(32);
     user.active = 0;
 
-    user.save();
+    // if user is saved, send email
+    user.save().then(function() {
+        const email = new emailTemplates ({
+            transport: nodemailer.createTransport(mgTransport(mail.nodemailer.mailgun.options)),
+            message: {
+                from: 'tatu.kulm@gmail.com'
+            },
+            send: true // uncomment below to send emails in development/test env:
+        });
 
-    const email = new emailTemplates ({
-        transport: nodemailer.createTransport(mgTransport(mail.nodemailer.mailgun.options)),
-        message: {
-            from: 'tatu.kulm@gmail.com'
-        },
-        send: true // uncomment below to send emails in development/test env:
+        email.send({
+            template: 'signup',
+            message: {
+                to: user.email,
+                subject: process.env.APP_NAME + ' - Rekisteröinti'
+            },
+            locals: {
+                name: user.name,
+                siteName: process.env.APP_NAME,
+                activation_url: process.env.APP_DOMAIN + '/account/activate/' + user.activation_token
+            }
+        }).then(function() {
+            return res.status(200).json( { status: "OK" });
+        }).catch(console.error);
     });
-
-    email.send({
-        template: 'signup',
-        message: {
-            to: user.email,
-            subject: process.env.APP_NAME + ' - Rekisteröinti'
-        },
-        locals: {
-            name: user.name,
-            siteName: process.env.APP_NAME,
-            activation_url: process.env.APP_DOMAIN + '/account/activate/' + user.activation_token
-        }
-    }).then(function() {
-        return res.status(200).json( { status: "OK" });
-    }).catch(console.error);
 });
 
 module.exports = router;

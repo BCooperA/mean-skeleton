@@ -56,6 +56,11 @@ passport.use(new LocalStrategy({usernameField: 'user[email]', passwordField: 'us
  |--------------------------------------------------------------------------
  | Social authentication strategy - Facebook
  |--------------------------------------------------------------------------
+ | First, application tries to authenticate user using the oauthID provided
+ | by Facebook. If oauthID is not present, app tries to look for email address
+ | returned by Facebook. If either oauthID or e-mail address is found in the database
+ | authentication is successful.
+ |--------------------------------------------------------------------------
  */
 passport.use(new FacebookStrategy(authProviders.facebook,
     function(accessToken, refreshToken, profile, done) {
@@ -104,6 +109,11 @@ passport.use(new FacebookStrategy(authProviders.facebook,
  |--------------------------------------------------------------------------
  | Social authentication strategy - Twitter
  |--------------------------------------------------------------------------
+ | First, application tries to authenticate user using the oauthID provided
+ | by Twitter. If oauthID is not present, app tries to look for email address
+ | returned by Twitter. If either oauthID or e-mail address is found in the database
+ | authentication is successful.
+ |--------------------------------------------------------------------------
  */
 passport.use(new TwitterStrategy(authProviders.twitter,
     function(token, tokenSecret, profile, done) {
@@ -150,6 +160,11 @@ passport.use(new TwitterStrategy(authProviders.twitter,
  |--------------------------------------------------------------------------
  | Social authentication strategy - Google
  |--------------------------------------------------------------------------
+ | First, application tries to authenticate user using the oauthID provided
+ | by Google. If oauthID is not present, app tries to look for email address
+ | returned by Google. If either oauthID or e-mail address is found in the database
+ | authentication is successful.
+ |--------------------------------------------------------------------------
  */
 passport.use(new GoogleStrategy(authProviders.google,
     function(accessToken, refreshToken, profile, done) {
@@ -174,7 +189,7 @@ passport.use(new GoogleStrategy(authProviders.google,
                             'auth.provider': 'google',
                             'auth.oauthID': profile.id,
                             'name': profile.displayName,
-                            'name': profile.photos[0].value.slice(0, -2) + '200',
+                            'image': profile.photos[0].value.slice(0, -2) + '200',
                             'email': profile.emails[0].value,
                             'active': 1
                         });

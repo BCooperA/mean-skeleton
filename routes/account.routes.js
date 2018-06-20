@@ -1,11 +1,12 @@
-const   router          = require('express').Router(),
-        mongoose        = require('mongoose'),
-        User            = mongoose.model('User'),
-        randtoken       = require('rand-token'),
-        mail            = require('../config/mail'),
-        nodemailer      = require('nodemailer'),
-        sgTransport     = require('nodemailer-sendgrid-transport'),
-        emailTemplates  = require('email-templates');
+const router                        = require('express').Router()
+    , mongoose                      = require('mongoose')
+    , User                          = mongoose.model('User')
+    , randtoken                     = require('rand-token')
+    , mail                          = require('../config/mail')
+    , nodemailer                    = require('nodemailer')
+    , mgTransport                   = require('nodemailer-mailgun-transport')
+    , emailTemplates                = require('email-templates')
+    , { check, validationResult }   = require('express-validator/check');
 
 /**
  |--------------------------------------------------------------------------
@@ -83,31 +84,31 @@ router.put('/password/recover', function(req, res, next) {
             // generate a request token for password reset
             user.request_password_token = randtoken.generate(32);
 
-            // save and send email
-            user.save();
+            // if user is saved, send email
+            user.save().then(function() {
+                const email = new emailTemplates ({
+                    transport: nodemailer.createTransport(mgTransport(mail.nodemailer.mailgun.options)),
+                    send: true, // uncomment below to send emails in development/test env
+                    message: {
+                        from: 'tatu.kulm@gmail.com'
+                    }
+                });
 
-            const email = new emailTemplates ({
-                transport: nodemailer.createTransport(sgTransport(mail.nodemailer.sendgrid.options)),
-                send: true, // uncomment below to send emails in development/test env
-                message: {
-                    from: 'tatu.kulm@gmail.com'
-                }
+                email.send({
+                    template: 'recover',
+                    message: {
+                        to: user.email,
+                        subject: process.env.APP_NAME + ' - Salasanan palautus'
+                    },
+                    locals: {
+                        name: user.name,
+                        siteName: process.env.APP_NAME,
+                        recover_url: process.env.APP_DOMAIN + '/account/reset/' + user.request_password_token
+                    }
+                }).then(function() {
+                    return res.status(200).json( { status: "OK" });
+                }).catch(console.error);
             });
-
-            email.send({
-                template: 'recover',
-                message: {
-                    to: user.email,
-                    subject: process.env.APP_NAME + ' - Salasanan palautus'
-                },
-                locals: {
-                    name: user.name,
-                    siteName: process.env.APP_NAME,
-                    recover_url: process.env.APP_DOMAIN + '/account/reset/' + user.request_password_token
-                }
-            }).then(function() {
-                return res.status(200).json( { status: "OK" });
-            }).catch(console.error);
         }
     }).catch(next);
 });

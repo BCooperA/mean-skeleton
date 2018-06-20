@@ -12,16 +12,14 @@
     -moz-animation-delay: 0ms !important;
   }
   .alert-test {
-    background-color: yellow !important;
-    color: #000;
-    padding: 10px !important;
+    background-color: transparent;
+    color: red;
+    padding: 0px !important;
     border: 0 !important;
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    span {
-      vertical-align: middle;
-      text-transform:initial;
-    }
+    width: 100%;
+    margin: 0 auto;
   }
   .inform-badge {
     //
@@ -32,9 +30,9 @@
   }
   a.signin-header {
     font-family: 'Pacifico', sans-serif;
-    font-size: 4rem;
+    font-size: 3rem;
     display: block;
-    margin: 20px auto 20px auto;
+    margin: 0 auto;
     text-align: center;
     color: #fdfdfd;
     text-decoration: none;
@@ -177,74 +175,6 @@ a.login-link {
 .right {
   float: right;
 }
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-  margin-top: 8px;
-}
-
-.switch input {display:none;}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-/* Login Button */
-.btn-login {
-  font-family: 'Lato', sans-serif;
-  background-color: transparent;
-  border: 2px solid #fdfdfd;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  padding: 10px;
-  opacity: 0.8;
-}
 .login-rm-wrapper {
   margin-bottom: 10px;
 }
@@ -254,12 +184,5 @@ input:checked + .slider:before {
     background-color: #0274cc;
     padding-left: 20px;
     text-align: left;
-  }
-}
-
-/* Media Queries */
-@media(min-width: @screen-xs-min) {
-  a.login-link {
-    float: right;
   }
 }

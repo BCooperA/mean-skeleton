@@ -35,6 +35,17 @@
   padding: 5px 30px 5px 30px;
   margin: 20px 20px 0 0;
 }
+/* Login Button */
+.btn-login {
+  font-family: 'Lato', sans-serif;
+  background-color: transparent;
+  border: 2px solid #fdfdfd;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 10px;
+  opacity: 0.8;
+}
 .btn-social {
   border: 0 !important;
   padding: 10px;
@@ -48,6 +59,21 @@
 
   i.fa {
     font-size: 2.2rem;
+  }
+}
+
+.btn-social-rectangle {
+  border: 0 !important;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  color: #fdfdfd;
+  width: 100%;
+  text-align: center;
+
+  i.fa {
+    text-align: left !important;
   }
 }
 .btn-social:hover {
@@ -65,9 +91,29 @@
 .btn-twitter:hover {
   background-color: #1bb8e5;
 }
-.btn-google-plus {
+.btn-google {
   background-color: #EA3F2E;
 }
-.btn-google-plus:hover {
+.btn-google:hover {
   background-color: #b22e21;
+}
+.glyphicon.spinning {
+  animation: spin 1s infinite linear;
+  -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+.spinner {
+  color: #fdfdfd;
+  font-size: 2em;
+  margin: 0 auto;
+  width: 100%;
 }
