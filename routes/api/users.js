@@ -6,6 +6,7 @@ const router            = require('express').Router()
     , mail              = require('../../config/mail')
     , nodemailer        = require('nodemailer')
     , sgTransport       = require('nodemailer-sendgrid-transport')
+    , mgTransport       = require('nodemailer-mailgun-transport')
     , emailTemplates    = require('email-templates');
 
 /**
@@ -125,7 +126,7 @@ router.post('/users', function(req, res, next) {
     user.save();
 
     const email = new emailTemplates ({
-        transport: nodemailer.createTransport(sgTransport(mail.nodemailer.sendgrid.options)),
+        transport: nodemailer.createTransport(mgTransport(mail.nodemailer.mailgun.options)),
         message: {
             from: 'tatu.kulm@gmail.com'
         },

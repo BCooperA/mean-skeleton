@@ -2,18 +2,9 @@ var mail = {
     nodemailer: {
         mailgun: {
             options: {
-                debug: true,
-                requireTLS: false,
-                host: process.env.SMTP_HOSTNAME,
-                secureConnection: false,
                 auth: {
-                    user: process.env.SMTP_USERNAME,
-                    pass: process.env.SMTP_PASSWORD
-
-                },
-                tls: {
-                    ciphers: 'SSLv3',
-                    rejectUnauthorized: false
+                    api_key: process.env.MAILGUN_API_KEY,
+                    domain: process.env.MAILGUN_DOMAIN
                 }
             }
         },

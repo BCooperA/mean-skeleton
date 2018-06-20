@@ -61,7 +61,14 @@ passport.use(new FacebookStrategy(authProviders.facebook,
     function(accessToken, refreshToken, profile, done) {
         process.nextTick(function() {
             // search for user in the database based on "oAuth" ID returned by facebook
-            User.findOne({ 'auth.oauthID': profile.id, 'auth.provider': 'facebook' }, function(err, user) {
+            User.findOne({
+                '$or': [{
+                    'auth.oauthID': profile.id,
+                    'auth.provider': 'facebook'
+                }, {
+                    'email': profile.emails[0].value
+                }]
+            }, function(err, user) {
                 if(err) {
                     return done(err);
                 }
@@ -101,7 +108,14 @@ passport.use(new FacebookStrategy(authProviders.facebook,
 passport.use(new TwitterStrategy(authProviders.twitter,
     function(token, tokenSecret, profile, done) {
         process.nextTick(function() {
-            User.findOne({ 'auth.oauthID' : profile.id, 'auth.provider': 'twitter' }, function(err, user) {
+            User.findOne({
+                '$or': [{
+                    'auth.oauthID': profile.id,
+                    'auth.provider': 'twitter'
+                }, {
+                    'email': profile.emails[0].value
+                }]
+            }, function(err, user) {
                 if (err)
                     return done(err);
 
@@ -140,8 +154,14 @@ passport.use(new TwitterStrategy(authProviders.twitter,
 passport.use(new GoogleStrategy(authProviders.google,
     function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
-            User.findOne({ 'auth.oauthID': profile.id, 'auth.provider': 'google' },
-                function (err, user) {
+            User.findOne({
+                    '$or': [{
+                        'auth.oauthID': profile.id,
+                        'auth.provider': 'google'
+                    }, {
+                        'email': profile.emails[0].value
+                    }]
+                }, function (err, user) {
                     if (err)
                         return done(err);
 
