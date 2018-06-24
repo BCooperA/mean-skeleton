@@ -1,5 +1,6 @@
 module.exports = {
-    secret: process.env.SECRET,
+    jwt_secret: process.env.JWT_SECRET,
+    session_secret: process.env.SESSION_SECRET,
 
     mongodb: {
         url: process.env.MONGO_URL

@@ -2,7 +2,7 @@ const mongoose            = require('mongoose')
     , uniqueValidator     = require('mongoose-unique-validator')
     , crypto              = require('crypto')
     , jwt                 = require('jsonwebtoken')
-    , secret              = require('../config/index').secret;
+    , secret              = require('../config/index').jwt_secret;
 
 const UserSchema = new mongoose.Schema({
     auth: {
