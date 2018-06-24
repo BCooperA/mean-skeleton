@@ -6,7 +6,8 @@ Getting started with your next project can be tricky and time consuming. The obj
 
 ## What's included ?
 
-* Authentication - Authenticate users using stateless [JSON Web Tokens (JWT)](https://jwt.io)
+* Local authentication - Authenticate users statelessly using [JSON Web Tokens (JWT)](https://jwt.io)
+* Social authentication - Authenticate users via Facebook, Twitter or Google with [Passport.js](https://github.com/jaredhanson/passport)
 * Password recovery / reset
 * Database models - Pre-built Mongoose schema, easy to extend. Read more about [Mongoose](http://mongoosejs.com)
 * Emails - Templated e-mails with [MailGun](https://www.mailgun.com) API service support
