@@ -11,25 +11,27 @@ Getting started with your next project can be tricky and time consuming. The obj
 
 ## How to install ?
 
-*1.* Clone the starter app to your desktop using `clone` command:
+*1.* Install [Node.js](https://nodejs.org/en/) to your computer
+
+*2.* Clone the starter app to your desktop using `clone` command:
 ```
 git clone https://github.com/BCooperA/mean-skeleton.git
 ```
 
-*2.* Download and [install](https://docs.mongodb.com/manual/installation/) MongoDB to your desktop
+*3.* Download and [install](https://docs.mongodb.com/manual/installation/) MongoDB to your desktop
 
-*3.* After installing MongoDB, create a new database `(TEST_DB)` for our application
+*4.* After installing MongoDB, create a new database `(TEST_DB)` for our application
 ```
 > use TEST_DB`
 ```
-*4.* Create a `.env` file from `.env.example` and add environment variables
+*5.* Create a `.env` file from `.env.example` and add environment variables
 
-*5.* Install required dependencies for the application
+*6.* Install required dependencies for the application
 ```
 npm install
 ```
 
-*6.* Run application & enjoy
+*7.* Run application
 
 ```
 node server
