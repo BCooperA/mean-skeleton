@@ -1,10 +1,7 @@
 /* Dashboard Styles */
 .dashboard-nav {
-  background-color: #14375a;
-  background-image: -webkit-gradient(linear,left top,right top,from(#14375a),to(#002143));
-  background-image: linear-gradient(to right,#14375a,#002143);
+  background-color: #006bd6;
   position: relative;
-
   box-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -177,7 +174,7 @@
 /* Search Results */
 .search-results {
   text-align: center;
-  color: #fdfdfd;
+  color: #333;
 
   i.fa {
     font-size: 6rem;
@@ -185,5 +182,38 @@
 
   p {
     font-size: 2rem;
+  }
+}
+
+.navbar-default {
+  .navbar-form .input-group >.form-control {
+    background-color: transparent;
+    border-bottom: 2px solid #fdfdfd;
+  }
+  .navbar-brand {
+    color: #fdfdfd;
+    padding: 10px;
+    font-size: 2.5em;
+  }
+  .navbar-nav > li > a {
+    color: #fdfdfd;
+  }
+  /* HEADER */
+  .navbar-nav {
+    display: block !important;
+    color: #fdfdfd !important;
+
+    > li > a {
+      color: #fdfdfd;
+    }
+
+    img.rounded-header {
+      max-width: 25px;
+      max-height: 25px;
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      margin-right: 5px;
+    }
   }
 }

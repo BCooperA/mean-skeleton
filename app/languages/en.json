@@ -1,4 +1,16 @@
 {
+  "signin": {
+    "title": "Sign in"
+  },
+  "signup": {
+    "title": "Sign up"
+  },
+  "recover": {
+    "title": "Recover account"
+  },
+  "reset": {
+    "title": "Reset password"
+  },
   "forms": {
     "auth": {
       "firstName": "First name",

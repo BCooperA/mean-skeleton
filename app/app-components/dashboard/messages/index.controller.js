@@ -3,15 +3,19 @@
 
     angular
         .module('app')
-        .controller('Messages.IndexController', Controller);
+        .controller('Messages.IndexController', Controller)
+        .$inject = ['$localStorage', 'AccountService'];
 
-    function Controller($location) {
+    function Controller($localStorage, AccountService) {
         var vm = this;
 
         initController();
 
         function initController() {
-        };
+            console.log("HEllo!");
+            vm.message = "Hello!";
+
+        }
     }
 
 })();

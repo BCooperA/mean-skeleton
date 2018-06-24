@@ -5,42 +5,44 @@
         .module('app')
         .controller('Dashboard.IndexController', Controller);
 
-    function Controller($rootScope, $http, $localStorage, AuthenticationService, $state, $location) {
+    function Controller($http, AuthenticationService, AccountService, $state, $localStorage, $rootScope) {
         var vm = this;
-        initController();
 
         vm.searchText = null;
         vm.search = search;
         vm.logOut = logOut;
+        initController();
+        $rootScope.bodylayout = 'dashboard';
+
 
         function initController() {
-            //console.log(jwtHelper.isTokenExpired($localStorage.currentUser.token));
-            AuthenticationService.GetById($localStorage.currentUser.id)
-                .then(function (response) {
+            // fetch user information based on id in $localStorage object
+            AccountService.getUser($localStorage.currentUser.id)
+                .then(function(response) {
                     vm.user = response;
-                });
+                })
         }
 
-        function search(query) {
-            var query = vm.searchText;
-            // console.log(query);
-
-            if( query.length >= 3 ) {
-                $http.post('http://localhost:3000/api/search/' + query).then(function(result){
-                    vm.searchResults = result.data;
-                    $state.go('dashboard.search');
-                });
+        function search() {
+            if( vm.searchText.length >= 3 ) {
+                var query = vm.searchText;
+                SearchService.getByKeyword(query)
+                    .then(function(response) {
+                        vm.searchResults = response;
+                        $state.go('dashboard.search');
+                    })
             } else {
-                $state.go('dashboard');
+                $state.go('dashboard.app');
             }
-
-
         }
 
+        /**
+         * Log user out from the application and redirect back to login page
+         */
         function logOut() {
             AuthenticationService.Logout();
-            $rootScope.loggedOut = true;
-            $location.path('/account/login');
+            $rootScope.bodylayout = '';
+            $state.go('account.login');
         }
     }
 

@@ -5,13 +5,18 @@
         .module('app')
         .controller('Profile.IndexController', Controller);
 
-    function Controller($scope) {
+    function Controller(AccountService, $stateParams, $rootScope) {
         var vm = this;
-
         initController();
 
         function initController() {
-            $scope.name = 'Tatu';
+            // fetch user information based on id found in $stateParams
+            AccountService.getUser($stateParams.id)
+                .then(function (response) {
+                    vm.user = response;
+                    $rootScope.title = vm.user.name;
+                });
+
         }
     }
 

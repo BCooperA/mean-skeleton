@@ -32,7 +32,7 @@
 
 
 </head>
-<body class="ng-cloak noise unauth">
+<body class="unauth {{ bodylayout }}">
     <noscript>
         <div style="position: fixed; top: 0px; left: 0px; z-index: 3000;
             height: 100%; width: 100%; background-color: rgba(255,255,255,0.3); padding-top: 100px;">
@@ -93,11 +93,14 @@
 
     <script src="angular/MainCtrl.js"></script>
 
-    <!-- AngularJS / application components -->
+    <!-- AngularJS / application components / controllers -->
     <script src="angular/app-components/auth/login/index.controller.js"></script>
     <script src="angular/app-components/auth/password/index.controller.js"></script>
     <script src="angular/app-components/auth/signup/index.controller.js"></script>
     <script src="angular/app-components/dashboard/index.controller.js"></script>
+    <script src="angular/app-components/dashboard/messages/index.controller.js"></script>
+    <script src="angular/app-components/dashboard/search/index.controller.js"></script>
+    <script src="angular/app-components/dashboard/profile/index.controller.js"></script>
 
     <!-- AngularJS / directives -->
     <script src="angular/app-directives/password-toggle.directive.js"></script>
@@ -107,6 +110,8 @@
 
     <!-- AngularJS / services -->
     <script src="angular/app-services/authentication.service.js"></script>
+    <script src="angular/app-services/account.service.js"></script>
     <script src="angular/app-services/error.service.js"></script>
+    <script src="angular/app-services/search.service.js"></script>
 </body>
 </html>

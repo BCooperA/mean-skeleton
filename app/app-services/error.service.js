@@ -16,6 +16,9 @@
             responseError: function (rejection) {
 
                 //Handle other statuses.
+                if(rejection.status == 401) {
+                    $location.path('/account/login');
+                }
 
                 // 422 (Unprocessable Entity)
                 if (rejection.status == 422) {

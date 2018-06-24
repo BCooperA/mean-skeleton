@@ -72,7 +72,7 @@
         $rootScope.$stateParams = $stateParams;
 
         // removes the hash from URL created by Facebook Login
-        if (window.location.hash == '#_=_'){
+        if (window.location.hash == '#_=_') {
             history.replaceState
                 ? history.replaceState(null, null, window.location.href.split('#')[0])
                 : window.location.hash = '';
@@ -93,10 +93,12 @@
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 
-            if (toState.authenticate && (!$localStorage.currentUser || jwtHelper.isTokenExpired($localStorage.currentUser.token))){
+            // if state is secured and no user is found in local storage or json web token is expired
+            if ( toState.authenticate && ( !$localStorage.currentUser || jwtHelper.isTokenExpired($localStorage.currentUser.token) ) ) {
                 // User isn’t authenticated
-                $location.path("/account/login");
+                //alert("You have been signed out due to inactivity. Please sign in again!");
                 event.preventDefault();
+                $state.go("account.login");
             }
         });
 

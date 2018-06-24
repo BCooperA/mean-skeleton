@@ -1,4 +1,16 @@
 {
+  "signin": {
+    "title": "Kirjaudu sisään"
+  },
+  "signup": {
+    "title": "Rekisteröidy"
+  },
+  "recover": {
+    "title": "Salasanan palautus"
+  },
+  "reset": {
+    "title": "Resetoi salasana"
+  },
   "forms": {
     "auth": {
       "firstName": "Etunimi",

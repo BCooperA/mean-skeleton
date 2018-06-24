@@ -5,7 +5,7 @@
         .module('app')
         .controller('Login.IndexController', Controller);
 
-    function Controller($location, AuthenticationService, $timeout) {
+    function Controller($location, AuthenticationService, $timeout, $translate, $localStorage, $state) {
         var vm = this;
 
         vm.login = login;
@@ -22,7 +22,7 @@
 
             AuthenticationService.Login(vm.email, vm.password, function (result) {
                 if (result === true) {
-                    $location.path('/app/dashboard');
+                    $state.go('dashboard.app');
                 }
             });
             // enable login btn

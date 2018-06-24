@@ -1,0 +1,43 @@
+<!-- Fixed navbar -->
+<nav class="navbar-default navbar-fixed-top dashboard-nav ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="dashboard.app">
+                <span class="glyphicon glyphicon-piggy-bank"></span>
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <!-- Search -->
+            <div class="col-sm-6 col-md-6">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input ng-model="vm.searchText" ng-change="vm.search(text)" class="form-control" placeholder="Search" name="srch-term" id="search-term" type="text">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div> <!-- /#search -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a ui.sref="dashboard.profile" href="/app/account/{{ vm.user._id }}">
+                    <img class="rounded-header" src="{{ vm.user.image }}" alt=" {{ vm.user.image }}"> {{ vm.user.name }}
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="vm.logOut()" href="">
+                        <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav> <!-- / nav -->
+
+<ui-view></ui-view>
