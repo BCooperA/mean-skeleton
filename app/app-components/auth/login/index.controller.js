@@ -12,12 +12,10 @@
         initController();
 
         function initController() {
-            // reset login status
             AuthenticationService.Logout();
         };
 
         function login() {
-            // disable login btn before authentication
             vm.loading = true;
 
             AuthenticationService.Login(vm.email, vm.password, function (result) {

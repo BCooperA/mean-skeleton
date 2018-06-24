@@ -1,6 +1,14 @@
 (function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Services - Search Service
+     |--------------------------------------------------------------------------
+     |
+     | This is the file where all the search related operations in application's frontend are handled.
+     |
+     */
     angular
         .module('app')
         .factory('SearchService', SearchService)

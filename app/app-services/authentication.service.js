@@ -1,6 +1,14 @@
 ﻿(function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Services - Authentication Service
+     |--------------------------------------------------------------------------
+     |
+     | This is the file where all the authentication related operations in application's frontend are handled.
+     |
+     */
     angular
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
@@ -13,7 +21,6 @@
         service.SignUp = SignUp;
         service.recoverPassword = recoverPassword;
         service.resetPassword = resetPassword;
-        service.getUserById = getUserById;
         return service;
 
         /**
@@ -73,7 +80,7 @@
         function SignUp(email, name, password, callback) {
             $http.post('/api/users', { user: { email: email, name: name, password: password } })
                 .then(function(response) {
-                    if (response.status == 200 && response.data.status == "OK") {
+                    if (response.status === 200 && response.data.status === "OK") {
                         return callback(true);
                     } else {
                         return callback(false);
@@ -81,10 +88,15 @@
                 });
         }
 
+        /**
+         * Sennds an recovery email to user for password reset
+         * @param email - user email
+         * @param callback - callback function based on valid or invalid email
+         */
         function recoverPassword(email, callback) {
             $http.put('/account/password/recover', { user : { email: email } })
                 .then(function(response) {
-                    if (response.status == 200 && response.data.status == 'OK') {
+                    if (response.status === 200 && response.data.status === 'OK') {
                         return callback(true);
                     } else {
                         return callback(false);
@@ -92,33 +104,21 @@
                 });
         }
 
+        /**
+         * Function to reset user password
+         * @param token - token provided by the route parameter
+         * @param password - new password
+         * @param callback - callback function based on valid or invalid password reset
+         */
         function resetPassword(token, password, callback) {
             $http.put('/account/password/reset/' + token, { user: { password: password } })
                 .then(function(response){
-                    if(response.status == 200 && response.data.status == 'OK') {
+                    if(response.status === 200 && response.data.status === 'OK') {
                         return callback(true);
                     } else {
                         return callback(false);
                     }
                 });
-        }
-
-        function getUserById(id) {
-            // test test
-            return $http.get('/api/user/' + id)
-                .then(handleSuccess, handleError('Error getting user by id'));
-        }
-
-        // handle success
-        function handleSuccess(res) {
-            return res.data;
-        }
-
-        // handle errors
-        function handleError(error) {
-            return function () {
-                return { error: true, message: error };
-            };
         }
     }
 })();

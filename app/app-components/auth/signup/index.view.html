@@ -8,7 +8,7 @@
 
             <div class="form-input-fields">
                 <div class="row">
-                    <!-- e-mail -->
+                    <!-- email -->
                     <div class="col-xs-12" ng-class="{ 'has-error' : signupForm.$submitted }">
                         <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
                         <input unique-email ng-required="true" ng-model="vm.email" name="email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
@@ -72,10 +72,10 @@
                 </div>
             </div><!-- /form-input-fields -->
 
-            <!-- Sign In Button -->
+            <!-- sign in button -->
             <input type="submit"  id="signup" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.sign_up_btn' | translate }}">
 
-            <!-- Back to Login page -->
+            <!-- back to login page -->
             <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
         </div>
     </form>

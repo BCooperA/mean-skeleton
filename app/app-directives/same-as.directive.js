@@ -1,11 +1,16 @@
-/**
- * Angular directive to compare two form values (can be used for password verification where user is forced to
- * input two or more fields with same values
- * See reference: https://stackoverflow.com/a/26319307/2411636
- */
 (function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Directive - same as
+     |--------------------------------------------------------------------------
+     |
+     | angular directive to compare two input values
+     | (can be used for password verification where user is forced to input two or more fields with same values)
+     | see reference here: https://stackoverflow.com/a/26319307/2411636
+     |
+     */
     angular
         .module('app')
         .directive('sameAs', Directive);

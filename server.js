@@ -28,17 +28,24 @@ var isProduction = process.env.NODE_ENV === 'production';
  | Configuration
  |--------------------------------------------------------------------------
  */
-app.use(helmet());                  // secure your Express apps by setting various HTTP headers with helmet
-app.use(cors());                    // enable CORS (See: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-app.use(cookieParser());            // Parse HTTP request cookies
-app.use(require('morgan')('dev'));  // HTTP request logger middleware for node.js
-app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies.
-app.use(bodyParser.json()); // returns middleware that only parses json
+app.use(helmet());                                      // secure your Express apps by setting various HTTP headers with helmet
+app.use(cors());                                        // enable CORS (See: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+app.use(cookieParser());                                // Parse HTTP request cookies
+app.use(require('morgan')('dev'));                      // HTTP request logger middleware for node.js
+app.use(bodyParser.urlencoded({ extended: false }));    // returns middleware that only parses urlencoded bodies.
+app.use(bodyParser.json());                             // returns middleware that only parses json
 
-app.use(require('method-override')()); // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
-app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
-app.use(passport.initialize()); // initialize passport strategies
-app.use(passport.session()); // initialize sessions for passport
+app.use(require('method-override')());                  // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+app.use(passport.initialize());                         // initialize passport strategies
+
+/**
+ |--------------------------------------------------------------------------
+ | Session based authentication
+ |--------------------------------------------------------------------------
+ | Use these if you are developing a session based authentication
+ */
+// app.use(passport.session());
+// app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 
 /**

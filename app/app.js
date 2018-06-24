@@ -1,14 +1,23 @@
 ﻿(function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Main - App.js
+     |--------------------------------------------------------------------------
+     |
+     | This is the file where all the configuration for the frontend part is handled
+     |
+     */
     angular
         .module('app', [ 'ui.router', 'ngAnimate', 'ngStorage', 'ngCookies', 'angular-jwt', 'inform', 'pascalprecht.translate' ])
         .config(config)
         .run(run);
 
     function config($qProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $translateProvider, stateList) {
-
-        // retrieves or overrides whether to generate an error when a rejected promise is not handled.
+        /**
+         * retrieves or overrides whether to generate an error when a rejected promise is not handled.
+         */
         $qProvider.errorOnUnhandledRejections(false);
 
         /**
@@ -23,10 +32,12 @@
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         /**
-         * ************************************************
-         * Frontend translations & localization
-         * ************************************************
+         |--------------------------------------------------------------------------
+         | Frontend translations / localization
+         |--------------------------------------------------------------------------
+         |
          */
+
         // load translation texts from respective json files found in the "/languages" directory
         $translateProvider.useStaticFilesLoader({
             prefix: '/angular/languages/',
@@ -43,13 +54,12 @@
         $translateProvider.useSanitizeValueStrategy('escape');
 
         /**
-         * ************************************************
-         * Front-end routes & templates (states since we are using $stateProvider instead or $routeProvider)
-         *
-         * NOTE! Since we are declaring how we serve static files in our express server file,
-         * we need to prepend our templateUrl values with "angular/" -prefix
-         * see reference: https://stackoverflow.com/questions/25833675/angular-renders-the-main-view-twice-instead-of-loading-the-correct-template
-         * ************************************************
+         |--------------------------------------------------------------------------
+         | Front-end routing & templating (states since we are using $stateProvider instead or $routeProvider)
+         |--------------------------------------------------------------------------
+         | NOTE! Since we are declaring how we serve static files in our express server file,
+         | we need to prepend our templateUrl values with "angular/" -prefix
+         | see reference: https://stackoverflow.com/questions/25833675/angular-renders-the-main-view-twice-instead-of-loading-the-correct-template
          */
         // Loop through states that will be passed in the configuration as a constant array
         for(var i = 0; i < stateList.length; i++ ) {

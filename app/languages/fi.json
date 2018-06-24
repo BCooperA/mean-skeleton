@@ -29,7 +29,6 @@
       },
       "signup_form": {
         "headline": "Rekisteröidy",
-
         "errors": {
           "firstName_required": "Etunimi on pakollinen",
           "lastName_required": "Sukunimi on pakollinen",
@@ -45,7 +44,17 @@
         "headline": "Unohditko salasanasi?",
         "text": "Syötä sähköpostiosoite, jolla rekisteröidyit sivustolle. Lähetämme ohjeet antamaasi sähköpostiosoitteeseen.",
         "submit_btn": "Lähetä ohjeet sähköpostiini"
+      },
+      "reset_form": {
+        "headline": "Restetoi salasana",
+        "text": "Syötä salasana kahdesti alla oleviin kenttiin vaihtaaksesi salasanasi.",
+        "passwordVerify": "Salasana uudelleen",
+        "reset_btn": "Vaihda salasana"
       }
     }
+  },
+  "verify_email": {
+    "headline": "Vahvista käyttäjätunnuksesi",
+    "text": "Käyttäjätunnuksesi on luotu. Vahvista käyttäjätunnuksesi seuraamalla sähköpostiosoitteeseen lähetettyjä ohjeita."
   }
 }

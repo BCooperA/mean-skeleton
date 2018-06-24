@@ -4,19 +4,27 @@
 (function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Services - Status Interceptor
+     |--------------------------------------------------------------------------
+     |
+     | This is the file where all the error statuses are handled
+     |
+     */
     angular
         .module('app')
         .factory('StatusInterceptor', StatusInterceptor);
 
-    function StatusInterceptor($q, $location,$injector, inform) {
+    function StatusInterceptor($q, $location, $rootScope, $injector, inform) {
         return {
             response: function (response) {
                 return response || $q.when(response);
             },
             responseError: function (rejection) {
-
-                //Handle other statuses.
+                // 401 (unauthorized)
                 if(rejection.status == 401) {
+                    $rootScope.bodyLayout = '';
                     $location.path('/account/login');
                 }
 

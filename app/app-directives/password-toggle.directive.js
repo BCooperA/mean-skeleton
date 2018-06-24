@@ -1,6 +1,14 @@
 (function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Directive - password toggle
+     |--------------------------------------------------------------------------
+     |
+     | angular directive to toggle between show/hide password
+     |
+     */
     angular
         .module('app')
         .directive('passwordToggle', Directive);

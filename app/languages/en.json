@@ -47,7 +47,17 @@
         "headline": "Forgot your password?",
         "text": "Enter the email address you used when you joined and we’ll send you instructions to reset your password.",
         "submit_btn": "Send instructions by email"
+      },
+      "reset_form": {
+        "headline": "Reset your password",
+        "text": "Enter your new password twice below to change your password.",
+        "passwordVerify": "Re-type password",
+        "reset_btn": "Reset password"
       }
     }
+  },
+  "verify_email": {
+    "headline": "Verify your account",
+    "text": "Your account has now been created. Activate your account by following the instruction sent to you via email."
   }
 }

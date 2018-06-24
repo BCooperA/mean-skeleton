@@ -1,6 +1,14 @@
 (function() {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Constants - States
+     |--------------------------------------------------------------------------
+     |
+     | dynamic states that are looped in the main file (app.js)
+     |
+     */
     var stateList =
         [
             {

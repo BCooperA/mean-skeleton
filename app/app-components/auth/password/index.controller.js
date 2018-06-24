@@ -1,5 +1,4 @@
 (function () {
-    //
     'use strict';
 
     angular
@@ -30,7 +29,6 @@
         }
 
         function reset() {
-            console.log();
             vm.loading = true;
 
             AuthenticationService.resetPassword($state.params.token, vm.password, function(result) {

@@ -1,25 +1,31 @@
 <div class="row pw-recovery-container">
     <form ng-class="{ 'has-error' : passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid }" name="passwordRecoveryForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="vm.recover()" novalidate>
         <div ng-class="{ 'shake animated' : passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid }">
+            <!-- icon -->
             <i class="fa fa-arrows-alt"></i>
-            <a href="" class="signin-header">{{ 'forms.auth.recover_form.headline' | translate }}</a>
-            <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
-            <!-- errors -->
-            <div ng-show="passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid" inform></div>
 
+            <!-- recover form headline -->
+            <a href="" class="signin-header">
+                {{ 'forms.auth.recover_form.headline' | translate }}
+            </a>
+            <!-- recover form text -->
+            <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
+
+            <!-- errors & messages -->
+            <div ng-show="passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid" inform></div>
             <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
 
             <div class="form-input-fields">
-                <!-- Email -->
+                <!-- email -->
                 <label for="inputEmail" class="sr-only">Email address</label>
                 <input ng-required="true" ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
                 <span class="fa fa-envelope errspan"></span>
             </div> <!-- /form-input-fields -->
 
-            <!-- Sign In Button -->
+            <!-- reset button -->
             <input type="submit"  id="recover" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.recover_form.submit_btn' | translate }}">
 
-            <!-- Back to Login page -->
+            <!-- back to login page -->
             <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
         </div>
     </form>

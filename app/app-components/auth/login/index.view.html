@@ -1,13 +1,17 @@
 ﻿<div class="row login-container">
-    <form name="loginForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="vm.login()" novalidate>
+    <form novalidate ng-submit="vm.login()" name="loginForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown">
         <!-- header link -->
-        <a href="/" class="app-brand"><span class="glyphicon glyphicon-piggy-bank"></span></a>
-        <a href="/login" class="signin-header">{{ 'forms.auth.signin_form.headline' | translate }}</a>
+        <a href="/" class="app-brand">
+            <span class="glyphicon glyphicon-piggy-bank"></span>
+        </a>
+        <a href="/account/login" class="signin-header">
+            {{ 'forms.auth.signin_form.headline' | translate }}
+        </a>
 
         <div class="login-wrap">
             <div class="form-input-fields">
                 <!-- errors -->
-                <div ng-show="loginForm.$submitted && loginForm.$invalid" inform></div>
+                <div ng-show="loginForm.$submitted" inform></div>
 
                 <!-- e-mail -->
                 <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
@@ -32,7 +36,7 @@
             <!-- Sign Up Button -->
             <a ng-disabled="vm.loading" class="secondary-btn btn-block"  href="/account/signup">{{ 'forms.auth.sign_up_btn' | translate }}</a>
 
-            <!-- Social Login -->
+            <!-- social Login -->
             <div class="row social-login">
                 <!-- Facebook -->
                 <div class="col-xs-4">
@@ -54,7 +58,7 @@
                         <i class="fa fa-google"></i> Google
                     </a>
                 </div> <!-- / Google -->
-            </div>
+            </div> <!-- / social login -->
         </div> <!-- /.login-wrap -->
     </form>
 </div> <!-- /.login-container -->

@@ -1,10 +1,15 @@
-/**
- * Angular directive to compare two password values
- * See reference: http://www.codelord.net/2014/11/02/angularjs-1-dot-3-taste-async-validators/
- */
 (function () {
     'use strict';
 
+    /**
+     |--------------------------------------------------------------------------
+     | Directive - unique email
+     |--------------------------------------------------------------------------
+     |
+     | angular directive to check whether email already exists in the database
+     | see reference here: http://www.codelord.net/2014/11/02/angularjs-1-dot-3-taste-async-validators/
+     |
+     */
     angular
         .module('app')
         .directive('uniqueEmail', Directive);
