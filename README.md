@@ -26,7 +26,7 @@ git clone https://github.com/BCooperA/mean-skeleton.git
 
 *4.* After installing MongoDB, create a new database `(TEST_DB)` for our application
 ```
-> use TEST_DB`
+> use YOUR_DATABASE_NAME
 ```
 *5.* Create a `.env` file from `.env.example` and add environment variables
 
