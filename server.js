@@ -37,6 +37,7 @@ app.use(bodyParser.json());                             // returns middleware th
 
 app.use(require('method-override')());                  // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 app.use(passport.initialize());                         // initialize passport strategies
+app.use(passport.session());                            // required for oAuth based authentication
 
 /**
  |--------------------------------------------------------------------------
@@ -44,7 +45,6 @@ app.use(passport.initialize());                         // initialize passport s
  |--------------------------------------------------------------------------
  | Use these if you are developing a session based authentication
  */
-// app.use(passport.session());
 // app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 
