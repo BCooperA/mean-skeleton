@@ -86,11 +86,11 @@ require('./config/passport');
  | Static files for front end
  |--------------------------------------------------------------------------
  */
-app.use("/js", express.static(__dirname + "/public/js")); // javascript files
-app.use("/fonts", express.static(__dirname + "/public/fonts")); // fonts
-app.use("/css", express.static(__dirname + "/public/styles")); // stylesheets
-app.use("/img", express.static(__dirname + "/public/img")); // images
-app.use("/angular", express.static(__dirname + "/app")); // angular files
+app.use("/js", express.static(__dirname + "/public/js"), { maxage: '1d' }); // javascript files
+app.use("/fonts", express.static(__dirname + "/public/fonts"), { maxage: '1d' }); // fonts
+app.use("/css", express.static(__dirname + "/public/styles"), { maxage: '1d' }); // stylesheets
+app.use("/img", express.static(__dirname + "/public/img"), { maxage: '1d' }); // images
+app.use("/angular", express.static(__dirname + "/app"), { maxage: '1d' }); // angular files
 
 /**
  |--------------------------------------------------------------------------
