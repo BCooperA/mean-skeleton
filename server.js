@@ -88,11 +88,11 @@ require('./config/passport');
  | Static files for front end
  |--------------------------------------------------------------------------
  */
-app.use("/js", express.static(__dirname + "/public/js", { maxage: '1d' })); // javascript files
-app.use("/fonts", express.static(__dirname + "/public/fonts", { maxage: '1d' })); // fonts
-app.use("/css", express.static(__dirname + "/public/styles", { maxage: '1d' })); // stylesheets
-app.use("/img", express.static(__dirname + "/public/img", { maxage: '1d' })); // images
-app.use("/angular", express.static(__dirname + "/app", { maxage: '1d' })); // angular files
+app.use("/js", express.static(__dirname + "/public/js", { maxage: '7d' })); // javascript files
+app.use("/fonts", express.static(__dirname + "/public/fonts", { maxage: '7d' })); // fonts
+app.use("/css", express.static(__dirname + "/public/styles", { maxage: '7d' })); // stylesheets
+app.use("/img", express.static(__dirname + "/public/img", { maxage: '7d' })); // images
+app.use("/angular", express.static(__dirname + "/app", { maxage: '7d' })); // angular files
 
 /**
  |--------------------------------------------------------------------------
@@ -120,10 +120,6 @@ app.get('*', function(req, res, next) {
  |--------------------------------------------------------------------------
  */
 app.use(function(req, res, next) {
-    if (req.url.indexOf("/js/") === 0 || req.url.indexOf("/css/") === 0 || req.url.indexOf("/fonts/") === 0 || req.url.indexOf("/img/") === 0 || req.url.indexOf("/angular/") === 0) {
-        res.setHeader("Cache-Control", "public, max-age=2592000");
-        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
-    }
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
