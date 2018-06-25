@@ -108,7 +108,18 @@ app.use(require('./routes'));
  | NOTE! use this only if you are developing an SPA (single page application)
  |--------------------------------------------------------------------------
  */
-app.get('*', function(req, res) {
+app.get('*', function(req, res, next) {
+
+    if (req.url.indexOf("/js/")         === 0 ||
+        req.url.indexOf("/css/")        === 0 ||
+        req.url.indexOf("/fonts/")      === 0 ||
+        req.url.indexOf("/img/")        === 0 ||
+        req.url.indexOf("/angular/")    === 0)
+    {
+        res.setHeader("Cache-Control", "public, max-age=2592000");
+        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+    }
+    //next();
     res.sendFile("./app/index.html", { root: __dirname });
 });
 
