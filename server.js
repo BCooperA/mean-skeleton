@@ -109,17 +109,6 @@ app.use(require('./routes'));
  |--------------------------------------------------------------------------
  */
 app.get('*', function(req, res, next) {
-
-    if (req.url.indexOf("/js/")         === 0 ||
-        req.url.indexOf("/css/")        === 0 ||
-        req.url.indexOf("/fonts/")      === 0 ||
-        req.url.indexOf("/img/")        === 0 ||
-        req.url.indexOf("/angular/")    === 0)
-    {
-        res.setHeader("Cache-Control", "public, max-age=2592000");
-        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
-    }
-    //next();
     res.sendFile("./app/index.html", { root: __dirname });
 });
 
@@ -131,6 +120,10 @@ app.get('*', function(req, res, next) {
  |--------------------------------------------------------------------------
  */
 app.use(function(req, res, next) {
+    if (req.url.indexOf("/js/") === 0 || req.url.indexOf("/css/") === 0 || req.url.indexOf("/fonts/") === 0 || req.url.indexOf("/img/") === 0 || req.url.indexOf("/angular/") === 0) {
+        res.setHeader("Cache-Control", "public, max-age=2592000");
+        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+    }
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
