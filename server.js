@@ -1,6 +1,7 @@
 require('dotenv').config(); // load environment variables before launching the application
 
 const express             = require('express')
+    , compression         = require('compression')
     , bodyParser          = require('body-parser')
     , session             = require('express-session')
     , cors                = require('cors')
@@ -28,6 +29,7 @@ var isProduction = process.env.NODE_ENV === 'production';
  | Configuration
  |--------------------------------------------------------------------------
  */
+app.use(compression());
 app.use(helmet());                                      // secure your Express apps by setting various HTTP headers with helmet
 app.use(cors());                                        // enable CORS (See: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 app.use(cookieParser());                                // Parse HTTP request cookies
