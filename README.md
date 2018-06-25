@@ -1,13 +1,17 @@
+![mean_logo](https://cdn-images-1.medium.com/max/1600/1*kkXbE9GlS73U7x1iXHP_vQ.png)
+
 # MEAN Starter App
 
 Getting started with your next project can be tricky and time consuming. The objective of this Starter App is to reduce the time and effort it takes to set up a base application for your next project. I'd like to call it a `"Micro Framework"`.
 
 ## What's included ?
 
-* Authentication / Registration - Authenticate users using [JSON Web Tokens (JWT)](https://jwt.io)
-* Database models - Pre-built Mongoose schemas, easy to extend. Read more about [Mongoose](http://mongoosejs.com)
-* E-mails - Send templated e-mails with Email API service, such as [MailGun](https://www.mailgun.com)
-* Heroku-ready - Easy to be deployed to [Heroku](https://www.heroku.com)
+* Local authentication - Authenticate users statelessly using [JSON Web Tokens (JWT)](https://jwt.io)
+* Social authentication - Authenticate users via Facebook, Twitter or Google with [Passport.js](https://github.com/jaredhanson/passport)
+* Password recovery / reset
+* Database models - Pre-built Mongoose schema, easy to extend. Read more about [Mongoose](http://mongoosejs.com)
+* Emails - Templated e-mails with [MailGun](https://www.mailgun.com) API service support
+* Heroku-ready - Ready to be deployed to [Heroku](https://www.heroku.com)
 
 ## How to install ?
 
@@ -22,7 +26,7 @@ git clone https://github.com/BCooperA/mean-skeleton.git
 
 *4.* After installing MongoDB, create a new database `(TEST_DB)` for our application
 ```
-> use TEST_DB`
+> use YOUR_DATABASE_NAME
 ```
 *5.* Create a `.env` file from `.env.example` and add environment variables
 
