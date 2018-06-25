@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .controller('Search.IndexController', Controller);
+        .controller('Search.IndexController', Controller)
+        .controller.$inject = ['SearchService', '$state'];
 
     function Controller(SearchService, $state) {
         var vm = this;

@@ -11,7 +11,8 @@
      */
     angular
         .module('app')
-        .directive('passwordToggle', Directive);
+        .directive('passwordToggle', Directive)
+        .directive.$inject = ['$compile'];
 
     function Directive($compile) {
         return {

@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .controller('SignUp.IndexController', Controller);
+        .controller('SignUp.IndexController', Controller)
+        .controller.$inject = ['$location', 'AuthenticationService'];
 
     function Controller($location, AuthenticationService) {
         var vm = this;

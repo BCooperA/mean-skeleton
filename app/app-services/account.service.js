@@ -12,6 +12,7 @@
     angular
         .module('app')
         .factory('AccountService', AccountService)
+        .factory.$inject = ['$http'];
 
     function AccountService($http) {
         var AccountService = {};

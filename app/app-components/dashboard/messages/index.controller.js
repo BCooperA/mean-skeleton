@@ -4,7 +4,7 @@
     angular
         .module('app')
         .controller('Messages.IndexController', Controller)
-        .$inject = ['$localStorage', 'AccountService'];
+        .controller.$inject = ['$localStorage', 'AccountService'];
 
     function Controller($localStorage, AccountService) {
         var vm = this;

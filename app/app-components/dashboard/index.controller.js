@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .controller('Dashboard.IndexController', Controller);
+        .controller('Dashboard.IndexController', Controller)
+        .controller.$inject = ['$http', 'AuthenticationService', 'AccountService', '$state', '$localStorage', '$rootScope'];
 
     function Controller($http, AuthenticationService, AccountService, $state, $localStorage, $rootScope) {
         var vm = this;

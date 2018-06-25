@@ -26,7 +26,7 @@ var paths = {
 /* watch for files */
 gulp.task('watch', function () {
     gulp.watch('./public/styles/**/*.less', gulp.series('less'));
-    //gulp.watch('./app/**/*.js', 'js', gulp.series('js'));
+    gulp.watch('./app/**/*.js', gulp.series('js'));
     //gulp.watch('./app/**/*.html', ['html']);
 });
 
@@ -53,10 +53,12 @@ gulp.task('less', function () {
 gulp.task('js', function() {
     return gulp.src([
         './app/app.js',
+        './app/app-constants/states.js',
         './app/utils.js',
+        './app/MainCtrl.js',
         './app/app-components/**/**/*.js',
-        './app/app-services/*.service.js',
-        './app/app-directives/*.directive.js'
+        './app/app-directives/*.directive.js',
+        './app/app-services/*.service.js'
     ])
         .pipe(plumber())
         .pipe(concat('app.js', { newLine: ';' }))

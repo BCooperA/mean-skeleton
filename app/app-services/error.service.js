@@ -14,7 +14,8 @@
      */
     angular
         .module('app')
-        .factory('StatusInterceptor', StatusInterceptor);
+        .factory('StatusInterceptor', StatusInterceptor)
+        .factory.$inject = ['$q', '$location', '$rootScope', '$injector', 'inform'];
 
     function StatusInterceptor($q, $location, $rootScope, $injector, inform) {
         return {

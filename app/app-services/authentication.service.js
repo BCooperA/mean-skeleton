@@ -11,7 +11,8 @@
      */
     angular
         .module('app')
-        .factory('AuthenticationService', AuthenticationService);
+        .factory('AuthenticationService', AuthenticationService)
+        .factory.$inject = ['$http', '$localStorage'];
 
     function AuthenticationService($http, $localStorage) {
         var service = {};

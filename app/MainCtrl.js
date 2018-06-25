@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .controller('MainController', Controller);
+        .controller('MainController', Controller)
+        .controller.$inject = ['$translate', '$scope'];
 
     function Controller($translate, $scope) {
         /** changes app language */

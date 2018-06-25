@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .controller('Password.IndexController', Controller);
+        .controller('Password.IndexController', Controller)
+        .controller.$inject = ['$state', '$location', 'AuthenticationService'];
 
     function Controller($state, $location, AuthenticationService) {
         var vm = this;

@@ -12,7 +12,8 @@
      */
     angular
         .module('app')
-        .directive('uniqueEmail', Directive);
+        .directive('uniqueEmail', Directive)
+        .directive.$inject = ['$http', '$q'];
 
     function Directive($http, $q) {
         return {

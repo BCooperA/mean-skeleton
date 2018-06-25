@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .controller('Profile.IndexController', Controller);
+        .controller('Profile.IndexController', Controller)
+        .controller.$inject = ['AccountService', '$stateParams', '$rootScope'];
 
     function Controller(AccountService, $stateParams, $rootScope) {
         var vm = this;

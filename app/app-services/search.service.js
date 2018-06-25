@@ -12,7 +12,7 @@
     angular
         .module('app')
         .factory('SearchService', SearchService)
-        .$inject = ['$http'];
+        .factory.$inject = ['$http'];
 
     function SearchService($http) {
         var searchService = {};
