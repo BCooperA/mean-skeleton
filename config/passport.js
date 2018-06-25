@@ -45,8 +45,8 @@ passport.use(new LocalStrategy({usernameField: 'user[email]', passwordField: 'us
     function(email, password, done) {
         User.findOne( { email: email } )
             .then(function(user) {
-                if(!user || !user.validPassword(password)){
-                    return done(null, false, { errors: {'email or password': 'is invalid' }});
+                if(!user || !user.validPassword(password)) {
+                    return done(null, false, { errors: { 'email or password': 'is invalid'} });
                 }
                 return done(null, user);
             }).catch(done);
@@ -170,40 +170,40 @@ passport.use(new GoogleStrategy(authProviders.google,
     function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
             User.findOne({
-                    '$or': [{
+                '$or': [{
+                    'auth.oauthID': profile.id,
+                    'auth.provider': 'google'
+                }, {
+                    'email': profile.emails[0].value
+                }]
+            }, function (err, user) {
+                if (err)
+                    return done(err);
+
+                if (user) {
+                    // if user is found then log them in
+                    return done(null, user);
+                } else {
+                    // if user is not found, create a new user based on their Google account info
+                    user = new User({
+                        'auth.provider': 'google',
                         'auth.oauthID': profile.id,
-                        'auth.provider': 'google'
-                    }, {
-                        'email': profile.emails[0].value
-                    }]
-                }, function (err, user) {
-                    if (err)
-                        return done(err);
+                        'name': profile.displayName,
+                        'image': profile.photos[0].value.slice(0, -2) + '200',
+                        'email': profile.emails[0].value,
+                        'active': 1
+                    });
 
-                    if (user) {
-                        // if user is found then log them in
-                        return done(null, user);
-                    } else {
-                        // if user is not found, create a new user based on their Google account info
-                        user = new User({
-                            'auth.provider': 'google',
-                            'auth.oauthID': profile.id,
-                            'name': profile.displayName,
-                            'image': profile.photos[0].value.slice(0, -2) + '200',
-                            'email': profile.emails[0].value,
-                            'active': 1
-                        });
-
-                        // save user in the database
-                        user.save(function (err) {
-                            if (err) {
-                                return done(err);
-                            } else {
-                                return done(null, user);
-                            }
-                        });
-                    }
-                });
+                    // save user in the database
+                    user.save(function (err) {
+                        if (err) {
+                            return done(err);
+                        } else {
+                            return done(null, user);
+                        }
+                    });
+                }
+            });
         });
     }
 ));

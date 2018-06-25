@@ -1,3 +1,6 @@
+// =========================================================
+// gulpfile.js
+// =========================================================
 var     gulp            = require('gulp'),
         less            = require('gulp-less'),
         cssmin          = require('gulp-cssmin'),
@@ -8,16 +11,28 @@ var     gulp            = require('gulp'),
         ngAnnotate      = require('gulp-ng-annotate'),
         htmlmin         = require('gulp-htmlmin');
 
+// ------------------------------------------------- configs
+var paths = {
+    less: {
+        src: './public/styles/app.less',
+        dest: './public/styles',
+        opts: {
+
+        }
+    }
+};
+
+// ---------------------------------------------- Gulp Tasks
 /* watch for files */
 gulp.task('watch', function () {
-    gulp.watch('./public/styles/**/*.less', ['less']);
-    gulp.watch('./app/**/*.js', ['js']);
+    gulp.watch('./public/styles/**/*.less', gulp.series('less'));
+    //gulp.watch('./app/**/*.js', 'js', gulp.series('js'));
     //gulp.watch('./app/**/*.html', ['html']);
 });
 
 /* compress & compile LESS files into CSS files */
 gulp.task('less', function () {
-    gulp.src('./public/styles/app.less')
+    return gulp.src(paths.less.src)
         .pipe(plumber())
         .pipe(less({
             paths: [
@@ -25,12 +40,12 @@ gulp.task('less', function () {
                 './node_modules/bootstrap-less'
             ]
         }))
-        .pipe(gulp.dest('./public/styles/'))
+        .pipe(gulp.dest(paths.less.dest))
         .pipe(cssmin())
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('./public/styles'))
+        .pipe(gulp.dest(paths.less.dest))
 
 });
 
@@ -69,4 +84,5 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest('public/fonts'))
 });
 
-gulp.task('default', ['less', 'js', 'watch']);
+// --------------------------------------- Default Gulp Task
+gulp.task('default', gulp.series('watch'));

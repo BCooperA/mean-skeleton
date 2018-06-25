@@ -132,7 +132,7 @@ router.put('/password/reset/:password_request_token', function(req, res, next) {
             } else {
                 if(typeof req.body.user.password !== 'undefined') {
                     user.request_password_token = ''; // reset request password token
-                    user.setPassword(req.body.user.password); // store hash and salt in the database
+                    user.password = req.body.user.password; // store hash and salt in the database
                 }
 
                 return user.save().then(function() {

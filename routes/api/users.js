@@ -124,7 +124,7 @@ router.post('/users', [
     var user = new User();
     user.email = req.body.user.email;
     user.name = req.body.user.name;
-    user.setPassword(req.body.user.password);
+    user.password = req.body.user.password;
     user.activation_token = randtoken.generate(32);
     user.active = 0;
 
