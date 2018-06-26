@@ -18,8 +18,8 @@
 
             AuthenticationService.SignUp(vm.email, vm.name, vm.password, function (result) {
                 if (result === true) {
-                    vm.loading = false;
                     $state.go('account.verify');
+                    vm.loading = false;
                 }
             });
 
