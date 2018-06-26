@@ -1,16 +1,16 @@
+<i ng-show="vm.loading === true" class="fa fa-spinner fa-spin" id="loading"></i>
 <div class="row pw-recovery-container">
     <form ng-class="{ 'has-error' : passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid }" name="passwordRecoveryForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown" ng-submit="vm.recover()" novalidate>
-        <div ng-class="{ 'shake animated' : passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid }">
-            <!-- icon -->
-            <i class="fa fa-arrows-alt"></i>
+        <!-- icon -->
+        <i class="fa fa-arrows-alt"></i>
 
-            <!-- recover form headline -->
-            <a href="" class="signin-header">
-                {{ 'forms.auth.recover_form.headline' | translate }}
-            </a>
-            <!-- recover form text -->
-            <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
-
+        <!-- recover form headline -->
+        <a href="" class="signin-header">
+            {{ 'forms.auth.recover_form.headline' | translate }}
+        </a>
+        <!-- recover form text -->
+        <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
+        <div ng-hide="vm.loading === true">
             <!-- errors & messages -->
             <div ng-show="passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid" inform></div>
             <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
@@ -27,6 +27,6 @@
 
             <!-- back to login page -->
             <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
-        </div>
+        </div> <!--/ng-hide -->
     </form>
 </div> <!-- /container -->

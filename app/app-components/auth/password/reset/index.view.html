@@ -1,3 +1,4 @@
+<i ng-show="vm.loading === true" class="fa fa-spinner fa-spin" id="loading"></i>
 <div class="row pw-recovery-container">
     <form novalidate ng-submit="passwordResetForm.$valid && vm.reset()" name="passwordResetForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown">
         <!-- icon -->
@@ -9,6 +10,7 @@
         <!-- reset form text -->
         <p>{{ 'forms.auth.reset_form.text' | translate }}</p>
 
+        <div ng-hide="vm.loading === true">
         <!-- errors & messages -->
         <div ng-show="(passwordResetForm.password.$modelValue !== passwordResetForm.passwordVrf.$modelValue) && passwordResetForm.$submitted" class="alert alert-danger">
             {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
@@ -37,5 +39,6 @@
 
         <!-- back to login page -->
         <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
+        </div><!-- / ng-hide -->
     </form>
 </div> <!-- /container -->
