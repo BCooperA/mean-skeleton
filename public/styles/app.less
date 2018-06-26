@@ -2,6 +2,7 @@
 // Main styles
 // =========================================================
 
+
 /* Glyph Icons */
 
 // Import the fonts from "node_modules" folder
@@ -33,6 +34,8 @@
 @import "@{fa_path}/path.less";
 @import "@{fa_path}/mixins.less";
 @import "@{fa_path}/icons.less";
+@import "@{fa_path}/animated.less";
+@import "@{fa_path}/larger.less";
 
 /* Custom */
 @import "./components/buttons.less";
@@ -65,11 +68,6 @@ body.dashboard {
 }
 body.search-bg {
   background-color: #006bd6 !important;
-}
-i.fa {
-  font-size: 2rem;
-  vertical-align: middle;
-  line-height: 1.3em;
 }
 a:hover, a:focus {
   text-decoration: none !important;
@@ -213,4 +211,22 @@ input.ng-invalid {
   width: 100%;
   display: block;
   margin: 0 auto 0px auto;
+}
+.spin{
+  -webkit-transform-origin: 50% 58%;
+  transform-origin:50% 58%;
+  -ms-transform-origin:50% 58%; /* IE 9 */
+  -webkit-animation: spin .2s infinite linear;
+  -moz-animation: spin .2s infinite linear;
+  -o-animation: spin .2s infinite linear;
+  animation: spin .2s infinite linear;
+}
+#loading {
+  color: #fdfdfd;
+  font-size: 3em;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 250px;
 }

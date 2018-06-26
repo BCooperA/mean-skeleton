@@ -1,5 +1,4 @@
 const mongoose            = require('mongoose')
-    , uniqueValidator     = require('mongoose-unique-validator')
     , crypto              = require('crypto')
     , bcrypt              = require('bcrypt-nodejs')
     , SALT_WORK_FACTOR    = 10
@@ -45,8 +44,6 @@ const UserSchema = new mongoose.Schema({
     //following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 }, { timestamps: true });
 
-UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
-
 /**
  * Check whether the entered password matches with the salt and hash saved in the database
  * @param password
@@ -56,11 +53,15 @@ UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
+/**
+ * Hash password with blowfish algorithm (bcrypt) before saving it in to the database
+ */
 UserSchema.pre('save', function(next) {
     var user = this;
 
     // only hash the password if it has been modified (or is new)
-    if (!user.isModified('password')) return next();
+    if (!user.isModified('password'))
+        return next();
 
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
     next();

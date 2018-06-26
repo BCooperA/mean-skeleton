@@ -41,7 +41,7 @@ passport.deserializeUser(function(id, done) {
  | Local authentication strategy (email, password)
  |--------------------------------------------------------------------------
  */
-passport.use(new LocalStrategy({usernameField: 'user[email]', passwordField: 'user[password]' },
+passport.use(new LocalStrategy({ usernameField: 'user[email]', passwordField: 'user[password]' },
     function(email, password, done) {
         User.findOne( { email: email } )
             .then(function(user) {

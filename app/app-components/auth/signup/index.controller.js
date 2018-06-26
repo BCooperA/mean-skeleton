@@ -4,9 +4,9 @@
     angular
         .module('app')
         .controller('SignUp.IndexController', Controller)
-        .controller.$inject = ['$location', 'AuthenticationService'];
+        .controller.$inject = ['$state', 'AuthenticationService'];
 
-    function Controller($location, AuthenticationService) {
+    function Controller($state, AuthenticationService) {
         var vm = this;
 
         vm.signUp = signUp;
@@ -15,15 +15,15 @@
 
             vm.loading = true;
             vm.name = vm.firstName + " " + vm.surName;
-            console.log(vm.name);
 
             AuthenticationService.SignUp(vm.email, vm.name, vm.password, function (result) {
                 if (result === true) {
-                    $location.path('/account/verify');
+                    vm.loading = false;
+                    $state.go('account.verify');
                 }
             });
 
-            vm.loading = false;
+
         }
     }
 

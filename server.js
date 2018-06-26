@@ -34,9 +34,8 @@ app.use(helmet());                                      // secure your Express a
 app.use(cors());                                        // enable CORS (See: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 app.use(cookieParser());                                // Parse HTTP request cookies
 app.use(require('morgan')('dev'));                      // HTTP request logger middleware for node.js
-app.use(bodyParser.urlencoded({ extended: false }));    // returns middleware that only parses urlencoded bodies.
+app.use(bodyParser.urlencoded({ extended: true }));     // returns middleware that only parses urlencoded bodies.
 app.use(bodyParser.json());                             // returns middleware that only parses json
-
 app.use(require('method-override')());                  // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 app.use(passport.initialize());                         // initialize passport strategies
 
@@ -47,7 +46,7 @@ app.use(passport.initialize());                         // initialize passport s
  | Use these if you are developing a session based authentication
  */
 app.use(session({ secret: config.session_secret, cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
-app.use(passport.session());                            // required for oAuth based authentication
+app.use(passport.session()); // required for oAuth based authentication
 
 
 /**
@@ -88,11 +87,11 @@ require('./config/passport');
  | Static files for front end
  |--------------------------------------------------------------------------
  */
-app.use("/js", express.static(__dirname + "/public/js", { maxage: '7d' })); // javascript files
-app.use("/fonts", express.static(__dirname + "/public/fonts", { maxage: '7d' })); // fonts
-app.use("/css", express.static(__dirname + "/public/styles", { maxage: '7d' })); // stylesheets
-app.use("/img", express.static(__dirname + "/public/img", { maxage: '7d' })); // images
-app.use("/angular", express.static(__dirname + "/app", { maxage: '7d' })); // angular files
+app.use("/js", express.static(__dirname + "/public/js")); // javascript files
+app.use("/fonts", express.static(__dirname + "/public/fonts")); // fonts
+app.use("/css", express.static(__dirname + "/public/styles")); // stylesheets
+app.use("/img", express.static(__dirname + "/public/img")); // images
+app.use("/angular", express.static(__dirname + "/app")); // angular files
 
 /**
  |--------------------------------------------------------------------------
