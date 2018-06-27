@@ -24,6 +24,8 @@
                     vm.mailSent = true;
                     vm.mailSentMsg = 'A link to reset your password has been sent to provided e-mail address.';
                     vm.loading = false;
+                } else {
+                    vm.loading = false;
                 }
             });
         }
@@ -36,6 +38,8 @@
                     // indicates that the mail was sent
                     vm.passwordReset = true;
                     vm.passwordResetMsg = 'Your password is now changed';
+                    vm.loading = false;
+                } else {
                     vm.loading = false;
                 }
             });
