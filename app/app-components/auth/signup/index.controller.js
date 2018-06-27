@@ -19,9 +19,9 @@
             AuthenticationService.SignUp(vm.email, vm.name, vm.password, function (result) {
                 if (result === true) {
                     $state.go('account.verify');
+                    vm.loading = false;
                 }
             });
-            vm.loading = false;
         }
     }
 
