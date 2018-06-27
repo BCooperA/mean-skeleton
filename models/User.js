@@ -25,8 +25,7 @@ const UserSchema = new mongoose.Schema({
     image: String,
     location: String,
     password: {
-        type: String,
-        required: true
+        type: String
     },
     request_password_token: {
         type: String,
