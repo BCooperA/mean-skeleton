@@ -19,6 +19,7 @@
             vm.mailSentMsg = '';
 
             AuthenticationService.recoverPassword(vm.email, function(result) {
+                console.log(result);
                 if(result === true) {
                     // indicates that the mail was sent
                     vm.mailSent = true;
