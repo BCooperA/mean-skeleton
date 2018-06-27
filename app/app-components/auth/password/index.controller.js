@@ -11,12 +11,12 @@
 
         vm.recover = recover;
         vm.reset = reset;
-        vm.mailSent = false;
-        vm.mailSentMsg = '';
 
         // send password recover instructions via e-mail
         function recover() {
             vm.loading = true;
+            vm.mailSent = false;
+            vm.mailSentMsg = '';
 
             AuthenticationService.recoverPassword(vm.email, function(result) {
                 if(result === true) {
