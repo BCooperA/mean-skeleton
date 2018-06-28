@@ -27,9 +27,9 @@
   padding: 10px;
 }
 .secondary-btn:hover {
-  background-color: #fdfdfd;
+  background-color: #036e9b;
   border: 2px solid transparent;
-  color: #00417a;
+  color: #fdfdfd;
 }
 .sign-in-btn {
   padding: 5px 30px 5px 30px;
@@ -76,22 +76,22 @@
     text-align: left !important;
   }
 }
-.btn-social:hover {
-  color: #fdfdfd;
+.btn-social-rectangle:hover, .btn-social-rectangle:focus {
+  color: #fdfdfd !important;
 }
-.btn-facebook {
+.btn-facebook, .btn-facebook:focus {
   background-color: #306199;
 }
 .btn-facebook:hover {
   background-color: #1f4066;
 }
-.btn-twitter {
+.btn-twitter, .btn-twitter:focus {
   background-color: #27C4F1;
 }
 .btn-twitter:hover {
   background-color: #1bb8e5;
 }
-.btn-google {
+.btn-google, .btn-google:focus {
   background-color: #EA3F2E;
 }
 .btn-google:hover {
@@ -100,20 +100,4 @@
 .glyphicon.spinning {
   animation: spin 1s infinite linear;
   -webkit-animation: spin2 1s infinite linear;
-}
-
-@keyframes spin {
-  from { transform: scale(1) rotate(0deg); }
-  to { transform: scale(1) rotate(360deg); }
-}
-
-@-webkit-keyframes spin2 {
-  from { -webkit-transform: rotate(0deg); }
-  to { -webkit-transform: rotate(360deg); }
-}
-.spinner {
-  color: #fdfdfd;
-  font-size: 2em;
-  margin: 0 auto;
-  width: 100%;
 }

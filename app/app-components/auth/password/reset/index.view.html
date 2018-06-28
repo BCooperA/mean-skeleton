@@ -1,18 +1,17 @@
-<i ng-show="vm.loading === true" class="fa fa-spinner fa-spin" id="loading"></i>
-<div class="row pw-recovery-container">
-    <form novalidate ng-submit="passwordResetForm.$valid && vm.reset()" name="passwordResetForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12 animated bounceInDown">
-        <!-- icon -->
-        <i class="fa fa-arrows-alt"></i>
-        <!-- reset form headline -->
-        <a href="" class="signin-header">
-            {{ 'forms.auth.reset_form.headline' | translate }}
-        </a>
+<h1 class="signin-header">
+    {{ 'forms.auth.reset_form.headline' | translate }}
+</h1>
+<div class="row login-container">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
         <!-- reset form text -->
         <p>{{ 'forms.auth.reset_form.text' | translate }}</p>
 
-        <div ng-hide="vm.loading === true">
+        <!-- loading spinner -->
+        <i ng-show="vm.loading" id="loading" class="fas fa-circle-notch loader"></i>
+
+        <form ng-hide="vm.loading" novalidate ng-submit="vm.reset()" name="passwordResetForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12">
         <!-- errors & messages -->
-        <div ng-show="(passwordResetForm.password.$modelValue !== passwordResetForm.passwordVrf.$modelValue) && passwordResetForm.$submitted" class="alert alert-danger">
+        <div ng-show="(passwordResetForm.password.$modelValue !== passwordResetForm.passwordVrf.$modelValue) || passwordResetForm.$submitted" inform>
             {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
         </div>
 
@@ -39,6 +38,6 @@
 
         <!-- back to login page -->
         <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
-        </div><!-- / ng-hide -->
     </form>
+    </div>
 </div> <!-- /container -->

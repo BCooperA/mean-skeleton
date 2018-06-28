@@ -128,7 +128,7 @@ router.put('/password/reset/:password_request_token', function(req, res, next) {
                 return next(err);
             if(!user) {
                 // invalid token or it does not belong to user
-                return res.status(422).json({"error": true, "message": "Invalid token"});
+                return res.status(422).json({ errors: { token: "is invalid" } });
             } else {
                 if(typeof req.body.user.password !== 'undefined') {
                     user.request_password_token = ''; // reset request password token

@@ -1,12 +1,22 @@
-<nav class="navbar navbar-default" id="auth-nav">
-    <div class="container-fluid">
-        <ul class="nav navbar-right" ng-controller="MainController">
-            <li><a href="" ng-click="changeLanguage('en')">EN</a></li>
-            <li><a href="" ng-click="changeLanguage('fi')">FI</a></li>
-        </ul>
-    </div>
-</nav>
+<!--<nav class="navbar navbar-default" id="auth-nav">-->
+    <!--<div class="container-fluid">-->
+        <!--<ul class="nav navbar-right" ng-controller="MainController">-->
+            <!--<li><a href="" ng-click="changeLanguage('en')">EN</a></li>-->
+            <!--<li><a href="" ng-click="changeLanguage('fi')">FI</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
 
 <div class="container">
+    <div class="main-logo">
+        <a class="main-logo-brand" href="/"><i class="fas fa-baseball-ball"></i> </a>
+    </div>
+
     <ui-view></ui-view>
 </div>
+
+<ul class="list-inline language-list" ng-controller="MainController">
+    <li><a title="In english" href="" ng-click="changeLanguage('en')">EN</a></li>
+    <li><a title="Suomeksi" href="" ng-click="changeLanguage('fi')">FI</a></li>
+</ul>
+

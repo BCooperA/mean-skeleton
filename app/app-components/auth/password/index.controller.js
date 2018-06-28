@@ -9,26 +9,23 @@
     function Controller($state, $location, AuthenticationService) {
         var vm = this;
 
+        vm.loading = false;
+        vm.mailSent = false;
+        vm.mailSentMsg = '';
         vm.recover = recover;
         vm.reset = reset;
 
         // send password recover instructions via e-mail
         function recover() {
             vm.loading = true;
-            vm.mailSent = false;
-            vm.mailSentMsg = '';
-
             AuthenticationService.recoverPassword(vm.email, function(result) {
-                console.log(result);
                 if(result === true) {
                     // indicates that the mail was sent
                     vm.mailSent = true;
                     vm.mailSentMsg = 'A link to reset your password has been sent to provided e-mail address.';
-                    vm.loading = false;
-                } else {
-                    vm.loading = false;
                 }
             });
+            vm.loading = false;
         }
 
         function reset() {
@@ -39,11 +36,9 @@
                     // indicates that the mail was sent
                     vm.passwordReset = true;
                     vm.passwordResetMsg = 'Your password is now changed';
-                    vm.loading = false;
-                } else {
-                    vm.loading = false;
                 }
             });
+            vm.loading = false;
         }
     }
 

@@ -14,7 +14,7 @@ var     gulp            = require('gulp'),
 // ------------------------------------------------- configs
 var paths = {
     less: {
-        src: './public/styles/app.less',
+        src: './public/styles/**/*.less',
         dest: './public/styles',
         opts: {
 
@@ -80,7 +80,7 @@ gulp.task('js', function() {
 /* load fonts from node_modules folder to application's `fonts` foler */
 gulp.task('fonts', function() {
     return gulp.src([
-        'node_modules/font-awesome/fonts/*',
+        'node_modules/@fortawesome/fontawesome-free/webfonts/*',
         'node_modules/bootstrap-less/fonts/*'
     ])
         .pipe(gulp.dest('public/fonts'))

@@ -6,36 +6,6 @@
 /* Glyph Icons */
 
 // Import the fonts from "node_modules" folder
-@icon-font-path: "../../node_modules/bootstrap-less/fonts/";
-@icon-font-name: "glyphicons-halflings-regular";
-
-/* Import Glyphicons font-family */
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('@{icon-font-path}@{icon-font-name}.eot');
-  src: url('@{icon-font-path}@{icon-font-name}.eot?#iefix') format('embedded-opentype'),
-  url('@{icon-font-path}@{icon-font-name}.woff') format('woff'),
-  url('@{icon-font-path}@{icon-font-name}.ttf') format('truetype'),
-  url('@{icon-font-path}@{icon-font-name}.svg#glyphicons_halflingsregular') format('svg');
-}
-
-/* Import Boostrap  */
-@import "../../node_modules/bootstrap-less/bootstrap/variables.less";
-@import "../../node_modules/bootstrap-less/bootstrap/index.less";
-@import "../../node_modules/bootstrap-less/bootstrap/glyphicons.less";
-@import "../../node_modules/bootstrap-less/bootstrap/responsive-utilities.less";
-
-
-/* Font Awesome */
-@fa_path: "../../node_modules/font-awesome/less";
-
-@import "@{fa_path}/variables.less";
-@import "@{fa_path}/core.less";
-@import "@{fa_path}/path.less";
-@import "@{fa_path}/mixins.less";
-@import "@{fa_path}/icons.less";
-@import "@{fa_path}/animated.less";
-@import "@{fa_path}/larger.less";
 
 /* Custom */
 @import "./components/buttons.less";
@@ -43,6 +13,21 @@
 @import "./components/signup-form.less";
 @import "./components/dashboard.less";
 @import "./components/post.less";
+
+/* Import Bootstrap files  */
+@import "../../node_modules/bootstrap-less/bootstrap/index.less";
+
+/* Font Awesome */
+@fa_path: "../../node_modules/@fortawesome/fontawesome-free/less";
+
+@import "@{fa_path}/_variables.less";
+@import "@{fa_path}/_core.less";
+@import "@{fa_path}/_mixins.less";
+@import "@{fa_path}/_icons.less";
+@import "@{fa_path}/_animated.less";
+@import "@{fa_path}/_larger.less";
+
+
 
 /**
     No Script (header block when javascript is turned off)
@@ -54,14 +39,31 @@ noscript {
   min-height: 60px;
   width: 100%;
 }
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
 body {
-  background: #ededed;
+  //background: #ededed;
   font-family: 'Oxygen', sans-serif !important;
 }
 body.unauth {
   //background: rgb(12, 153, 214);
-  background: #006bd6;
+  //background: #FDC830;  /* fallback for old browsers */
+  //background: -webkit-linear-gradient(to top, #fc992f, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+  //background: linear-gradient(to top, #fc992f, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #00B4DB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 }
 body.dashboard {
   background: #ededed !important;
@@ -98,16 +100,20 @@ a:hover, a:focus {
   background-repeat:no-repeat;
   background-size:50%;
   background-position:center;
-  top:-10px;
-  right: -10px;
+  top: 0px;
+  right: -23px;
   z-index:1;
   -webkit-tap-highlight-color:transparent;
 }
-.password-toggle [type="text"] + a {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23444' d='M29.6.4C29 0 28 0 27.4.4L21 6.8c-1.4-.5-3-.8-5-.8C9 6 3 10 0 16c1.3 2.6 3 4.8 5.4 6.5l-5 5c-.5.5-.5 1.5 0 2 .3.4.7.5 1 .5s1 0 1.2-.4l27-27C30 2 30 1 29.6.4zM13 10c1.3 0 2.4 1 2.8 2L12 15.8c-1-.4-2-1.5-2-2.8 0-1.7 1.3-3 3-3zm-9.6 6c1.2-2 2.8-3.5 4.7-4.7l.7-.2c-.4 1-.6 2-.6 3 0 1.8.6 3.4 1.6 4.7l-2 2c-1.6-1.2-3-2.7-4-4.4zM24 13.8c0-.8 0-1.7-.4-2.4l-10 10c.7.3 1.6.4 2.4.4 4.4 0 8-3.6 8-8z'/%3E%3Cpath fill='%23444' d='M26 9l-2.2 2.2c2 1.3 3.6 3 4.8 4.8-1.2 2-2.8 3.5-4.7 4.7-2.7 1.5-5.4 2.3-8 2.3-1.4 0-2.6 0-3.8-.4L10 25c2 .6 4 1 6 1 7 0 13-4 16-10-1.4-2.8-3.5-5.2-6-7z'/%3E%3C/svg%3E");
+.password-toggle [type="text"] + a:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e106";
+  color: #ccc;
 }
-.password-toggle [type="password"] + a {
-  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23444' d='M16 6C9 6 3 10 0 16c3 6 9 10 16 10s13-4 16-10c-3-6-9-10-16-10zm8 5.3c1.8 1.2 3.4 2.8 4.6 4.7-1.2 2-2.8 3.5-4.7 4.7-3 1.5-6 2.3-8 2.3s-6-.8-8-2.3C6 19.5 4 18 3 16c1.5-2 3-3.5 5-4.7l.6-.2C8 12 8 13 8 14c0 4.5 3.5 8 8 8s8-3.5 8-8c0-1-.3-2-.6-2.6l.4.3zM16 13c0 1.7-1.3 3-3 3s-3-1.3-3-3 1.3-3 3-3 3 1.3 3 3z'/%3E%3C/svg%3E");
+.password-toggle [type="password"] + a:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e105";
+  color: #ccc;
 }
 .round {
   border-radius: 50%;
@@ -115,9 +121,9 @@ a:hover, a:focus {
 
 /* Media Queries */
 @media(min-width: @screen-lg-min) {
-#signin-form {
-      margin: 0px auto 0 auto;
-      max-width: 42.5%;
+  .login-container {
+    width: 80%;
+    margin: 10px auto;
   }
 }
 .pw-recovery-container {
@@ -201,32 +207,186 @@ a:hover, a:focus {
 span.help-block {
   font-size: 0.8em;
 }
-input.ng-invalid {
-  border-bottom: 2px solid red !important;
-}
-.app-brand {
+
+// =========================================================
+// MAIN LOGO
+// =========================================================
+.main-logo {
+  float: left;
+  padding: 15px;
   text-align: center;
+  width: 100%;
+}
+.main-logo-brand {
+  float:none;
   color: #fdfdfd;
   font-size:5em;
-  width: 100%;
-  display: block;
-  margin: 0 auto 0px auto;
 }
-.spin{
-  -webkit-transform-origin: 50% 58%;
-  transform-origin:50% 58%;
-  -ms-transform-origin:50% 58%; /* IE 9 */
-  -webkit-animation: spin .2s infinite linear;
-  -moz-animation: spin .2s infinite linear;
-  -o-animation: spin .2s infinite linear;
-  animation: spin .2s infinite linear;
+.main-logo-brand:hover, .main-logo-brand:focus, .main-logo-brand:visited {
+  color: #fdfdfd;
+}
+h1.signin-header {
+  font-family: 'Pacifico', sans-serif;
+  font-size: 3rem;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  color: #fefefe;
+  text-decoration: none;
+}
+
+// =========================================================
+// SIGN IN PAGE
+// =========================================================
+.login-container {
+  margin-top: 15px;
+  padding: 10px;
+
+  p {
+    text-align: center;
+  }
+}
+
+.form-signin, .form-control {
+  border: transparent;
+}
+.form-signin .form-input-fields {
+  margin: 0;
+}
+.alert-danger {
+
+}
+/* SIGN IN FORM */
+form#signin-form {
+  background-color: #fdfdfd;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  // border: 1px solid #bdbdbd;
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.22);
+
+  .login-wrap {
+    margin-top: 0;
+  }
+  .form-input-fields {
+    margin-top: 0;
+  }
+
+  .form-control {
+    margin: 5px 0px 5px 0px;
+    padding: 20px 0px 20px 10px;
+    background-color: transparent;
+    border: 1px solid #ddd !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    color: #333;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    transition: none;
+    -webkit-transition: none;
+  }
+  .form-control:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #333;
+  }
+
+  .errspan {
+    float: right;
+    margin-right: 10px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    font-size: 2.2rem;
+    color: #ccc;
+  }
+
+  .form-control:focus + .errspan {
+    color: #ccc;
+  }
+
+  .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #333;
+  }
+  .form-control:focus::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #333;
+  }
+
+  .form-control::-moz-placeholder { /* Firefox 19+ */
+    color: #333;
+  }
+  .form-control:focus::-moz-placeholder { /* Firefox 19+ */
+    color: #333;
+  }
+
+  .form-control:-ms-input-placeholder { /* IE 10+ */
+    color: #333;
+  }
+  .form-control:focus:-ms-input-placeholder { /* IE 10+ */
+    color: #333;
+  }
+
+  .form-control:-moz-placeholder { /* Firefox 18- */
+    color: #333;
+  }
+  .form-control:focus:-moz-placeholder { /* Firefox 18- */
+    color: #333;
+  }
+
+  a.login-link {
+    margin-top: 11px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+
+  .btn-social-rectangle:hover, .btn-social-rectangle:focus {
+    color: #fdfdfd !important;
+  }
 }
 #loading {
-  color: #fdfdfd;
-  font-size: 3em;
-  margin: 0 auto;
+  color: #000;
+  font-size: 2em;
+}
+@-webkit-keyframes spinner {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(359deg); }
+}
+.loader.ng-animate { -webkit-animation: none 0s; }
+form#signin-form.ng-animate { -webkit-animation: none 0s; }
+.loader {
   display: block;
   text-align: center;
+  padding:10px;
+  margin: 0 auto;
+  width: 100%;
   position: relative;
-  top: 250px;
+  -webkit-animation: spinner 2s infinite linear;
+  z-index: 9999;
+}
+// =========================================================
+// LANGUAGE
+// =========================================================
+ul.language-list { /* also works with ol */
+  width: 100%; /* or your desired width */
+  text-align: center; /* this will center the list items */
+}
+ul.language-list > li {
+  display: inline-block; /* the key bit */
+  *display: inline; /* IE7 hack */
+  *zoom: 1; /* IE7 hack */
+}
+ul.language-list > li > a {
+  color: #fdfdfd;
+  font-weight: 600;
+  font-size: 1.5rem;
 }

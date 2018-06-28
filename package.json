@@ -66,6 +66,7 @@
     "underscore": "1.8.3"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
     "angular-inform": "0.0.19",
     "angular-jwt": "^0.1.10",
     "angular-translate": "^2.18.1",

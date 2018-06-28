@@ -8,7 +8,7 @@
 
     function Controller($location, AuthenticationService, $timeout, $translate, $localStorage, $state) {
         var vm = this;
-
+        vm.loading = false;
         vm.login = login;
         initController();
 
