@@ -23,11 +23,11 @@ const router          = require('express').Router()
  */
 router.post('/signin', function(req, res, next) {
     if(!req.body.user.email) {
-        return res.status(422).json({ errors: { email: "can't be blank" } });
+        return res.status(422).json({ error: "Email can't be blank." });
     }
 
     if(!req.body.user.password) {
-        return res.status(422).json({ errors: { password: "can't be blank" } });
+        return res.status(422).json({ error: "Password can't be blank." });
     }
 
     passport.authenticate('local', { session: false }, function(err, user, info) {
@@ -37,7 +37,7 @@ router.post('/signin', function(req, res, next) {
         if(user) {
             if(user.activation_token !== '' || user.active === 0) {
                 // account is not activated
-                return res.status(422).json({ errors: { user: 'Account is not been activated.' } });
+                return res.status(422).json({ error: 'Inactive account.' });
             }
 
             // generate JSON web token to user

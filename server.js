@@ -10,7 +10,8 @@ const express             = require('express')
     , mongoose            = require('mongoose')
     , helmet              = require('helmet')
     , cookieParser        = require('cookie-parser')
-    , config              = require('./config/index');
+    , config              = require('./config/index')
+    , expressValidator    = require('express-validator');
 
 /**
  |--------------------------------------------------------------------------
@@ -71,6 +72,8 @@ mongoose.connect(config.mongodb.url, {
     useMongoClient: true,
     promiseLibrary: require('bluebird')
 });
+
+app.use(expressValidator());
 
 /**
  |--------------------------------------------------------------------------

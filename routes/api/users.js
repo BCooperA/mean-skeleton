@@ -92,7 +92,6 @@ router.put('/user', auth.required, function(req, res, next) {
  |--------------------------------------------------------------------------
  |
  | Add's new user to the database
- | TODO: Handle helpers better
  | TODO: Create a helper function for sending mails instead of hard coding it here
  */
 router.post('/users', [
@@ -113,14 +112,15 @@ router.post('/users', [
     check('user.password')
         .isLength({ min: 5 }).withMessage('must be at least 5 chars long')
         .matches(/\d/).withMessage('Password must contain at least one number')
-], function(req, res, next) {
+    ], function(req, res, next) {
 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
         // return validation errors
-        return res.status(422).json({ errors: errors.array() });
+        return res.status(422).json({ error: errors.array()[0].msg });
     }
+
     var user = new User();
     user.email = req.body.user.email;
     user.name = req.body.user.name;

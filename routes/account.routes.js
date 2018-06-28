@@ -74,12 +74,12 @@ router.put('/password/recover', function(req, res, next) {
             return next(err);
 
         if(!req.body.user.email) {
-            return res.status(422).json({ errors: { email: "can't be blank" } });
+            return res.status(422).json({ error: "E-mail can't be blank" });
         }
 
         if(!user) {
             // e-mail address was not found in the database
-            return res.status(422).json({ errors: { email: "not found"} });
+            return res.status(422).json({ error: "E-mail not found"});
         } else {
             // generate a request token for password reset
             user.request_password_token = randtoken.generate(32);
@@ -121,25 +121,44 @@ router.put('/password/recover', function(req, res, next) {
  | validates it (runs a query to check that token belongs to someone) and eventually
  | replaces old password with new password
  */
-router.put('/password/reset/:password_request_token', function(req, res, next) {
-    User.findOne( { request_password_token: new RegExp('^'+ req.params.password_request_token +'$', "i") },
-        function(err, user) {
-            if(err)
-                return next(err);
-            if(!user) {
-                // invalid token or it does not belong to user
-                return res.status(422).json({ errors: { token: "is invalid" } });
-            } else {
-                if(typeof req.body.user.password !== 'undefined') {
-                    user.request_password_token = ''; // reset request password token
-                    user.password = req.body.user.password; // store hash and salt in the database
-                }
+router.put('/password/reset/:password_request_token', [
+    // validation
+    check('user.password')
+        .isLength({ min: 5 }).withMessage('Password must be at least 5 chars long')
+        .matches(/\d/).withMessage('Password must contain at least one number'),
+],function(req, res, next) {
 
-                return user.save().then(function() {
+    try {
+        validationResult(req).throw();
+
+        /**
+         * Check whether or not the two passwords match
+         * NOTE! we cannot use custom validator function for this because it returns an
+         * "TypeError: Cannot read property 'then' of undefined".
+         * Must be some kind of a bug
+         */
+        if(req.body.user.password !== req.body.user.passwordVrf) {
+            return res.status(422).json({error: "Passwords don't match"});
+        }
+        // if input validation passes, next validate the token from query params
+        User.findOne( { request_password_token: new RegExp('^'+ req.params.password_request_token +'$', "i") }, function(err, user) {
+            if (err) return next(err);
+
+            if (!user) {
+                return res.status(422).json({error: "Reset token is invalid"});
+            } else {
+                user.request_password_token = ''; // reset request password token
+                user.password = req.body.user.password; // store hash and salt in the database
+
+                return user.save().then(function () {
                     return res.status(200).json({status: "OK"});
                 });
             }
-        }).catch(next);
+        });
+    } catch (err) {
+        // print any validation errors
+        return res.status(422).json({ error: err.array()[0].msg });
+    }
 });
 
 module.exports = router;

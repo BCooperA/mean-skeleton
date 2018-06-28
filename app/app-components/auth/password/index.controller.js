@@ -31,7 +31,7 @@
         function reset() {
             vm.loading = true;
 
-            AuthenticationService.resetPassword($state.params.token, vm.password, function(result) {
+            AuthenticationService.resetPassword($state.params.token, vm.password, vm.passwordVrf, function(result) {
                 if(result) {
                     // indicates that the mail was sent
                     vm.passwordReset = true;

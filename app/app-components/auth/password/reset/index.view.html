@@ -11,7 +11,7 @@
 
         <form ng-hide="vm.loading" novalidate ng-submit="vm.reset()" name="passwordResetForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12">
         <!-- errors & messages -->
-        <div ng-show="(passwordResetForm.password.$modelValue !== passwordResetForm.passwordVrf.$modelValue) || passwordResetForm.$submitted" inform>
+        <div ng-show="passwordResetForm.$submitted" inform>
             {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
         </div>
 

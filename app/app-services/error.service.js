@@ -30,11 +30,8 @@
                 }
 
                 // 422 (Unprocessable Entity)
-                if (rejection.status == 422) {
-                    angular.forEach(rejection.data.errors, function(message) {
-                        inform.add(capitalizeFirstLetter(Object.keys(rejection.data.errors)[0]+ " " + message), { "type": "alert alert-danger"});
-                    });
-
+                if (rejection.status == 422 && rejection.data.error !== '') {
+                    inform.add(rejection.data.error, { "type": "alert alert-danger"});
                 }
 
                 return $q.reject(rejection);

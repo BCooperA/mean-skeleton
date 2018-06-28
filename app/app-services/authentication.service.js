@@ -111,8 +111,8 @@
          * @param password - new password
          * @param callback - callback function based on valid or invalid password reset
          */
-        function resetPassword(token, password, callback) {
-            $http.put('/account/password/reset/' + token, { user: { password: password } })
+        function resetPassword(token, password, passwordVrf, callback) {
+            $http.put('/account/password/reset/' + token, { user: { password: password, passwordVrf: passwordVrf } })
                 .then(function(response){
                     if(response.status === 200 && response.data.status === 'OK') {
                         return callback(true);
