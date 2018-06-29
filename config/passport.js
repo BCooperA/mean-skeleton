@@ -52,8 +52,7 @@ passport.use(new LocalStrategy({ usernameField: 'user[email]', passwordField: 'u
              * and later tries to log in using local authentication with correct e-mail address, the server will return error with status code
              * of 500, since there are no password field in the database
              */
-            console.log(user.password);
-            if (!user || !user.validPassword(password) || err.status === 500) {
+            if (!user || !user.validPassword(password) || user.password === null) {
                 return done(null, false, {error: "Incorrect credentials"});
             }
             return done(null, user);
