@@ -1,13 +1,14 @@
-<h1 class="signin-header">
-    <!-- verify email headline -->
-    {{ 'verify_email.headline' | translate }}
-</h1>
-<div class="row login-container">
+<div class="row auth-container">
     <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
-        <!-- verify email text -->
-        <p>{{ 'verify_email.text' | translate }}</p>
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'verify_email.headline' | translate }}</div>
+            <div style="padding: 10px;" class="panel-body">
+                <!-- verify email text -->
+                <p>{{ 'verify_email.text' | translate }}</p>
+                <!-- back to login page -->
+                <a class="secondary btn-block"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+            </div> <!-- / panel-body -->
+        </div><!-- / panel-default -->
+    </div> <!-- / col centered -->
+</div> <!-- /container -->
 
-        <!-- Back to Homepage -->
-        <a class="secondary-btn btn-block" href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
-    </div>
-</div>

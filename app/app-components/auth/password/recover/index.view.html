@@ -1,32 +1,33 @@
-<h1 class="signin-header">
-    {{ 'forms.auth.recover_form.headline' | translate }}
-</h1>
 <div class="row auth-container">
     <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
-        <!-- recover form text -->
-        <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
-
         <!-- loading spinner -->
         <i ng-show="vm.loading" id="loading" class="fas fa-circle-notch loader"></i>
-        <form ng-hide="vm.loading" novalidate ng-submit="vm.recover()" ng-class="{ 'has-error' : passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid }" name="passwordRecoveryForm" class="auth-form noselect form-horizontal col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'forms.auth.recover_form.headline' | translate }}</div>
+            <div class="panel-body">
+                <!-- recover form text -->
+                <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
+                <form ng-hide="vm.loading" novalidate ng-submit="vm.recover()" ng-class="{ 'has-error' : passwordRecoveryForm.$submitted && passwordRecoveryForm.$invalid }" name="passwordRecoveryForm" class="auth-form noselect form-horizontal col-sm-12">
 
-            <!-- errors & messages -->
-            <div ng-show="passwordRecoveryForm.$submitted" inform></div>
-            <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
+                    <!-- errors & messages -->
+                    <div ng-show="passwordRecoveryForm.$submitted" inform></div>
+                    <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
 
-            <!-- form-input-fields -->
-            <div class="form-input-fields">
-                <!-- email -->
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input ng-required="true" ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
-                <span class="fa fa-envelope form-icon"></span>
-            </div> <!-- /form-input-fields -->
+                    <!-- form-input-fields -->
+                    <div class="form-input-fields">
+                        <!-- email -->
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input ng-required="true" ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
+                        <span class="fa fa-envelope form-icon"></span>
+                    </div> <!-- /form-input-fields -->
 
-            <!-- reset button -->
-            <input type="submit"  id="recover" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.recover_form.submit_btn' | translate }}">
+                    <!-- reset button -->
+                    <input type="submit"  id="recover" ng-hide="vm.loading" class="primary btn-block" value="{{ 'forms.auth.recover_form.submit_btn' | translate }}">
 
-            <!-- back to login page -->
-            <a class="secondary-btn btn-block" ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
-        </form>
+                    <!-- back to login page -->
+                    <a class="secondary btn-block" ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+                </form>
+            </div> <!-- / panel-body -->
+        </div><!-- / panel-default -->
     </div> <!-- / col centered -->
 </div> <!-- /container -->

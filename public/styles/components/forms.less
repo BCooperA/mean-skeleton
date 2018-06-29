@@ -5,12 +5,29 @@
 // =========================================================
 // AUTH FORMS (signin, signup, recover, reset)
 // =========================================================
+.auth-container {
+  .panel {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.55);
+  }
+  .panel-heading {
+    text-align: center;
+    font-family: 'Pacifico', sans-serif;
+    font-size: 2em;
+  }
+  .panel-body {
+    padding: 8px 0;
+
+    p {
+      text-align: center;
+      color: #333;
+      padding: 0 15px;
+    }
+  }
+}
 form.auth-form {
-  background-color: #eee;
+  //background-color: #eee;
   margin: 0 auto;
   width: 100%;
-  padding: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.22);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -62,11 +79,15 @@ form.auth-form {
     position: relative;
     z-index: 2;
     font-size: 2.2rem;
-    color: #ccc;
+    color: #bdbdbd;
   }
 
-  .form-control:focus + .form-icon {
-    color: #ccc;
+  .form-icon, a.pwd-toggle:before {
+    color: #015085;
+  }
+
+  .form-control:focus + .form-icon, form-control:focus + a.pwd-toggle:before {
+    color: #015085;
   }
 
   // password toggler (eye) icon
@@ -93,17 +114,19 @@ form.auth-form {
   .password-toggle [type="text"] + a.pwd-toggle:before {
     font-family: 'Glyphicons Halflings', sans-serif;
     content: "\e106";
-    color: #ccc;
   }
   .password-toggle [type="password"] + a.pwd-toggle:before {
     font-family: 'Glyphicons Halflings', sans-serif;
     content: "\e105";
-    color: #ccc;
   }
 
   // =========================================================
   // SIGN IN
   // =========================================================
+  .forgot-wrap {
+    padding:0;
+    margin: 10px 0;
+  }
   // forgot password link
   a.forgot-pwd-link {
     margin-top: 11px;

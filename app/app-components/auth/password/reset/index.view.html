@@ -1,45 +1,45 @@
-<h1 class="signin-header">
-    {{ 'forms.auth.reset_form.headline' | translate }}
-</h1>
 <div class="row auth-container">
     <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
-        <!-- reset form text -->
-        <p>{{ 'forms.auth.reset_form.text' | translate }}</p>
-
         <!-- loading spinner -->
         <i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'forms.auth.reset_form.headline' | translate }}</div>
+            <div class="panel-body">
+                <!-- reset form text -->
+                <p>{{ 'forms.auth.reset_form.text' | translate }}</p>
+                <form ng-hide="vm.loading" novalidate ng-submit="vm.reset()" name="passwordResetForm" class="auth-form noselect form-horizontal col-sm-12">
 
-        <form ng-hide="vm.loading" novalidate ng-submit="vm.reset()" name="passwordResetForm" class="auth-form noselect form-horizontal col-sm-12">
+                    <!-- errors & messages -->
+                    <div ng-show="passwordResetForm.$submitted" inform>
+                        {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
+                    </div>
 
-            <!-- errors & messages -->
-            <div ng-show="passwordResetForm.$submitted" inform>
-                {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
-            </div>
+                    <div ng-if="vm.passwordReset" class="alert alert-success">
+                        {{ vm.passwordResetMsg }}
+                    </div>
 
-            <div ng-if="vm.passwordReset" class="alert alert-success">
-                {{ vm.passwordResetMsg }}
-            </div>
+                    <!-- form-input-fields -->
+                    <div class="form-input-fields">
+                        <!-- password -->
+                        <div ng-class="{ 'has-error' : signupForm.$submitted }">
+                            <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
+                            <input required type="password" data-password-toggle ng-model="vm.password" name="password"  id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
+                        </div>
 
-            <!-- form-input-fields -->
-            <div class="form-input-fields">
-                <!-- password -->
-                <div ng-class="{ 'has-error' : signupForm.$submitted }">
-                    <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
-                    <input required type="password" data-password-toggle ng-model="vm.password" name="password"  id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
-                </div>
+                        <!-- password verify -->
+                        <div ng-class="{ 'has-error' : signupForm.$submitted }">
+                            <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.reset_form.passwordVerify' | translate }}</label>
+                            <input required type="password" data-password-toggle ng-model="vm.passwordVrf" same-as="vm.password" name="passwordVrf" id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.reset_form.passwordVerify' | translate }}">
+                        </div>
+                    </div> <!-- /form-input-fields -->
 
-                <!-- password verify -->
-                <div ng-class="{ 'has-error' : signupForm.$submitted }">
-                    <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.reset_form.passwordVerify' | translate }}</label>
-                    <input required type="password" data-password-toggle ng-model="vm.passwordVrf" same-as="vm.password" name="passwordVrf" id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.reset_form.passwordVerify' | translate }}">
-                </div>
-            </div> <!-- /form-input-fields -->
+                    <!-- reset button -->
+                    <input type="submit" id="resetPassword" ng-disabled="vm.loading" class="primary btn-block" value="{{ 'forms.auth.reset_form.reset_btn' | translate }}">
 
-            <!-- reset button -->
-            <input type="submit" id="resetPassword" ng-disabled="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.reset_form.reset_btn' | translate }}">
-
-            <!-- back to login page -->
-            <a class="secondary-btn btn-block"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
-        </form>
+                    <!-- back to login page -->
+                    <a class="secondary btn-block"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+                </form>
+            </div> <!-- / panel-body -->
+        </div><!-- / panel-default -->
     </div> <!-- / col centered -->
 </div> <!-- /container -->

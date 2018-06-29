@@ -31,9 +31,9 @@
 
                 // 422 (Unprocessable Entity)
                 if (rejection.status == 422 && rejection.data.error !== '') {
-                    inform.add(rejection.data.error, { "type": "alert alert-danger"});
+                    inform.remove();
+                    inform.add(rejection.data.error, { "ttl": 0, "type": "danger"});
                 }
-
                 return $q.reject(rejection);
 
             }

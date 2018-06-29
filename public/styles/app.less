@@ -40,9 +40,12 @@ body {
   font-family: 'Oxygen', sans-serif !important;
 }
 body.unauth {
-  background: #00B4DB;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  //background: #00B4DB;  /* fallback for old browsers */
+  //background: -webkit-linear-gradient(to top, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+  //background: linear-gradient(to top, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #015085;
+
 }
 body.dashboard {
   background: #ededed !important;
@@ -105,14 +108,13 @@ a:hover, a:focus {
 // ALERTS & ERRORS
 // =========================================================
 .alert {
-  padding: 5px;
-  text-align: center;
-  background-color: transparent;
   border: 0;
 }
 .alert-danger {
-  color: red;
   font-weight: 600;
+}
+.inform-badge {
+  display: none !important;
 }
 
 // =========================================================
@@ -138,7 +140,7 @@ h1.signin-header {
   display: block;
   margin: 0 auto;
   text-align: center;
-  color: #fefefe;
+  color: #015085;
   text-decoration: none;
 }
 
