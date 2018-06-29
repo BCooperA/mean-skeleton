@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="theme-color" content="#2196F3" />
+    <meta name="theme-color" content="#0b4075" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- application css -->
     <link href="../css/app.min.css" rel="stylesheet" />
@@ -39,6 +39,7 @@
     <!-- jQuery & Twitter Bootstrap -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://cdn.rawgit.com/HubSpot/tether/v1.3.4/dist/js/tether.min.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -70,5 +71,11 @@
 
     <!-- AngularJS / application file -->
     <script src="../js/src/app.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        });
+    </script>
 </body>
 </html>

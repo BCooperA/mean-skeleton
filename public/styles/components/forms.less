@@ -7,23 +7,27 @@
 // =========================================================
 .auth-container {
   .panel {
-    box-shadow: 0 1px 4px rgba(0,0,0,0.55);
+    //box-shadow: 0 1px 4px rgba(0,0,0,0.55);
     margin-bottom: 0;
+    border: 0;
+    background-color: transparent;
   }
   .panel-heading {
     text-align: center;
     font-family: 'Francois One', sans-serif;
     letter-spacing: -1px;
     font-size: 1.77em;
-    color: #666;
+    color: #efefef;
+    border: 0;
     text-transform: uppercase;
+    background-color: transparent;
   }
   .panel-body {
     padding: 8px 0;
 
     p {
       text-align: center;
-      color: #333;
+      color: #fdfdfd;
       padding: 0 15px;
     }
   }
@@ -50,7 +54,7 @@ form.auth-form {
   .form-control {
     //margin: 5px 0px 5px 0px;
     padding: 20px 0px 20px 10px;
-    background-color: transparent;
+    background-color: #fdfdfd;
     border: 1px solid #ddd !important;
     border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -66,7 +70,7 @@ form.auth-form {
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #333;
-    background-color: #fafafa;
+    background-color: #efefef;
   }
   // input field placeholders
   .form-control::-webkit-input-placeholder,
@@ -94,8 +98,12 @@ form.auth-form {
     color: #bcbcbc;
   }
 
-  .form-control:focus + .form-icon, form-control:focus + a.pwd-toggle:before {
+  .form-control:focus + .form-icon {
     color: #bcbcbc;
+  }
+
+  .form-control:focus + a.pwd-toggle:before {
+    color: #333;
   }
 
   // password toggler (eye) icon
@@ -142,12 +150,13 @@ form.auth-form {
   // =========================================================
   .forgot-wrap {
     padding:0;
-    margin: 10px 0;
+    display: block;
+    text-align: center;
+    margin: 15px 0 0 0;
   }
   // forgot password link
   a.forgot-pwd-link {
-    margin-top: 11px;
-    color: #333;
+    color: #efefef;
     text-align: center;
     font-weight: 600;
   }

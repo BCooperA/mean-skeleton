@@ -3,7 +3,7 @@
         <!-- loading spinner -->
         <i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
         <div ng-hide="vm.loading" class="panel panel-default">
-            <div class="panel-heading">{{ 'forms.auth.signin_form.headline' | translate }}</div>
+            <div class="panel-heading fancy"><span>{{ 'forms.auth.signin_form.headline' | translate }}</span></div>
             <div class="panel-body">
                 <form novalidate ng-submit="vm.login()" name="loginForm" class="auth-form noselect form-horizontal col-sm-12">
                     <!-- errors -->
@@ -22,15 +22,6 @@
                             </div>
                         </div> <!-- /form-input-fields -->
 
-                        <!-- forgot password -->
-                        <div class="login-rm-wrapper">
-                            <div class="col-xs-12 forgot-wrap">
-                                <a ui-sref="account.recover" class="forgot-pwd-link">
-                                    {{ 'forms.auth.forgot_pwd' | translate }} &nbsp; <i class="fa fa-question-circle"></i>
-                                </a>
-                            </div>
-                        </div> <!-- /.forgot password -->
-
                         <!-- sign in button -->
                         <button ng-disabled="vm.loading" type="submit"  id="login" class="primary btn-block">{{ 'forms.auth.sign_in_btn' | translate }}</button>
 
@@ -41,25 +32,33 @@
                         <div class="row social-login">
                             <!-- Facebook -->
                             <div class="col-xs-4">
-                                <a href="/auth/signin/facebook" target="_self" class="btn btn-social-rectangle btn-facebook">
+                                <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Facebookilla" href="/auth/signin/facebook" target="_self" class="btn btn-social-rectangle btn-facebook">
                                     <i class="fab fa-facebook"></i>
                                 </a>
                             </div> <!-- / Facebook -->
 
                             <!-- Twitter -->
                             <div class="col-xs-4">
-                                <a href="/auth/signin/twitter" target="_self" class="btn btn-social-rectangle btn-twitter">
+                                <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Twitterillä" href="/auth/signin/twitter" target="_self" class="btn btn-social-rectangle btn-twitter">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </div> <!-- / Twitter -->
 
                             <!-- Google -->
                             <div class="col-xs-4">
-                                <a href="/auth/signin/google" target="_self" class="btn btn-social-rectangle btn-google">
+                                <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Googlella" href="/auth/signin/google" target="_self" class="btn btn-social-rectangle btn-google">
                                     <i class="fab fa-google"></i>
                                 </a>
                             </div> <!-- / Google -->
                         </div> <!-- / social login -->
+                        <!-- forgot password -->
+                        <div class="login-rm-wrapper">
+                            <div class="col-xs-12 forgot-wrap">
+                                <a ui-sref="account.recover" class="forgot-pwd-link">
+                                    {{ 'forms.auth.forgot_pwd' | translate }} &nbsp; <i class="fa fa-question-circle"></i>
+                                </a>
+                            </div>
+                        </div> <!-- /.forgot password -->
                     </div> <!-- /.login-wrap -->
                 </form>
             </div> <!-- / panel-body -->

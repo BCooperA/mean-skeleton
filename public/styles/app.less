@@ -7,8 +7,6 @@
 
 /* Custom LESS files */
 @import "./components/buttons.less";
-@import "./components/signin-form.less";
-@import "./components/signup-form.less";
 @import "./components/dashboard.less";
 @import "./components/post.less";
 @import "./components/forms.less";
@@ -220,9 +218,35 @@ ul.language-list > li > a {
   }
   .auth-container {
     width: 80%;
-    margin: 10px auto;
+    margin: 10px auto 0 auto;
   }
   .main-logo-brand {
     font-size: 8rem;
   }
+}
+.fancy {
+  line-height: 0.5;
+  text-align: center;
+}
+.fancy span {
+  display: inline-block;
+  position: relative;
+}
+.fancy span:before,
+.fancy span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 2px solid white;
+  //border-top: 1px solid white;
+  top: 0;
+  width: 143px;
+}
+.fancy span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.fancy span:after {
+  left: 100%;
+  margin-left: 15px;
 }
