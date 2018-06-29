@@ -1,7 +1,7 @@
 // =========================================================
-// gulpfile.js
+// Gulpfile
 // =========================================================
-var     gulp            = require('gulp'),
+const   gulp            = require('gulp'),
         less            = require('gulp-less'),
         cssmin          = require('gulp-cssmin'),
         plumber         = require('gulp-plumber'),
@@ -12,54 +12,65 @@ var     gulp            = require('gulp'),
         htmlmin         = require('gulp-htmlmin');
 
 // ------------------------------------------------- configs
-var paths = {
+var config = {
     less: {
-        src: './public/styles/**/*.less',
+        src: './public/styles/app.less',
         dest: './public/styles',
         opts: {
 
         }
+    },
+
+    js: {
+        src: [
+            './app/app.js',
+            './app/app-constants/states.js',
+            './app/utils.js',
+            './app/MainCtrl.js',
+            './app/app-components/**/**/*.js',
+            './app/app-directives/*.directive.js',
+            './app/app-services/*.service.js'
+        ],
+        dest: './public/js/src'
     }
 };
 
 // ---------------------------------------------- Gulp Tasks
-/* watch for files */
+// =========================================================
+// WATCH - watches for file changes and executes related tasks
+// =========================================================
 gulp.task('watch', function () {
-    gulp.watch('./public/styles/**/*.less', gulp.series('less'));
-    gulp.watch('./app/**/*.js', gulp.series('js'));
+    gulp.watch('./public/styles/**/*.less',  ['less']);
+    gulp.watch('./app/**/*.js', ['js']);
     //gulp.watch('./app/**/*.html', ['html']);
 });
 
-/* compress & compile LESS files into CSS files */
+// ===========================================================================
+// LESS - compress & compiles LESS files into a single CSS file (app.min.css)
+// ===========================================================================
 gulp.task('less', function () {
-    return gulp.src(paths.less.src)
+    return gulp.src(config.less.src)
         .pipe(plumber())
         .pipe(less({
             paths: [
-                '.',
+                config.less.src,
                 './node_modules/bootstrap-less'
             ]
         }))
-        .pipe(gulp.dest(paths.less.dest))
+        .pipe(gulp.dest(config.less.dest))
         .pipe(cssmin())
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest(paths.less.dest))
+        .pipe(gulp.dest(config.less.dest))
 
 });
 
-/* compile and compress javascript files into one single app.js file */
+// ===========================================================================
+// JS - compress & compiles AngularJS files into a one single JS file (app.js)
+// ===========================================================================
 gulp.task('js', function() {
-    return gulp.src([
-        './app/app.js',
-        './app/app-constants/states.js',
-        './app/utils.js',
-        './app/MainCtrl.js',
-        './app/app-components/**/**/*.js',
-        './app/app-directives/*.directive.js',
-        './app/app-services/*.service.js'
-    ])
+    return gulp.src(config.js.src)
         .pipe(plumber())
         .pipe(concat('app.js', { newLine: ';' }))
         .pipe(ngAnnotate())
@@ -68,16 +79,21 @@ gulp.task('js', function() {
             suffix: '.min'
         }))
         .pipe(plumber.stop())
-        .pipe(gulp.dest('./public/js/src'));
+        .pipe(gulp.dest(config.js.dest));
 });
 
-// gulp.task('html', function() {
-//     return gulp.src('./public/app/**/*.html')
-//         .pipe(htmlmin({collapseWhitespace: true, removeComments: true}))
-//         .pipe(gulp.dest('./public/dist'));
-// });
+// ===========================================================================
+// HTML - compress & removes comments from HTML files (use in production)
+// ===========================================================================
+gulp.task('html', function() {
+    return gulp.src('./public/app/**/*.html')
+        .pipe(htmlmin({collapseWhitespace: true, removeComments: true}))
+        .pipe(gulp.dest('./public/dist'));
+});
 
-/* load fonts from node_modules folder to application's `fonts` foler */
+// ===========================================================================
+// FONTS - copy fonts from node_modules folder to application's `fonts` folder
+// ===========================================================================
 gulp.task('fonts', function() {
     return gulp.src([
         'node_modules/@fortawesome/fontawesome-free/webfonts/*',
@@ -87,4 +103,4 @@ gulp.task('fonts', function() {
 });
 
 // --------------------------------------- Default Gulp Task
-gulp.task('default', gulp.series('watch'));
+gulp.task('default', ['watch']);

@@ -70,7 +70,7 @@
         $urlRouterProvider.otherwise("/account/login");
     }
 
-    function run($rootScope, $http, $localStorage, $cookies, $state, $stateParams, jwtHelper, $location) {
+    function run($rootScope, $http, $localStorage, $cookies, $state, $stateParams, jwtHelper) {
         // let javascript detect the browsing language and save it to local storage
         var userLang = navigator.language.substring(0, 2) || navigator.userLanguage.substring(0, 2);
 
@@ -80,6 +80,7 @@
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+        $rootScope.lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "en" ;
 
         // removes the hash from URL created by Facebook Login
         if (window.location.hash == '#_=_') {
@@ -106,7 +107,6 @@
             // if state is secured and no user is found in local storage or json web token is expired
             if ( toState.authenticate && ( !$localStorage.currentUser || jwtHelper.isTokenExpired($localStorage.currentUser.token) ) ) {
                 // User isn’t authenticated
-                //alert("You have been signed out due to inactivity. Please sign in again!");
                 event.preventDefault();
                 $state.go("account.login");
             }

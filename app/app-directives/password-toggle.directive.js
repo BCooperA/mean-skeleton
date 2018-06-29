@@ -24,7 +24,7 @@
                     elem.attr('type', (elem.attr('type') ==='text' ? 'password' : 'text' ) );
                 };
 
-                var lnk = angular.element('<a class="errspan pwd-toggle" data-ng-click="tgl()"></a>');
+                var lnk = angular.element('<a class="pwd-toggle" data-ng-click="tgl()"></a>');
                 $compile(lnk)(scope);
                 elem.wrap('<div class="password-toggle"/>').after(lnk);
             }

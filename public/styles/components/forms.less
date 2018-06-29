@@ -1,0 +1,132 @@
+// =========================================================
+// APPLICATION FORMS
+// =========================================================
+
+// =========================================================
+// AUTH FORMS (signin, signup, recover, reset)
+// =========================================================
+form.auth-form {
+  background-color: #eee;
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.22);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+
+  .login-wrap {
+    margin-top: 0;
+  }
+  .form-input-fields {
+    margin-top: 0;
+  }
+
+  // input fields
+  .form-control {
+    margin: 5px 0px 5px 0px;
+    padding: 20px 0px 20px 10px;
+    background-color: transparent;
+    border: 1px solid #ddd !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    color: #333;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    transition: none;
+    -webkit-transition: none;
+  }
+  .form-control:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #333;
+  }
+  // input field placeholders
+  .form-control::-webkit-input-placeholder,
+  .form-control:focus::-webkit-input-placeholder,
+  .form-control::-moz-placeholder,
+  .form-control:focus::-moz-placeholder,
+  .form-control:-ms-input-placeholder,
+  .form-control:focus:-ms-input-placeholder,
+  .form-control:-moz-placeholder,
+  .form-control:focus:-moz-placeholder {
+    color: #333;
+  }
+
+  .form-icon {
+    float: right;
+    margin-right: 10px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    font-size: 2.2rem;
+    color: #ccc;
+  }
+
+  .form-control:focus + .form-icon {
+    color: #ccc;
+  }
+
+  // password toggler (eye) icon
+  .password-toggle {
+    position:relative;
+    display:block;
+    user-select: none;
+  }
+  .password-toggle  a.pwd-toggle {
+    cursor:pointer;
+    display:inline-block;
+    position:absolute;
+    width:45px;
+    height:45px;
+    font-size:2.2rem;
+    background-repeat:no-repeat;
+    background-size:50%;
+    background-position:center;
+    top: 5px;
+    right: -15px;
+    z-index:9999;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .password-toggle [type="text"] + a.pwd-toggle:before {
+    font-family: 'Glyphicons Halflings', sans-serif;
+    content: "\e106";
+    color: #ccc;
+  }
+  .password-toggle [type="password"] + a.pwd-toggle:before {
+    font-family: 'Glyphicons Halflings', sans-serif;
+    content: "\e105";
+    color: #ccc;
+  }
+
+  // =========================================================
+  // SIGN IN
+  // =========================================================
+  // forgot password link
+  a.forgot-pwd-link {
+    margin-top: 11px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+  }
+  // social login (facebook, twitter, google) wrapper
+  .social-login {
+    margin-top: 10px;
+  }
+
+  // =========================================================
+  // SIGN UP
+  // =========================================================
+  // help block for sign up errors
+  span.help-block {
+    font-size: 0.8em;
+    margin-left: 2px;
+  }
+
+  // angular animations
+  .ng-animate {
+    -webkit-animation: none 0s;
+  }
+}

@@ -1,9 +1,24 @@
+// =========================================================
+// APPLICATION BUTTONS
+// =========================================================
 
-/* Buttons */
-.primary-btn, .secondary-btn {
-  font-size: 1.7rem !important;
-  color: #fdfdfd !important;
+// =========================================================
+// MAIN BUTTON STYLES
+// =========================================================
+.primary, .secondary, .default, .secondary-btn {
+  padding: 10px;
+  border: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 1.7rem;
   text-align: center;
+  color: #fdfdfd;
+}
+.primary {
+  background: #1064b8;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #0D4E8E, #1064b8);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #0D4E8E, #1064b8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .primary-btn {
   background: rgba(0, 65, 122, 0.88);
@@ -31,37 +46,10 @@
   border: 2px solid transparent;
   color: #fdfdfd;
 }
-.sign-in-btn {
-  padding: 5px 30px 5px 30px;
-  margin: 20px 20px 0 0;
-}
-/* Login Button */
-.btn-login {
-  font-family: 'Lato', sans-serif;
-  background-color: transparent;
-  border: 2px solid #fdfdfd;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  padding: 10px;
-  opacity: 0.8;
-}
-.btn-social {
-  border: 0 !important;
-  padding: 10px;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  color: #fdfdfd;
-  width: 45px;
-  height: 45px;
-  margin: 0 auto;
 
-  i.fa {
-    font-size: 2.2rem;
-  }
-}
-
+// =========================================================
+// SOCIAL LOGIN BUTTONS (facebook, twitter, google)
+// =========================================================
 .btn-social-rectangle {
   border: 0 !important;
   padding: 10px;
@@ -72,6 +60,7 @@
   width: 100%;
   text-align: center;
 
+  // font-awesome icon for social buttons
   i.fa {
     text-align: left !important;
   }
@@ -97,7 +86,6 @@
 .btn-google:hover {
   background-color: #b22e21;
 }
-.glyphicon.spinning {
-  animation: spin 1s infinite linear;
-  -webkit-animation: spin2 1s infinite linear;
+.btn-social-rectangle:hover, .btn-social-rectangle:focus {
+  color: #fdfdfd !important;
 }

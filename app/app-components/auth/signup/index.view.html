@@ -1,19 +1,20 @@
 <h1 class="signin-header">
     {{ 'forms.auth.signup_form.headline' | translate }}
 </h1>
-<div class="row login-container">
+<div class="row auth-container">
     <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
         <!-- loading spinner -->
-        <i ng-show="vm.loading" id="loading" class="fas fa-circle-notch loader"></i>
+        <i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
 
-    <form ng-hide="vm.loading" novalidate ng-submit="signupForm.$valid && vm.signUp()" name="signupForm" id="signin-form" class="noselect form-horizontal form-signin col-sm-12">
+        <form ng-hide="vm.loading" novalidate ng-submit="signupForm.$valid && vm.signUp()" name="signupForm" class="auth-form noselect form-horizontal col-sm-12">
+            <!-- form-input-fields -->
             <div class="form-input-fields">
+                <!-- email -->
                 <div class="row">
-                    <!-- email -->
                     <div class="col-xs-12" ng-class="{ 'has-error' : signupForm.$submitted }">
                         <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
                         <input unique-email ng-required="true" ng-model="vm.email" name="email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
-                        <span class="fa fa-envelope errspan"></span>
+                        <span class="fa fa-envelope form-icon"></span>
 
                         <!-- e-mail / form-errors -->
                         <span class="help-block" ng-show="signupForm.email.$error.required && signupForm.$submitted" >{{ 'forms.auth.signup_form.errors.email_required' | translate }}</span>
@@ -21,9 +22,10 @@
                     </div>
                 </div>
 
+                <!-- name -->
                 <div class="row">
+                    <!-- first name -->
                     <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <!-- first name -->
                         <label for="inputFirstName" class="sr-only">{{ 'forms.auth.firstName' | translate }}</label>
                         <input placeholder="{{ 'forms.auth.firstName' | translate }}" ng-required="true" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="vm.firstName" name="firstName" required autocomplete="off" type="text" id="inputFirstName" class="form-control" autofocus>
 
@@ -32,13 +34,13 @@
                         <span ng-show="signupForm.firstName.$error.pattern && signupForm.$submitted" class="help-block">{{ 'forms.auth.signup_form.errors.name_alpha' | translate }}</span>
                     </div>
 
+                    <!-- last name -->
                     <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <!-- lastname -->
                         <label for="inputSurName" class="sr-only">{{ 'forms.auth.lastName' | translate }}</label>
                         <input placeholder="{{ 'forms.auth.lastName' | translate }}" ng-required="true" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="vm.surName" name="lastName" required autocomplete="off" type="text" id="inputSurName" class="form-control" autofocus>
-                        <span class="fa fa-user-circle errspan"></span>
+                        <span class="fa fa-user-circle form-icon"></span>
 
-                        <!-- surname / form-errors -->
+                        <!-- last name / form-errors -->
                         <span ng-show="signupForm.lastName.$error.required && signupForm.$submitted" class="help-block">
                                 {{ 'forms.auth.signup_form.errors.lastName_required' | translate }}
                             </span>
@@ -47,11 +49,12 @@
                                 {{ 'forms.auth.signup_form.errors.name_alpha' | translate }}
                             </span>
                     </div>
-                </div>
+                </div> <!-- / name -->
 
+                <!-- passwords -->
                 <div class="row">
+                    <!-- password -->
                     <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <!-- password -->
                         <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
                         <input ng-minlength="6" ng-required="true" data-password-toggle ng-model="vm.password" name="password" required type="password" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
 
@@ -60,15 +63,15 @@
                         <span ng-show="signupForm.password.$error.minlength && signupForm.$submitted" class="help-block">{{ 'forms.auth.signup_form.errors.password_minlength' | translate }}</span>
                     </div>
 
+                    <!-- password verify -->
                     <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted && signupForm.passwordVrf.$invalid }">
-                        <!-- password verify -->
                         <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
                         <input same-as="vm.password" name="passwordVrf" required type="password" data-password-toggle ng-model="vm.passwordVrf"  id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
 
                         <!-- password verify / form-errors -->
                         <span ng-show="(signupForm.password.$modelValue !== signupForm.passwordVrf.$modelValue) && signupForm.$submitted" class="help-block">
-                                {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
-                            </span>
+                            {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
+                        </span>
                     </div>
                 </div>
             </div><!-- /form-input-fields -->
@@ -77,7 +80,7 @@
             <input type="submit"  id="signup" ng-hide="vm.loading" class="primary-btn btn-block" value="{{ 'forms.auth.sign_up_btn' | translate }}">
 
             <!-- back to login page -->
-            <a class="secondary-btn btn-block"  href="/account/login">{{ 'forms.auth.go_back' | translate }}</a>
-    </form>
-</div> <!-- /login-container -->
-</div>
+            <a class="secondary-btn btn-block"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+        </form>
+    </div> <!-- / col centered -->
+</div> <!-- /container -->
