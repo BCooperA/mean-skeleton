@@ -26,11 +26,19 @@
 // =========================================================
 // GENERAL
 // =========================================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
 html {
   height: 100%;
 }
 body {
-  height: 100%;
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -202,6 +210,20 @@ ul.language-list > li > a {
 // MEDIA QUERIES
 // =========================================================
 @media(min-width: @screen-lg-min) {
+  // center auth form vertically and horizontally
+  .auth-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .auth-container-center {
+      width: 100%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+    }
+  }
   .auth-container {
     width: 80%;
     margin: 10px auto;
