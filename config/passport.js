@@ -45,7 +45,7 @@ passport.use(new LocalStrategy({ usernameField: 'user[email]', passwordField: 'u
     function(email, password, done) {
         User.findOne( { email: email } )
             .then(function(user) {
-                if(!user || !user.validPassword(password) || user.password === undefined) {
+                if(!user || !user.validPassword(password) || !user.password) {
                     return done(null, false, { error: "Incorrect credentials" });
                 }
                 return done(null, user);
