@@ -45,7 +45,13 @@ passport.use(new LocalStrategy({ usernameField: 'user[email]', passwordField: 'u
     function(email, password, done) {
         User.findOne( { email: email } )
             .then(function(err, user) {
-                if(!user || !user.validPassword(password) || err.status == 500) {
+                /**
+                 * NOTE! In here, we are checking if the error status code equals to "500"
+                 * This is because when user is initially signed up using social authentication
+                 * and later tries to log in using local authentication with correct e-mail address, the server will return error with status code
+                 * of 500, since there are no password field in the database
+                 */
+                if(!user || !user.validPassword(password) || err.status === 500) {
                     return done(null, false, { error: "Incorrect credentials" });
                 }
                 return done(null, user);
