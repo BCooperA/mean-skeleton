@@ -2,12 +2,12 @@
     <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
         <!-- loading spinner -->
         <i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
-        <div class="panel panel-default">
+        <div ng-hide="vm.loading" class="panel panel-default">
             <div class="panel-heading">{{ 'forms.auth.reset_form.headline' | translate }}</div>
             <div class="panel-body">
                 <!-- reset form text -->
                 <p>{{ 'forms.auth.reset_form.text' | translate }}</p>
-                <form ng-hide="vm.loading" novalidate ng-submit="vm.reset()" name="passwordResetForm" class="auth-form noselect form-horizontal col-sm-12">
+                <form novalidate ng-submit="vm.reset()" name="passwordResetForm" class="auth-form noselect form-horizontal col-sm-12">
 
                     <!-- errors & messages -->
                     <div ng-show="passwordResetForm.$submitted" inform>
@@ -20,24 +20,24 @@
 
                     <!-- form-input-fields -->
                     <div class="form-input-fields">
-                        <!-- password -->
-                        <div ng-class="{ 'has-error' : signupForm.$submitted }">
-                            <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
-                            <input required type="password" data-password-toggle ng-model="vm.password" name="password"  id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
+                        <div class="input-group">
+                            <!-- password -->
+                            <span class="input-group-addon" id="reset-password"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input data-password-toggle ng-model="vm.password" required type="password" aria-describedby="reset-password" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
                         </div>
 
-                        <!-- password verify -->
-                        <div ng-class="{ 'has-error' : signupForm.$submitted }">
-                            <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.reset_form.passwordVerify' | translate }}</label>
-                            <input required type="password" data-password-toggle ng-model="vm.passwordVrf" same-as="vm.password" name="passwordVrf" id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.reset_form.passwordVerify' | translate }}">
+                        <div class="input-group">
+                            <!-- password verify -->
+                            <span class="input-group-addon" id="reset-password-vrf"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input required type="password" aria-describedby="reset-password-vrf" data-password-toggle ng-model="vm.passwordVrf" same-as="vm.password" name="passwordVrf" id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.reset_form.passwordVerify' | translate }}">
                         </div>
                     </div> <!-- /form-input-fields -->
 
                     <!-- reset button -->
-                    <input type="submit" id="resetPassword" ng-disabled="vm.loading" class="primary btn-block" value="{{ 'forms.auth.reset_form.reset_btn' | translate }}">
+                    <button type="submit" id="resetPassword" ng-disabled="vm.loading" class="primary btn-block">{{ 'forms.auth.reset_form.reset_btn' | translate }}</button>
 
                     <!-- back to login page -->
-                    <a class="secondary btn-block"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+                    <a class="secondary btn-block go-back"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
                 </form>
             </div> <!-- / panel-body -->
         </div><!-- / panel-default -->

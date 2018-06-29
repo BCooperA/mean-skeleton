@@ -108,6 +108,7 @@
             if ( toState.authenticate && ( !$localStorage.currentUser || jwtHelper.isTokenExpired($localStorage.currentUser.token) ) ) {
                 // User isn’t authenticated
                 event.preventDefault();
+                $rootScope.bodylayout = '';
                 $state.go("account.login");
             }
         });

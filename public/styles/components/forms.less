@@ -11,8 +11,9 @@
   }
   .panel-heading {
     text-align: center;
-    font-family: 'Pacifico', sans-serif;
-    font-size: 2em;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 1.7em;
+    color: #333;
   }
   .panel-body {
     padding: 8px 0;
@@ -37,11 +38,14 @@ form.auth-form {
   }
   .form-input-fields {
     margin-top: 0;
+    margin-bottom: 10px;
   }
-
+  .input-group {
+    margin: 8px 0px 0px 0px;
+  }
   // input fields
   .form-control {
-    margin: 5px 0px 5px 0px;
+    //margin: 5px 0px 5px 0px;
     padding: 20px 0px 20px 10px;
     background-color: transparent;
     border: 1px solid #ddd !important;
@@ -59,6 +63,7 @@ form.auth-form {
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #333;
+    background-color: #efefef;
   }
   // input field placeholders
   .form-control::-webkit-input-placeholder,
@@ -83,11 +88,11 @@ form.auth-form {
   }
 
   .form-icon, a.pwd-toggle:before {
-    color: #015085;
+    color: #bcbcbc;
   }
 
   .form-control:focus + .form-icon, form-control:focus + a.pwd-toggle:before {
-    color: #015085;
+    color: #bcbcbc;
   }
 
   // password toggler (eye) icon
@@ -120,6 +125,15 @@ form.auth-form {
     content: "\e105";
   }
 
+  a.go-back:before {
+    font-family: 'Glyphicons Halflings', sans-serif;
+    color: #fdfdfd;
+    content: "\e132";
+    float: left;
+    left: 30px;
+    position: absolute;
+  }
+
   // =========================================================
   // SIGN IN
   // =========================================================
@@ -142,6 +156,10 @@ form.auth-form {
   // =========================================================
   // SIGN UP
   // =========================================================
+  .signup-form-control {
+    //
+    margin: 5px 0 !important;
+  }
   // help block for sign up errors
   span.help-block {
     font-size: 0.8em;

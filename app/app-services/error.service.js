@@ -25,13 +25,15 @@
             responseError: function (rejection) {
                 // 401 (unauthorized)
                 if(rejection.status == 401) {
-                    $rootScope.bodyLayout = '';
-                    $location.path('/account/login');
+                    $rootScope.bodylayout = '';
+                    $state.go('account.login');
                 }
 
-                // 422 (Unprocessable Entity)
+                // 422 (unprocessable Entity)
                 if (rejection.status == 422 && rejection.data.error !== '') {
-                    inform.remove();
+                    // clear inform messages before applying new one
+                    inform.clear();
+                    // add error message to inform handler
                     inform.add(rejection.data.error, { "ttl": 0, "type": "danger"});
                 }
                 return $q.reject(rejection);

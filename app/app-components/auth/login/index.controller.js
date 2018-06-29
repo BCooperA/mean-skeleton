@@ -4,9 +4,9 @@
     angular
         .module('app')
         .controller('Login.IndexController', Controller)
-        .controller.$inject = ['$location', 'AuthenticationService', '$timeout', '$translate', '$localStorage', '$state'];
+        .controller.$inject = ['$location', '$rootScope', 'AuthenticationService', '$timeout', '$translate', '$localStorage', '$state'];
 
-    function Controller($location, AuthenticationService, $timeout, $translate, $localStorage, $state) {
+    function Controller($location, $rootScope, AuthenticationService, $timeout, $translate, $localStorage, $state) {
         var vm = this;
         vm.loading = false;
         vm.login = login;

@@ -27,11 +27,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a ui.sref="dashboard.profile" href="/app/account/{{ vm.user._id }}">
-                    <img class="rounded-header" src="{{ vm.user.image }}" alt=" {{ vm.user.image }}"> {{ vm.user.name }}
+                        <img class="rounded-header" src="{{ vm.user.image }}" alt=" {{ vm.user.image }}"> {{ vm.user.name }}
                     </a>
                 </li>
                 <li>
-                    <a ng-click="vm.logOut()" href="">
+                    <a href="#" ng-click="vm.logOut()">
                         <span class="glyphicon glyphicon-log-out"></span>
                     </a>
                 </li>
