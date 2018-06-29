@@ -224,29 +224,26 @@ ul.language-list > li > a {
     font-size: 8rem;
   }
 }
-.fancy {
-  line-height: 0.5;
+/* headlines with lines */
+.decorated{
+  overflow: hidden;
   text-align: center;
 }
-.fancy span {
-  display: inline-block;
+.decorated > span{
   position: relative;
+  display: inline-block;
 }
-.fancy span:before,
-.fancy span:after {
-  content: "";
+.decorated > span:before, .decorated > span:after{
+  content: '';
   position: absolute;
-  height: 5px;
-  border-bottom: 2px solid white;
-  //border-top: 1px solid white;
-  top: 0;
-  width: 143px;
+  top: 50%;
+  border-bottom: 2px solid;
+  width: 591px; /* half of limiter*/
+  margin: 0 20px;
 }
-.fancy span:before {
+.decorated > span:before{
   right: 100%;
-  margin-right: 15px;
 }
-.fancy span:after {
+.decorated > span:after{
   left: 100%;
-  margin-left: 15px;
 }
