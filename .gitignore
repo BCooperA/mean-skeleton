@@ -85,3 +85,4 @@ fabric.properties
 # Custom CSS files
 public/styles/components/*.css
 public/styles/app.css
+public/styles/app.min.css
