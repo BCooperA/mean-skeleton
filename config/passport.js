@@ -52,7 +52,7 @@ passport.use(new LocalStrategy({ usernameField: 'user[email]', passwordField: 'u
              * and later tries to log in using local authentication with correct e-mail address, the server will return error with status code
              * of 500, since there are no password field in the database
              */
-            if (!user || !user.validPassword(password) || user.password === null) {
+            if (!user || !user.validPassword(password) || user.password === '') {
                 return done(null, false, {error: "Incorrect credentials"});
             }
             return done(null, user);
@@ -93,6 +93,7 @@ passport.use(new FacebookStrategy(authProviders.facebook,
                     user = new User({
                         'auth.provider': 'facebook',
                         'auth.oauthID': profile.id,
+                        'password': '',
                         'name': profile._json.first_name + ' ' + profile._json.last_name,
                         'email': profile.emails[0].value,
                         'image': profile.photos[0].value,
@@ -145,6 +146,7 @@ passport.use(new TwitterStrategy(authProviders.twitter,
                         'auth.provider': 'twitter',
                         'auth.oauthID': profile.id,
                         'name': profile.displayName,
+                        'password': '',
                         'image': profile._json.profile_image_url_https.slice(this.length, -11) + '.jpg',
                         'email': profile.emails[0].value,
                         'active': 1
@@ -196,6 +198,7 @@ passport.use(new GoogleStrategy(authProviders.google,
                         'auth.provider': 'google',
                         'auth.oauthID': profile.id,
                         'name': profile.displayName,
+                        'password': '',
                         'image': profile.photos[0].value.slice(0, -2) + '200',
                         'email': profile.emails[0].value,
                         'active': 1
