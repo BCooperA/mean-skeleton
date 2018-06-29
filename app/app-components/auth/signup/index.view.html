@@ -3,7 +3,11 @@
         <!-- loading spinner -->
         <i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
         <div class="panel panel-default" ng-hide="vm.loading">
-            <div class="panel-heading fancy"><span>{{ 'forms.auth.signup_form.headline' | translate }}</span></div>
+            <div class="panel-heading">
+                <h2 class="decorated">
+                    <span>{{ 'forms.auth.signup_form.headline' | translate }}</span>
+                </h2>
+            </div>
             <div class="panel-body">
                 <form novalidate ng-submit="signupForm.$valid && vm.signUp()" name="signupForm" class="auth-form noselect form-horizontal col-sm-12">
                     <!-- form-input-fields -->
