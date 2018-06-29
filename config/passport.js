@@ -44,8 +44,8 @@ passport.deserializeUser(function(id, done) {
 passport.use(new LocalStrategy({ usernameField: 'user[email]', passwordField: 'user[password]' },
     function(email, password, done) {
         User.findOne( { email: email } )
-            .then(function(user) {
-                if(!user || !user.validPassword(password) || !user.password) {
+            .then(function(err, user) {
+                if(!user || !user.validPassword(password) || err.status == 500) {
                     return done(null, false, { error: "Incorrect credentials" });
                 }
                 return done(null, user);
