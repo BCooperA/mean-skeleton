@@ -6,6 +6,7 @@ const router                        = require('express').Router()
     , mail                          = require('../../config/mail')
     , nodemailer                    = require('nodemailer')
     , mgTransport                   = require('nodemailer-mailgun-transport')
+    , sgTransport                   = require('nodemailer-sendgrid-transport')
     , emailTemplates                = require('email-templates')
     , { check, validationResult }   = require('express-validator/check');
 /**
@@ -131,13 +132,7 @@ router.post('/users', [
     // if user is saved, send email
     user.save().then(function() {
         const email = new emailTemplates ({
-            transport: nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.GMAIL_USER,
-                    pass: process.env.GMAIL_PASSWORD
-                }
-            }),
+            transport: nodemailer.createTransport(mail.nodemailer.gmail.options),
             message: {
                 from: 'tatu.kulm@gmail.com'
             },

@@ -86,13 +86,7 @@ router.put('/password/recover', function(req, res, next) {
             // if user is saved, send email
             user.save().then(function() {
                 const email = new emailTemplates ({
-                    transport: nodemailer.createTransport({
-                        service: 'gmail',
-                        auth: {
-                            user: process.env.GMAIL_USER,
-                            pass: process.env.GMAIL_PASSWORD
-                        }
-                    }),
+                    transport: nodemailer.createTransport(mail.nodemailer.gmail.options),
                     send: true, // uncomment below to send emails in development/test env
                     message: {
                         from: 'tatu.kulm@gmail.com'

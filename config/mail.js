@@ -15,6 +15,15 @@ var mail = {
                     api_key: process.env.SMTP_SENDGRID_PASSWORD
                 }
             }
+        },
+        gmail: {
+            options: {
+                service: 'gmail',
+                auth: {
+                    user: process.env.GMAIL_USER,
+                    pass: process.env.GMAIL_PASSWORD
+                }
+            }
         }
     }
 };
