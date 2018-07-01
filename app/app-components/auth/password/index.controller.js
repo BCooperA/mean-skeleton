@@ -21,11 +21,12 @@
             AuthenticationService.recoverPassword(vm.email, function(result) {
                 if(result === true) {
                     // indicates that the mail was sent
+                    vm.loading = false;
                     vm.mailSent = true;
                     vm.mailSentMsg = 'A link to reset your password has been sent to provided e-mail address.';
                 }
             });
-            vm.loading = false;
+
         }
 
         function reset() {
@@ -34,11 +35,12 @@
             AuthenticationService.resetPassword($state.params.token, vm.password, vm.passwordVrf, function(result) {
                 if(result) {
                     // indicates that the mail was sent
+                    vm.loading = false;
                     vm.passwordReset = true;
                     vm.passwordResetMsg = 'Your password is now changed';
                 }
             });
-            vm.loading = false;
+
         }
     }
 

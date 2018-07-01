@@ -21,11 +21,11 @@
 
             AuthenticationService.Login(vm.email, vm.password, function (result) {
                 if (result === true) {
+                    vm.loading = false;
                     $state.go('dashboard.app');
                 }
             });
             // enable login btn
-            vm.loading = false;
         };
     }
 
