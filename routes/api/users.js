@@ -112,7 +112,7 @@ router.post('/users', [
     check('user.password')
         .isLength({ min: 5 }).withMessage('must be at least 5 chars long')
         .matches(/\d/).withMessage('Password must contain at least one number')
-    ], function(req, res, next) {
+], function(req, res, next) {
 
     const errors = validationResult(req);
 
@@ -131,7 +131,13 @@ router.post('/users', [
     // if user is saved, send email
     user.save().then(function() {
         const email = new emailTemplates ({
-            transport: nodemailer.createTransport(mgTransport(mail.nodemailer.mailgun.options)),
+            transport: nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.GMAIL_USER,
+                    pass: process.env.GMAIL_PASSWORD
+                }
+            }),
             message: {
                 from: 'tatu.kulm@gmail.com'
             },

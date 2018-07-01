@@ -4,7 +4,6 @@ const router                        = require('express').Router()
     , randtoken                     = require('rand-token')
     , mail                          = require('../config/mail')
     , nodemailer                    = require('nodemailer')
-    , mgTransport                   = require('nodemailer-mailgun-transport')
     , emailTemplates                = require('email-templates')
     , { check, validationResult }   = require('express-validator/check');
 
@@ -87,7 +86,13 @@ router.put('/password/recover', function(req, res, next) {
             // if user is saved, send email
             user.save().then(function() {
                 const email = new emailTemplates ({
-                    transport: nodemailer.createTransport(mgTransport(mail.nodemailer.mailgun.options)),
+                    transport: nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: process.env.GMAIL_USER,
+                            pass: process.env.GMAIL_PASSWORD
+                        }
+                    }),
                     send: true, // uncomment below to send emails in development/test env
                     message: {
                         from: 'tatu.kulm@gmail.com'
