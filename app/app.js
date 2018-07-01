@@ -25,6 +25,8 @@
          */
         $httpProvider.interceptors.push("StatusInterceptor");
 
+        $httpProvider.interceptors.push('LoadingInterceptor');
+
         /**
          * use the HTML5 History API
          * See: https://docs.angularjs.org/guide/$location#html5-mode

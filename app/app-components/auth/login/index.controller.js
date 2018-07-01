@@ -25,6 +25,7 @@
                     $state.go('dashboard.app');
                 }
             });
+            vm.loading = false;
             // enable login btn
         };
     }

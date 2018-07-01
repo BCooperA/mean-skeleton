@@ -1,37 +1,32 @@
-<div class="row auth-container">
-    <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
-        <!-- loading spinner -->
-        <i ng-show="vm.loading" id="loading" class="fas fa-circle-notch loader"></i>
-        <div ng-hide="vm.loading" class="panel panel-default">
-            <div class="panel-heading fancy">
-                <h2 class="decorated">
-                    <span>{{ 'forms.auth.recover_form.headline' | translate }}</span>
-                </h2>
-            </div>
-            <div class="panel-body">
-                <!-- recover form text -->
-                <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
-                <form novalidate ng-submit="vm.recover()" name="passwordRecoveryForm" class="auth-form noselect form-horizontal col-sm-12">
-                    <!-- errors & messages -->
-                    <div inform class="inform-center" ng-show="passwordRecoveryForm.$submitted"></div>
-                    <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
+<div ng-hide="vm.loading" class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="decorated">
+            <span>{{ 'forms.auth.recover_form.headline' | translate }}</span>
+        </h2>
+    </div>
+    <div class="panel-body">
+        <!-- recover form text -->
+        <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
+        <form novalidate ng-submit="vm.recover()" name="passwordRecoveryForm" class="auth-form noselect form-horizontal col-sm-12">
+            <!-- errors & messages -->
+            <div inform class="inform-center" ng-show="passwordRecoveryForm.$submitted"></div>
+            <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
 
-                    <!-- form-input-fields -->
-                    <div class="form-input-fields">
-                        <!-- e-mail -->
-                        <div class="input-group">
-                            <span class="input-group-addon" id="sizing-addon4"><span class="fa fa-envelope"></span></span>
-                            <input aria-describedby="sizing-addon4" ng-required="true" ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
-                        </div>
-                    </div> <!-- /form-input-fields -->
+            <!-- form-input-fields -->
+            <div class="form-input-fields">
+                <!-- e-mail -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon4"><span class="fa fa-envelope"></span></span>
+                    <input aria-describedby="sizing-addon4" ng-required="true" ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
+                </div>
+            </div> <!-- /form-input-fields -->
 
-                    <!-- recover button -->
-                    <button type="submit"  id="recover" ng-hide="vm.loading" class="primary btn-block">{{ 'forms.auth.recover_form.submit_btn' | translate }}</button>
+            <!-- recover button -->
+            <button type="submit"  id="recover" ng-hide="vm.loading" class="primary btn-block">{{ 'forms.auth.recover_form.submit_btn' | translate }}</button>
 
-                    <!-- back to login page -->
-                    <a class="secondary btn-block go-back" ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
-                </form>
-            </div> <!-- / panel-body -->
-        </div><!-- / panel-default -->
-    </div> <!-- / col centered -->
-</div> <!-- /container -->
+            <!-- back to login page -->
+            <a class="secondary btn-block go-back" ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+        </form>
+    </div> <!-- / panel-body -->
+</div><!-- / panel-default -->
+

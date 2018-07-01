@@ -1,71 +1,68 @@
-﻿<div class="row auth-container">
-    <div class="col-xs-12 col-md-6 col-md-offset-3 centered">
-        <!-- loading spinner -->
-        <i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
-        <div ng-hide="vm.loading" class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="decorated">
-                    <span>{{ 'forms.auth.signin_form.headline' | translate }}</span>
-                </h2>
-            </div>
-            <div class="panel-body">
-                <form novalidate ng-submit="vm.login()" name="loginForm" class="auth-form noselect form-horizontal col-sm-12">
-                    <!-- errors -->
-                    <div inform class="inform-center" ng-show="loginForm.$submitted"></div>
-                    <div class="login-wrap">
-                        <div class="form-input-fields">
-                            <!-- e-mail -->
-                            <div class="input-group">
-                                <span  class="input-group-addon" id="sizing-addon2"><span class="fa fa-envelope"></span></span>
-                                <input ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
-                            </div>
+﻿<!-- loading spinner -->
+<i ng-show="vm.loading" class="fas fa-circle-notch loader"></i>
+<div ng-hide="vm.loading" class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="decorated">
+            <span>{{ 'forms.auth.signin_form.headline' | translate }}</span>
+        </h2>
+    </div>
+    <div class="panel-body">
+        <form novalidate ng-submit="vm.login()" name="loginForm" class="auth-form noselect form-horizontal col-sm-12">
+            <!-- errors -->
+            <div inform class="inform-center" ng-show="loginForm.$submitted"></div>
+            <div class="login-wrap">
+                <div class="form-input-fields">
+                    <!-- e-mail -->
+                    <div class="input-group">
+                        <span  class="input-group-addon" id="sizing-addon2"><span class="fa fa-envelope"></span></span>
+                        <input ng-model="vm.email" required autocomplete="off" type="email" id="inputEmail" class="form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
+                    </div>
 
-                            <div class="input-group">
-                                <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input data-password-toggle ng-model="vm.password" required type="password" aria-describedby="sizing-addon3" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
-                            </div>
-                        </div> <!-- /form-input-fields -->
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input data-password-toggle ng-model="vm.password" required type="password" aria-describedby="sizing-addon3" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
+                    </div>
+                </div> <!-- /form-input-fields -->
 
-                        <!-- sign in button -->
-                        <button ng-disabled="vm.loading" type="submit"  id="login" class="primary btn-block">{{ 'forms.auth.sign_in_btn' | translate }}</button>
+                <!-- sign in button -->
+                <button ng-disabled="vm.loading" type="submit"  id="login" class="primary btn-block">{{ 'forms.auth.sign_in_btn' | translate }}</button>
 
-                        <!-- sign up button -->
-                        <a ng-disabled="vm.loading" class="secondary btn-block"  ui-sref="account.signup">{{ 'forms.auth.sign_up_btn' | translate }}</a>
+                <!-- sign up button -->
+                <a ng-disabled="vm.loading" class="secondary btn-block"  ui-sref="account.signup">{{ 'forms.auth.sign_up_btn' | translate }}</a>
 
-                        <!-- social Login -->
-                        <div class="row social-login">
-                            <!-- Facebook -->
-                            <div class="col-xs-4">
-                                <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Facebookilla" href="/auth/signin/facebook" target="_self" class="btn btn-social-rectangle btn-facebook">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                            </div> <!-- / Facebook -->
+                <!-- social Login -->
+                <div class="row social-login">
+                    <!-- Facebook -->
+                    <div class="col-xs-4">
+                        <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Facebookilla" href="/auth/signin/facebook" target="_self" class="btn btn-social-rectangle btn-facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div> <!-- / Facebook -->
 
-                            <!-- Twitter -->
-                            <div class="col-xs-4">
-                                <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Twitterillä" href="/auth/signin/twitter" target="_self" class="btn btn-social-rectangle btn-twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div> <!-- / Twitter -->
+                    <!-- Twitter -->
+                    <div class="col-xs-4">
+                        <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Twitterillä" href="/auth/signin/twitter" target="_self" class="btn btn-social-rectangle btn-twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div> <!-- / Twitter -->
 
-                            <!-- Google -->
-                            <div class="col-xs-4">
-                                <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Googlella" href="/auth/signin/google" target="_self" class="btn btn-social-rectangle btn-google">
-                                    <i class="fab fa-google"></i>
-                                </a>
-                            </div> <!-- / Google -->
-                        </div> <!-- / social login -->
-                        <!-- forgot password -->
-                        <div class="login-rm-wrapper">
-                            <div class="col-xs-12 forgot-wrap">
-                                <a ui-sref="account.recover" class="forgot-pwd-link">
-                                    {{ 'forms.auth.forgot_pwd' | translate }} &nbsp; <i class="fa fa-question-circle"></i>
-                                </a>
-                            </div>
-                        </div> <!-- /.forgot password -->
-                    </div> <!-- /.login-wrap -->
-                </form>
-            </div> <!-- / panel-body -->
-        </div><!-- / panel-default -->
-    </div> <!-- / col centered -->
-</div> <!-- /container -->
+                    <!-- Google -->
+                    <div class="col-xs-4">
+                        <a data-toggle="tooltip" data-placement="bottom" title="Kirjaudu Googlella" href="/auth/signin/google" target="_self" class="btn btn-social-rectangle btn-google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div> <!-- / Google -->
+                </div> <!-- / social login -->
+                <!-- forgot password -->
+                <div class="login-rm-wrapper">
+                    <div class="col-xs-12 forgot-wrap">
+                        <a ui-sref="account.recover" class="forgot-pwd-link">
+                            {{ 'forms.auth.forgot_pwd' | translate }} &nbsp; <i class="fa fa-question-circle"></i>
+                        </a>
+                    </div>
+                </div> <!-- /.forgot password -->
+            </div> <!-- /.login-wrap -->
+        </form>
+    </div> <!-- / panel-body -->
+</div><!-- / panel-default -->
+

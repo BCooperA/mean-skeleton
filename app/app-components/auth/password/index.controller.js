@@ -26,6 +26,7 @@
                     vm.mailSentMsg = 'A link to reset your password has been sent to provided e-mail address.';
                 }
             });
+            vm.loading = false;
 
         }
 
@@ -40,6 +41,7 @@
                     vm.passwordResetMsg = 'Your password is now changed';
                 }
             });
+            vm.loading = false;
 
         }
     }
