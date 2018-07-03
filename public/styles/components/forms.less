@@ -1,13 +1,10 @@
-// =========================================================
-// APPLICATION FORMS
-// =========================================================
+/* ==========================================================================
+APPLICATION - FORMS
+========================================================================== */
 
-// =========================================================
-// AUTH FORMS (signin, signup, recover, reset)
-// =========================================================
+/* ------------ panel styles block  ------------ */
 .auth-container {
   .panel {
-    //box-shadow: 0 1px 4px rgba(0,0,0,0.55);
     box-shadow: none;
     margin-bottom: 0;
     border: 0;
@@ -22,9 +19,10 @@
     border: 0;
     text-transform: uppercase;
     background-color: transparent;
+    padding: 0 15px;
   }
   .panel-body {
-    padding: 8px 0;
+    padding: 0px 0;
 
     p {
       text-align: center;
@@ -33,13 +31,11 @@
     }
   }
 }
+
+/* ------------ form (signup, signin, recover, reset)  ------------ */
 form.auth-form {
-  //background-color: #eee;
   margin: 0 auto;
   width: 100%;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
 
   .login-wrap {
     margin-top: 0;
@@ -49,22 +45,21 @@ form.auth-form {
     margin-bottom: 10px;
   }
   .input-group {
-    margin: 8px 0px 0px 0px;
+    margin: 8px 0 0 0;
   }
-  // input fields
+  /* ------------ INPUT FIELD - STYLES ------------ */
   .form-control {
-    //margin: 5px 0px 5px 0px;
-    padding: 20px 0px 20px 10px;
+    padding: 20px 0 20px 10px;
     background-color: #fdfdfd;
-    border: 1px solid #ddd !important;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    border: 1px solid #ddd;
     color: #333;
     box-shadow: none;
     -webkit-box-shadow: none;
     transition: none;
     -webkit-transition: none;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
   }
   .form-control:focus {
     outline: 0;
@@ -73,7 +68,35 @@ form.auth-form {
     color: #333;
     background-color: #efefef;
   }
-  // input field placeholders
+
+  /* ------------ INPUT FIELD - ERRORS / FEEDBACK ------------ */
+  .input-group-addon.has-error {
+    background-color: @error-input-field-addon;
+    border: 0;
+  }
+  .has-error {
+    background-color: @error-input-field;
+    color: @basic-white;
+    border: 1px solid @error-input-field-border;
+  }
+  .input-group-addon.has-feedback {
+    background-color: @success-input-field-addon;
+    border: 0;
+  }
+  .has-feedback {
+    background-color: @success-input-field;
+    color: @basic-white;
+    border: 1px solid @success-input-field-border;
+  }
+  .has-error + .form-icon,
+  .has-error + a.pwd-toggle:before,
+  .has-feedback + .form-icon,
+  .has-feedback + a.pwd-toggle:before
+  {
+    color: @basic-white;
+  }
+
+  /* ------------ INPUT FIELD - PLACEHOLDERS ------------ */
   .form-control::-webkit-input-placeholder,
   .form-control:focus::-webkit-input-placeholder,
   .form-control::-moz-placeholder,
@@ -85,29 +108,7 @@ form.auth-form {
     color: #333;
   }
 
-  .form-icon {
-    float: right;
-    margin-right: 10px;
-    margin-top: -40px;
-    position: relative;
-    z-index: 2;
-    font-size: 2.2rem;
-    color: #bdbdbd;
-  }
-
-  .form-icon, a.pwd-toggle:before {
-    color: #bcbcbc;
-  }
-
-  .form-control:focus + .form-icon {
-    color: #bcbcbc;
-  }
-
-  .form-control:focus + a.pwd-toggle:before {
-    color: #333;
-  }
-
-  // password toggler (eye) icon
+  /* ------------ PASSWORD TOGGLE ------------ */
   .password-toggle {
     position:relative;
     display:block;
@@ -120,9 +121,7 @@ form.auth-form {
     width:45px;
     height:45px;
     font-size:2.2rem;
-    background-repeat:no-repeat;
     background-size:50%;
-    background-position:center;
     top: 5px;
     right: -10px;
     z-index:9999;
@@ -136,19 +135,45 @@ form.auth-form {
     font-family: 'Glyphicons Halflings', sans-serif;
     content: "\e105";
   }
+  a.pwd-toggle:before {
+    color: #bcbcbc;
+  }
 
+  .form-control:focus + a.pwd-toggle:before {
+    color: #333;
+  }
+
+  /* ------------ "GO BACK" BUTTON ------------ */
   a.go-back:before {
     font-family: 'Glyphicons Halflings', sans-serif;
-    color: #fdfdfd;
     content: "\e132";
+    color: @basic-white;
     float: left;
     left: 30px;
     position: absolute;
   }
 
   // =========================================================
-  // SIGN IN
+  // SIGN IN - FORM - SPECIFIC
   // =========================================================
+
+  /* ------------ SIGN IN FORM - SOCIAL LOGIN ------------ */
+  h3 {
+    // "OR" text
+    font-size: 1em;
+    color: @basic-white;
+    text-transform: uppercase;
+  }
+  h3.decorated > span:before, .decorated > span:after {
+    // lines on-side "OR" text
+    color: #002f4f;
+  }
+  .social-login {
+    // wrapper
+    margin-top: 20px;
+  }
+
+  /* ------------ SIGN IN FORM - FORGOT PASSWORD ------------ */
   .forgot-wrap {
     padding:0;
     display: block;
@@ -161,22 +186,22 @@ form.auth-form {
     text-align: center;
     font-weight: 600;
   }
-  // social login (facebook, twitter, google) wrapper
-  .social-login {
-    margin-top: 10px;
-  }
 
   // =========================================================
-  // SIGN UP
+  // SIGN UP - FORM - SPECIFIC
   // =========================================================
   .signup-form-control {
-    //
-    margin: 5px 0 !important;
+    margin: 0;
   }
-  // help block for sign up errors
   span.help-block {
+    // help block for text-based errors
     font-size: 0.8em;
     margin-left: 2px;
+    color: @basic-white;
+  }
+
+  button[disabled] {
+    opacity: 0.45;
   }
 
   // angular animations

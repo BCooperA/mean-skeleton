@@ -1,89 +1,232 @@
 <div class="panel panel-default" ng-hide="vm.loading">
     <div class="panel-heading">
+        <!----------------------------
+            SIGN UP FORM HEADLINE
+            ------------------------------>
         <h2 class="decorated">
             <span>{{ 'forms.auth.signup_form.headline' | translate }}</span>
         </h2>
     </div>
     <div class="panel-body">
-        <form novalidate ng-submit="signupForm.$valid && vm.signUp()" name="signupForm" class="auth-form noselect form-horizontal col-sm-12">
-            <!-- errors & messages -->
+        <!----------------------------
+            SIGNUP FORM
+            ------------------------------>
+        <form novalidate ng-submit="signupForm.$valid && vm.signUp()"
+              name="signupForm" class="auth-form noselect form-horizontal col-sm-12">
+            <!----------------------------
+                SIGN UP FORM - ERRORS & MESSAGES
+                ------------------------------>
             <div ng-show="signupForm.$submitted" inform></div>
-            <!-- form-input-fields -->
+
+            <!----------------------------
+                SIGN UP FORM - INPUT FIELDS
+                ------------------------------>
             <div class="form-input-fields">
-                <!-- email -->
                 <div class="row">
-                    <div class="col-xs-12" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
-                        <input ng-required="true" ng-model="vm.email" name="email" required autocomplete="off" type="email" id="inputEmail" class="form-control signup-form-control" placeholder="{{ 'forms.auth.email' | translate }}" autofocus>
-                        <span class="fa fa-envelope form-icon"></span>
-
-                        <!-- e-mail / form-errors -->
-                        <span class="help-block" ng-show="signupForm.email.$error.required && signupForm.$submitted" >{{ 'forms.auth.signup_form.errors.email_required' | translate }}</span>
-                        <span class="help-block" ng-show="signupForm.email.$error.emailExists && signupForm.$submitted">{{ 'forms.auth.signup_form.errors.emailAddr_exists' | translate }}</span>
-                    </div>
-                </div>
-
-                <!-- name -->
-                <div class="row">
-                    <!-- first name -->
-                    <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <label for="inputFirstName" class="sr-only">{{ 'forms.auth.firstName' | translate }}</label>
-                        <input placeholder="{{ 'forms.auth.firstName' | translate }}" ng-required="true" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="vm.firstName" name="firstName" required autocomplete="off" type="text" id="inputFirstName" class="signup-form-control form-control" autofocus>
-
-                        <!-- first name / form-errors -->
-                        <span ng-show="signupForm.firstName.$error.required && signupForm.$submitted" class="help-block">{{ 'forms.auth.signup_form.errors.firstName_required' | translate }}</span>
-                        <span ng-show="signupForm.firstName.$error.pattern && signupForm.$submitted" class="help-block">{{ 'forms.auth.signup_form.errors.name_alpha' | translate }}</span>
-                    </div>
-
-                    <!-- last name -->
-                    <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <label for="inputSurName" class="sr-only">{{ 'forms.auth.lastName' | translate }}</label>
-                        <input placeholder="{{ 'forms.auth.lastName' | translate }}" ng-required="true" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="vm.surName" name="lastName" required autocomplete="off" type="text" id="inputSurName" class="signup-form-control form-control" autofocus>
-                        <span class="fa fa-user-circle form-icon"></span>
-
-                        <!-- last name / form-errors -->
-                        <span ng-show="signupForm.lastName.$error.required && signupForm.$submitted" class="help-block">
-                                {{ 'forms.auth.signup_form.errors.lastName_required' | translate }}
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <!----------------------------
+                                SIGN UP FORM - INPUT ICON
+                                ------------------------------>
+                            <span class="input-group-addon" id="addon-email"
+                                  ng-class="{
+                                  'has-error' : (signupForm.$submitted || signupForm.email.$dirty) && !signupForm.email.$valid,
+                                  'has-feedback':  signupForm.email.$valid
+                                  }">
+                                <span class="glyphicon glyphicon-envelope"></span>
                             </span>
-
-                        <span ng-show="signupForm.lastName.$error.pattern && signupForm.$submitted" class="help-block">
-                                {{ 'forms.auth.signup_form.errors.name_alpha' | translate }}
-                            </span>
-                    </div>
-                </div> <!-- / name -->
-
-                <!-- passwords -->
-                <div class="row">
-                    <!-- password -->
-                    <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted }">
-                        <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
-                        <input ng-minlength="6" ng-required="true" data-password-toggle ng-model="vm.password" name="password" required type="password" id="inputPassword" class="signup-form-control form-control" placeholder="{{ 'forms.auth.password' | translate }}">
-
-                        <!-- password / form-errors -->
-                        <span ng-show="signupForm.password.$error.required && signupForm.$submitted" class="help-block">{{ 'forms.auth.signup_form.errors.password_required' | translate }}</span>
-                        <span ng-show="signupForm.password.$error.minlength && signupForm.$submitted" class="help-block">{{ 'forms.auth.signup_form.errors.password_minlength' | translate }}</span>
-                    </div>
-
-                    <!-- password verify -->
-                    <div class="col-xs-6" ng-class="{ 'has-error' : signupForm.$submitted && signupForm.passwordVrf.$invalid }">
-                        <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
-                        <input same-as="vm.password" name="passwordVrf" required type="password" data-password-toggle ng-model="vm.passwordVrf"  id="inputPasswordVerify" class="signup-form-control form-control" placeholder="{{ 'forms.auth.password' | translate }}">
-
-                        <!-- password verify / form-errors -->
-                        <span ng-show="(signupForm.password.$modelValue !== signupForm.passwordVrf.$modelValue) && signupForm.$submitted" class="help-block">
-                            {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
+                            <!--------------------------------------
+                                SIGN UP FORM - INPUT FIELD - EMAIL
+                                ------------------------------------>
+                            <label for="inputEmail" class="sr-only">{{ 'forms.auth.email' | translate }}</label>
+                            <input type="email" required autofocus unique-email autocomplete="off"
+                                   id="inputEmail" class="form-control signup-form-control" aria-describedby="addon-email"
+                                   placeholder="{{ 'forms.auth.email' | translate }}" name="email"
+                                   ng-model="vm.email" ng-required="true"
+                                   ng-class="{
+                                   'has-error' : (signupForm.$submitted || signupForm.email.$dirty) && !signupForm.email.$valid,
+                                   'has-feedback':  signupForm.email.$valid
+                                   }">
+                        </div><!-- / .input-group -->
+                        <!----------------------------
+                            TEXT-BASED ERRORS - EMAIL
+                            ------------------------------>
+                        <span class="help-block" ng-show="signupForm.email.$error.required && (signupForm.$submitted || signupForm.email.$dirty)" >
+                            <!-- error / enauk required -->
+                            {{ 'forms.auth.signup_form.errors.email_required' | translate }}
                         </span>
-                    </div>
-                </div>
+                        <span class="help-block" ng-show="signupForm.email.$error.emailExists && (signupForm.$submitted || signupForm.email.$dirty)">
+                            <!-- error / email not unique -->
+                            {{ 'forms.auth.signup_form.errors.emailAddr_exists' | translate }}
+                        </span>
+                        <span class="help-block" ng-show="signupForm.email.$error.email && (signupForm.$submitted || signupForm.email.$dirty)">
+                            <!-- error / valid email -->
+                            {{ 'forms.auth.email_valid_email' | translate }}
+                        </span>
+                    </div><!-- / .col-xs-12 -->
+                </div><!-- / .row -->
+
+                <!--------------------------------------
+                    SIGN UP FORM - INPUT FIELD - NAME
+                    ------------------------------------>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="input-group">
+                            <!----------------------------
+                                SIGN UP FORM - INPUT ICON
+                                ------------------------------>
+                            <span class="input-group-addon" id="addon-user-fn"
+                                  ng-class="{
+                                  'has-error' : (signupForm.$submitted || signupForm.firstName.$dirty) && !signupForm.firstName.$valid,
+                                  'has-feedback':  signupForm.firstName.$valid
+                                  }">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            <!--------------------------------------
+                                SIGN UP FORM - INPUT FIELD - FIRST NAME
+                                ------------------------------------>
+                            <label for="inputFirstName" class="sr-only">{{ 'forms.auth.firstName' | translate }}</label>
+                            <input type="text" required autofocus autocomplete="off"
+                                   id="inputFirstName" class="signup-form-control form-control" aria-describedby="addon-user-fn"
+                                   placeholder="{{ 'forms.auth.firstName' | translate }}" name="firstName"
+                                   ng-model="vm.firstName" ng-required="true" ng-pattern ="/^[a-zA-Z\x7f-\xff]*$/"
+                                   ng-class="{
+                                   'has-error': (signupForm.firstName.$dirty || signupForm.$submitted) && !signupForm.firstName.$valid,
+                                   'has-feedback':  signupForm.firstName.$valid
+                                   }">
+                        </div><!--/ .input-group -->
+                    </div> <!--/ .col-xs-6 -->
+
+                    <div class="col-xs-6">
+                        <div class="input-group">
+                            <!----------------------------
+                                SIGN UP FORM - INPUT ICON
+                                ------------------------------>
+                            <span class="input-group-addon" id="addon-user-ln"
+                                  ng-class="{
+                                  'has-error' : (signupForm.$submitted || signupForm.lastName.$dirty) && !signupForm.lastName.$valid,
+                                  'has-feedback':  signupForm.lastName.$valid
+                                  }">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            <!--------------------------------------
+                                SIGN UP FORM - INPUT FIELD - LAST NAME
+                                ------------------------------------>
+                            <label for="inputLastName" class="sr-only">{{ 'forms.auth.lastName' | translate }}</label>
+                            <input type="text" required autofocus autocomplete="off"
+                                   id="inputLastName" class="signup-form-control form-control" aria-describedby="addon-user-ln"
+                                   placeholder="{{ 'forms.auth.lastName' | translate }}" name="lastName"
+                                   ng-model="vm.surName" ng-required="true" ng-pattern ="/^[a-zA-Z\x7f-\xff]*$/"
+                                   ng-class="{
+                                   'has-error' : (signupForm.lastName.$dirty || signupForm.$submitted) && !signupForm.lastName.$valid,
+                                   'has-feedback':  signupForm.lastName.$valid
+                                   }">
+                        </div><!--/ .input-group -->
+                    </div> <!-- / .col-xs-6 -->
+                </div> <!-- / .row -->
+                <!----------------------------
+                    TEXT-BASED ERRORS - NAME
+                    ------------------------------>
+                <span ng-show="signupForm.firstName.$error.required && (signupForm.$submitted || signupForm.firstName.$dirty)" class="help-block">
+                    <!-- first name / required -->
+                    {{ 'forms.auth.signup_form.errors.firstName_required' | translate }}
+                </span>
+                <span ng-show="signupForm.firstName.$error.pattern || signupForm.lastName.$error.pattern && (signupForm.$submitted || signupForm.firstName.$dirty || signupForm.lastName.$dirty)" class="help-block">
+                    <!-- first name / alpha -->
+                    {{ 'forms.auth.signup_form.errors.name_alpha' | translate }}
+                </span>
+                <span ng-show="signupForm.lastName.$error.required && (signupForm.$submitted || signupForm.lastName.$dirty)" class="help-block">
+                    <!-- lastn name / required -->
+                    {{ 'forms.auth.signup_form.errors.lastName_required' | translate }}
+                </span>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <!----------------------------
+                                SIGN UP FORM - INPUT ICON
+                                ------------------------------>
+                            <span class="input-group-addon" id="pwd-addon"
+                                  ng-class="{ 'has-error' : (signupForm.password.$dirty || signupForm.$submitted) && (!signupForm.password.$valid || !signupForm.passwordVrf.$valid),
+                                            'has-feedback':  signupForm.password.$valid && signupForm.passwordVrf.$valid
+                                            }">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </span>
+                            <!--------------------------------------
+                                SIGN UP FORM - INPUT FIELD - PASSWORD
+                                ------------------------------------>
+                            <label for="inputPassword" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
+                            <input type="password" required data-password-toggle
+                                   id="inputPassword" class="form-control" aria-describedby="pwd-addon"
+                                   placeholder="{{ 'forms.auth.password' | translate }}" name="password"
+                                   ng-model="vm.password" ng-required="true" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/"
+                                   ng-class="{
+                                   'has-error' : (signupForm.password.$dirty || signupForm.$submitted) && (!signupForm.password.$valid || !signupForm.passwordVrf.$valid),
+                                   'has-feedback':  signupForm.password.$valid && signupForm.passwordVrf.$valid
+                                   }">
+                        </div> <!-- / .input-group -->
+                    </div> <!-- / .col-xs-12 -->
+                </div> <!-- / .row -->
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <!----------------------------
+                                SIGN UP FORM - INPUT ICON
+                                ------------------------------>
+                            <span class="input-group-addon" id="pwd-vrf-addon"
+                                  ng-class="{
+                                  'has-error' : (signupForm.password.$dirty || signupForm.$submitted) && (!signupForm.password.$valid || !signupForm.passwordVrf.$valid),
+                                  'has-feedback':  signupForm.password.$valid && signupForm.passwordVrf.$valid
+                                  }">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </span>
+                            <!--------------------------------------
+                                SIGN UP FORM - INPUT FIELD - PASSWORD VERIFY
+                                ------------------------------------>
+                            <label for="inputPasswordVerify" class="sr-only">{{ 'forms.auth.password' | translate }}</label>
+                            <input type="password" required same-as="vm.password" data-password-toggle
+                                   id="inputPasswordVerify" class="signup-form-control form-control" aria-describedby="pwd-vrf-addon"
+                                   placeholder="{{ 'forms.auth.password_again' | translate }}" name="passwordVrf"
+                                   ng-model="vm.passwordVrf" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/"
+                                   ng-class="{
+                                   'has-error' : (signupForm.passwordVrf.$dirty || signupForm.$submitted) && (!signupForm.password.$valid || !signupForm.passwordVrf.$valid),
+                                   'has-feedback':  signupForm.passwordVrf.$valid && signupForm.password.$valid
+                                   }">
+                        </div> <!-- / .input-group -->
+                    </div> <!-- / .col-xs-12 -->
+                </div> <!-- / .row -->
+
+                <!----------------------------
+                    TEXT-BASED ERRORS - PASSWORD
+                    ------------------------------>
+                <span ng-show="signupForm.password.$error.required && (signupForm.$submitted || signupForm.password.$dirty)" class="help-block">
+                    <!-- error / password required -->
+                    {{ 'forms.auth.signup_form.errors.password_required' | translate }}
+                </span>
+                <span ng-show="(signupForm.password.$error.pattern || signupForm.passwordVrf.$error.pattern) && (signupForm.$submitted || signupForm.password.$dirty || signupForm.passwordVrf.$dirty)" class="help-block">
+                    <!-- error / password pattern -->
+                    {{ 'forms.auth.signup_form.errors.password_pattern' | translate }}
+                </span>
+                <span ng-show="(signupForm.password.$modelValue !== signupForm.passwordVrf.$modelValue) && (signupForm.$submitted || signupForm.passwordVrf.$dirty)" class="help-block">
+                    <!-- error / password don't match -->
+                    {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
+                </span>
             </div><!-- /form-input-fields -->
 
-            <!-- sign up button -->
-            <button ng-disabled="vm.loading" type="submit"  id="signup" class="primary btn-block">{{ 'forms.auth.sign_up_btn' | translate }}</button>
+            <!----------------------------
+                "SIGN UP" - BTN
+                ------------------------------>
+            <button ng-disabled="vm.loading || !signupForm.$valid" type="submit"  id="signup" class="primary btn-block">
+                {{ 'forms.auth.sign_up_btn' | translate }}
+            </button>
 
-            <!-- back to login page -->
-            <a class="secondary btn-block go-back"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+            <!----------------------------
+                 "GO BACK TO LOGIN PAGE" - BTN
+                ------------------------------>
+            <a class="secondary btn-block go-back"  ui-sref="account.login">
+                {{ 'forms.auth.go_back' | translate }}
+            </a>
         </form>
     </div> <!-- / panel-body -->
 </div><!-- / panel-default -->
-</div> <!-- / col centered -->
-

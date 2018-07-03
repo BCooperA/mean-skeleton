@@ -1,30 +1,26 @@
 // =========================================================
-// APPLICATION BUTTONS
-// =========================================================
-
-// =========================================================
 // MAIN BUTTON STYLES
 // =========================================================
-.primary, .secondary, .default, .secondary-btn {
+.primary, .secondary, .default, .secondary-btn, .btn-social-rectangle {
   padding: 10px;
   font-size: 1.7rem;
   text-align: center;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-}//
+}
 .primary {
   background-color: #16b;
   background: linear-gradient(to bottom, #2d8cec,#16b);
   background: -webkit-linear-gradient(to bottom, #2d8cec, #16b);  /* Chrome 10-25, Safari 5.1-6 */
   border: 1px solid #0b4075;
   text-shadow: 0 1px 1px rgba(0,0,0,0.75);
-  color: #fdfdfd;
+  color: @basic-white;
 }
 .primary:after {
   font-family: 'Glyphicons Halflings', sans-serif;
-  color: #fdfdfd;
   content: "\e131";
+  color: @basic-white;
   float: right;
   right: 30px;
   position: absolute;
@@ -37,7 +33,7 @@
   border-image: none;
   border-style: solid;
   border-width: 1px;
-  color: white;
+  color: @basic-white;
   text-shadow: 0 1px 1px rgba(0,0,0,0.75);
 }
 .default {
@@ -50,45 +46,33 @@
   color: #000;
   text-shadow: 0 1px 1px rgba(255,255,255,.75);
 }
+
 // =========================================================
-// SOCIAL LOGIN BUTTONS (facebook, twitter, google)
+// SOCIAL BUTTONS (facebook, twitter, google)
 // =========================================================
 .btn-social-rectangle {
   border: 0 !important;
-  padding: 10px;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  color: #fdfdfd;
+  color: @basic-white;
   width: 100%;
-  text-align: center;
-
-  // font-awesome icon for social buttons
-  i.fa {
-    text-align: left !important;
-  }
 }
-.btn-social-rectangle:hover, .btn-social-rectangle:focus {
-  color: #fdfdfd !important;
+.btn-social-rectangle:hover {
+  color: @basic-white;
 }
 .btn-facebook, .btn-facebook:focus {
-  background-color: #306199;
+  background-color: @btn-facebook-bg;
 }
 .btn-facebook:hover {
-  background-color: #1f4066;
+  background-color: @btn-facebok-bg-hover;
 }
 .btn-twitter, .btn-twitter:focus {
-  background-color: #27C4F1;
+  background-color: @btn-twitter-bg;
 }
 .btn-twitter:hover {
-  background-color: #1bb8e5;
+  background-color: @btn-twitter-bg-hover;
 }
 .btn-google, .btn-google:focus {
-  background-color: #EA3F2E;
+  background-color: @btn-google-bg;
 }
 .btn-google:hover {
-  background-color: #b22e21;
-}
-.btn-social-rectangle:hover, .btn-social-rectangle:focus {
-  color: #fdfdfd !important;
+  background-color: @btn-google-bg-hover;
 }

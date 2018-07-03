@@ -1,15 +1,26 @@
 <div ng-hide="vm.loading" class="panel panel-default">
     <div class="panel-heading">
+        <!----------------------------
+            RESET FORM HEADLINE
+            ------------------------------>
         <h2 class="decorated">
             <span>{{ 'forms.auth.reset_form.headline' | translate }}</span>
         </h2>
     </div>
     <div class="panel-body">
-        <!-- reset form text -->
+        <!----------------------------
+            RESET FORM TEXT
+            ------------------------------>
         <p>{{ 'forms.auth.reset_form.text' | translate }}</p>
-        <form novalidate ng-submit="vm.reset()" name="passwordResetForm" class="auth-form noselect form-horizontal col-sm-12">
 
-            <!-- errors & messages -->
+        <!----------------------------
+            RESET FORM
+            ------------------------------>
+        <form novalidate ng-submit="vm.reset()"
+              name="passwordResetForm" class="auth-form noselect form-horizontal col-sm-12">
+            <!----------------------------
+                RESET FORM - ERRORS & MESSAGES
+                ------------------------------>
             <div ng-show="passwordResetForm.$submitted" inform>
                 {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
             </div>
@@ -17,27 +28,85 @@
             <div ng-if="vm.passwordReset" class="alert alert-success">
                 {{ vm.passwordResetMsg }}
             </div>
-
-            <!-- form-input-fields -->
+            <!----------------------------
+                RESET FORM - INPUT FIELDS
+                ------------------------------>
             <div class="form-input-fields">
                 <div class="input-group">
-                    <!-- password -->
-                    <span class="input-group-addon" id="reset-password"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input data-password-toggle ng-model="vm.password" required type="password" aria-describedby="reset-password" id="inputPassword" class="form-control" placeholder="{{ 'forms.auth.password' | translate }}">
+                    <!----------------------------
+                        RESET FORM - INPUT ICON
+                        ------------------------------>
+                    <span class="input-group-addon" id="reset-password"
+                          ng-class="{
+                          'has-error': (passwordResetForm.password.$dirty || passwordResetForm.$submitted) && (!passwordResetForm.password.$valid || !passwordResetForm.passwordVrf.$valid),
+                          'has-feedback':  passwordResetForm.password.$valid && passwordResetForm.passwordVrf.$valid
+                          }">
+                        <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <!----------------------------
+                        RESET FORM - INPUT FIELD - PASSWORD
+                        ------------------------------>
+                    <input type="password" required data-password-toggle
+                           id="inputPassword" class="form-control" aria-describedby="reset-password"
+                           placeholder="{{ 'forms.auth.password' | translate }}" name="password"
+                           ng-required="true" ng-model="vm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/"
+                           ng-class="{
+                           'has-error': (passwordResetForm.password.$dirty || passwordResetForm.$submitted) && (!passwordResetForm.password.$valid || !passwordResetForm.passwordVrf.$valid),
+                            'has-feedback':  passwordResetForm.passwordVrf.$valid && passwordResetForm.password.$valid
+                            }">
                 </div>
 
                 <div class="input-group">
-                    <!-- password verify -->
-                    <span class="input-group-addon" id="reset-password-vrf"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input required type="password" aria-describedby="reset-password-vrf" data-password-toggle ng-model="vm.passwordVrf" same-as="vm.password" name="passwordVrf" id="inputPasswordVerify" class="form-control" placeholder="{{ 'forms.auth.reset_form.passwordVerify' | translate }}">
-                </div>
-            </div> <!-- /form-input-fields -->
+                    <!----------------------------
+                        RESET FORM - INPUT ICON
+                        ------------------------------>
+                    <span class="input-group-addon" id="reset-password-vrf"
+                          ng-class="{
+                          'has-error': (passwordResetForm.password.$dirty || passwordResetForm.$submitted) && (!passwordResetForm.password.$valid || !passwordResetForm.passwordVrf.$valid),
+                          'has-feedback':  passwordResetForm.password.$valid && passwordResetForm.passwordVrf.$valid
+                          }">
+                        <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <!----------------------------
+                        RESET FORM - INPUT FIELD - PASSWORD VERIFY
+                        ------------------------------>
+                    <input type="password" required data-password-toggle same-as="vm.password"
+                           id="inputPasswordVerify" class="form-control" aria-describedby="reset-password-vrf"
+                           placeholder="{{ 'forms.auth.password_again' | translate }}" name="passwordVrf"
+                           ng-model="vm.passwordVrf" ng-required="true" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/"
+                           ng-class="{
+                           'has-error': (passwordResetForm.password.$dirty || passwordResetForm.$submitted) && (!passwordResetForm.password.$valid || !passwordResetForm.passwordVrf.$valid),
+                           'has-feedback':  passwordResetForm.passwordVrf.$valid && passwordResetForm.password.$valid
+                           }">
+                </div> <!-- /.input-group -->
 
-            <!-- reset button -->
-            <button type="submit" id="resetPassword" ng-disabled="vm.loading" class="primary btn-block">{{ 'forms.auth.reset_form.reset_btn' | translate }}</button>
+                <!----------------------------
+                    TEXT-BASED ERRORS
+                    ------------------------------>
+                <span ng-show="(passwordResetForm.password.$error.pattern || passwordResetForm.passwordVrf.$error.pattern) && (passwordResetForm.$submitted || passwordResetForm.password.$dirty || passwordResetForm.passwordVrf.$dirty)" class="help-block">
+                    <!-- error / pattern -->
+                    {{ 'forms.auth.signup_form.errors.password_pattern' | translate }}
+                </span>
 
-            <!-- back to login page -->
-            <a class="secondary btn-block go-back"  ui-sref="account.login">{{ 'forms.auth.go_back' | translate }}</a>
+                <span ng-show="(passwordResetForm.password.$modelValue !== passwordResetForm.passwordVrf.$modelValue) && (passwordResetForm.$submitted || passwordResetForm.passwordVrf.$dirty)" class="help-block">
+                    <!-- error / password don't match -->
+                    {{ 'forms.auth.signup_form.errors.password_nomatch' | translate }}
+                </span>
+            </div> <!-- /.form-input-fields -->
+
+            <!----------------------------
+                "RESET" - BTN
+                ------------------------------>
+            <button type="submit" id="resetPassword" ng-disabled="vm.loading || !passwordResetForm.$valid" class="primary btn-block">
+                {{ 'forms.auth.reset_form.reset_btn' | translate }}
+            </button>
+
+            <!----------------------------
+                 "GO BACK TO LOGIN PAGE" - BTN
+                ------------------------------>
+            <a class="secondary btn-block go-back"  ui-sref="account.login">
+                {{ 'forms.auth.go_back' | translate }}
+            </a>
         </form>
     </div> <!-- / panel-body -->
 </div><!-- / panel-default -->

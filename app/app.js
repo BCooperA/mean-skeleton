@@ -25,7 +25,7 @@
          */
         $httpProvider.interceptors.push("StatusInterceptor");
 
-        $httpProvider.interceptors.push('LoadingInterceptor');
+        //$httpProvider.interceptors.push('LoadingInterceptor');
 
         /**
          * use the HTML5 History API
@@ -82,7 +82,7 @@
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
-        $rootScope.lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "en" ;
+        //$rootScope.lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "en" ;
 
         // removes the hash from URL created by Facebook Login
         if (window.location.hash == '#_=_') {

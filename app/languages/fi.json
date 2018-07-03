@@ -23,9 +23,11 @@
       "sign_in_btn": "Kirjaudu",
       "sign_up_btn": "Rekisteröidy",
       "go_back": "Kirjautumissivulle",
+      "email_valid_email": "Syötä kelvollinen sähköpostiosoite",
 
       "signin_form": {
-        "headline": "Kirjaudu"
+        "headline": "Kirjaudu",
+        "social-login-text": "Tai"
       },
       "signup_form": {
         "headline": "Rekisteröidy",
@@ -37,7 +39,8 @@
           "emailAddr_exists": "Sähköpostisoite on jo rekisteröity",
           "password_required": "Salasana on pakollinen",
           "password_minlength": "Salasana on liian lyhyt",
-          "password_nomatch": "Salasanat eivät täsmää"
+          "password_nomatch": "Salasanat eivät täsmää",
+          "password_pattern": "Salasanan on oltava väh. 8 merkkiä, sisältää yhden numeron, vähintään yhden ison ja pienen kirjaimen"
         }
       },
       "recover_form": {

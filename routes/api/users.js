@@ -97,22 +97,20 @@ router.put('/user', auth.required, function(req, res, next) {
  */
 router.post('/users', [
     // validation
-    check('user.email')
+    check('user.email').isEmail().withMessage('Invalid e-mail address')
         .custom(function(value) {
             return User.findOne({email: value }).then(function(user) {
                 if(user) {
                     return Promise.reject('E-mail already in use');
                 }
             })
-        })
-        .isEmail().withMessage('Invalid e-mail address'),
+        }),
 
     check('user.name')
         .isLength({ min: 3 }).withMessage('Name is required'),
 
-    check('user.password')
-        .isLength({ min: 5 }).withMessage('must be at least 5 chars long')
-        .matches(/\d/).withMessage('Password must contain at least one number')
+    check('user.password').matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
+        .withMessage('Minimum of 8 chars, including one upper case and lower case letter and at least one digit.')
 ], function(req, res, next) {
 
     const errors = validationResult(req);

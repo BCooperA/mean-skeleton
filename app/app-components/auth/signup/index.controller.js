@@ -4,25 +4,24 @@
     angular
         .module('app')
         .controller('SignUp.IndexController', Controller)
-        .controller.$inject = ['$state', 'AuthenticationService'];
+        .controller.$inject = ['$state', 'AuthenticationService', '$rootScope'];
 
-    function Controller($state, AuthenticationService) {
+    function Controller($state, AuthenticationService, $rootScope) {
         var vm = this;
 
         vm.signUp = signUp;
 
         function signUp() {
-
+            $rootScope.loading = true;
             vm.loading = true;
             vm.name = vm.firstName + " " + vm.surName;
 
             AuthenticationService.SignUp(vm.email, vm.name, vm.password, function (result) {
                 if (result === true) {
-                    vm.loading = false;
                     $state.go('account.verify');
                 }
             });
-            vm.loading = false;
+            $rootScope.loading = false;
         }
     }
 

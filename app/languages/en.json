@@ -23,9 +23,11 @@
       "sign_in_btn": "Sign in",
       "sign_up_btn": "Sign up",
       "go_back": "Back to login page",
+      "email_valid_email": "Provide real email address",
 
       "signin_form": {
-        "headline": "Sign in"
+        "headline": "Sign in",
+        "social-login-text": "Or"
       },
       "signup_form": {
         "headline": "Sign up",
@@ -40,7 +42,8 @@
           "emailAddr_exists": "E-mail address is already taken",
           "password_required": "Password is required",
           "password_minlength": "Password is too short",
-          "password_nomatch": "Passwords doesn't match"
+          "password_nomatch": "Passwords doesn't match",
+          "password_pattern": "Password must contain at least 8 chars with at least one digit, upper case and lower case letter"
         }
       },
       "recover_form": {
