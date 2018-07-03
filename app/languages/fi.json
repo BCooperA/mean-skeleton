@@ -46,13 +46,15 @@
       "recover_form": {
         "headline": "Unohditko salasanasi?",
         "text": "Syötä sähköpostiosoite, jolla rekisteröidyit sivustolle. Lähetämme ohjeet antamaasi sähköpostiosoitteeseen.",
-        "submit_btn": "Lähetä ohjeet sähköpostiini"
+        "submit_btn": "Lähetä ohjeet sähköpostiini",
+        "recover_success": "Linkki salasanan resetoimiseen on lähetetty antamaasi sähköpostiosoitteeseen."
       },
       "reset_form": {
         "headline": "Restetoi salasana",
         "text": "Syötä salasana kahdesti alla oleviin kenttiin vaihtaaksesi salasanasi.",
         "passwordVerify": "Salasana uudelleen",
-        "reset_btn": "Vaihda salasana"
+        "reset_btn": "Vaihda salasana",
+        "reset_success": "Salasanasi on nyt vaihdettu."
       }
     }
   },

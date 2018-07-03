@@ -1,3 +1,4 @@
+<i ng-show="vm-loading" class="glyphicon glyphicon-cog loader"></i>
 <div ng-hide="vm.loading" class="panel panel-default">
     <div class="panel-heading">
         <!----------------------------
@@ -11,7 +12,7 @@
         <!----------------------------
             RECOVER FORM TEXT
             ------------------------------>
-        <p>{{ 'forms.auth.recover_form.text' | translate }}</p>
+        <p ng-hide="vm.mailSent">{{ 'forms.auth.recover_form.text' | translate }}</p>
 
         <!----------------------------
             RECOVER FORM
@@ -22,57 +23,61 @@
                 RECOVER FORM - ERRORS & MESSAGES
                 ------------------------------>
             <div inform class="inform-center" ng-show="passwordRecoveryForm.$submitted"></div>
-            <div ng-if="vm.mailSent" class="alert alert-success">{{ vm.mailSentMsg }}</div>
+            <div ng-if="vm.mailSent" class="alert alert-success">
+                {{ 'forms.auth.recover_form.recover_success' | translate }}
+            </div>
 
             <!----------------------------
                 RECOVER FORM - INPUT FIELDS
                 ------------------------------>
-            <div class="form-input-fields">
-                <div class="input-group">
+            <div class="hide-when-success" ng-hide="vm.mailSent">
+                <div class="form-input-fields">
+                    <div class="input-group">
 
-                    <!----------------------------
-                        RECOVER FORM - INPUT ICON
-                        ------------------------------>
-                    <span class="input-group-addon" id="addon-email"
-                          ng-class="{
+                        <!----------------------------
+                            RECOVER FORM - INPUT ICON
+                            ------------------------------>
+                        <span class="input-group-addon" id="addon-email"
+                              ng-class="{
                             'has-error' : (passwordRecoveryForm.$submitted || passwordRecoveryForm.email.$dirty) && !passwordRecoveryForm.email.$valid,
                             'has-feedback':  passwordRecoveryForm.email.$valid
                             }">
                         <span class="glyphicon glyphicon-envelope"></span>
                     </span>
 
-                    <!----------------------------------------
-                        RECOVER FORM - INPUT FIELD - EMAIL
-                        ---------------------------------------->
-                    <input type="email" required autofocus autocomplete="off"
-                           id="inputEmail" class="form-control" aria-describedby="addon-email"
-                           placeholder="{{ 'forms.auth.email' | translate }}" name="email"
-                           ng-model="vm.email" ng-required="true"
-                           ng-class="{
+                        <!----------------------------------------
+                            RECOVER FORM - INPUT FIELD - EMAIL
+                            ---------------------------------------->
+                        <input type="email" required autofocus autocomplete="off"
+                               id="inputEmail" class="form-control" aria-describedby="addon-email"
+                               placeholder="{{ 'forms.auth.email' | translate }}" name="email"
+                               ng-model="vm.email" ng-required="true"
+                               ng-class="{
                            'has-error' : (passwordRecoveryForm.$submitted || passwordRecoveryForm.email.$dirty) && !passwordRecoveryForm.email.$valid,
                            'has-feedback':  passwordRecoveryForm.email.$valid
                            }">
-                </div>
+                    </div>
 
-                <!----------------------------
-                    TEXT-BASED ERRORS
-                    ------------------------------>
-                <span class="help-block" ng-show="passwordRecoveryForm.email.$error.required && (passwordRecoveryForm.$submitted || passwordRecoveryForm.email.$dirty)" >
+                    <!----------------------------
+                        TEXT-BASED ERRORS
+                        ------------------------------>
+                    <span class="help-block" ng-show="passwordRecoveryForm.email.$error.required && (passwordRecoveryForm.$submitted || passwordRecoveryForm.email.$dirty)" >
                     <!-- error / required -->
                     {{ 'forms.auth.signup_form.errors.email_required' | translate }}
                 </span>
-                <span class="help-block" ng-show="passwordRecoveryForm.email.$error.email && (passwordRecoveryForm.$submitted || passwordRecoveryForm.email.$dirty)">
+                    <span class="help-block" ng-show="passwordRecoveryForm.email.$error.email && (passwordRecoveryForm.$submitted || passwordRecoveryForm.email.$dirty)">
                    <!-- error / email -->
                     {{ 'forms.auth.email_valid_email' | translate }}
                 </span>
-            </div> <!-- /form-input-fields -->
+                </div> <!-- /form-input-fields -->
 
-            <!----------------------------
-                "RECOVER" - BTN
-                ------------------------------>
-            <button ng-disabled="!passwordRecoveryForm.$valid" type="submit"  id="recover" ng-hide="vm.loading" class="primary btn-block">
-                {{ 'forms.auth.recover_form.submit_btn' | translate }}
-            </button>
+                <!----------------------------
+                    "RECOVER" - BTN
+                    ------------------------------>
+                <button ng-disabled="!passwordRecoveryForm.$valid" type="submit"  id="recover" ng-hide="vm.loading" class="primary btn-block">
+                    {{ 'forms.auth.recover_form.submit_btn' | translate }}
+                </button>
+            </div> <!-- / .hide-when-success -->
 
             <!----------------------------
                  "GO BACK TO LOGIN PAGE" - BTN

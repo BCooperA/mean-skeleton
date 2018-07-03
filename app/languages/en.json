@@ -49,13 +49,15 @@
       "recover_form": {
         "headline": "Forgot your password?",
         "text": "Enter the email address you used when you joined and we’ll send you instructions to reset your password.",
-        "submit_btn": "Send instructions by email"
+        "submit_btn": "Send instructions by email",
+        "recover_success": "A link to reset your password has been sent to provided e-mail address."
       },
       "reset_form": {
         "headline": "Reset your password",
         "text": "Enter your new password twice below to change your password.",
         "passwordVerify": "Re-type password",
-        "reset_btn": "Reset password"
+        "reset_btn": "Reset password",
+        "reset_success": "Your password is now changed."
       }
     }
   },

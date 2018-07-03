@@ -26,7 +26,6 @@
                 }
             });
             vm.loading = false;
-            // enable login btn
         };
     }
 

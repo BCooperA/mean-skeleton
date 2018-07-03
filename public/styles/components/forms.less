@@ -31,7 +31,12 @@ APPLICATION - FORMS
     }
   }
 }
-
+h2.decorated {
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+h2.decorated > span:before, h2.decorated > span:after {
+  color: #002f4f;
+}
 /* ------------ form (signup, signin, recover, reset)  ------------ */
 form.auth-form {
   margin: 0 auto;
@@ -67,6 +72,12 @@ form.auth-form {
     box-shadow: none;
     color: #333;
     background-color: #efefef;
+  }
+  .input-group .form-control:first-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 
   /* ------------ INPUT FIELD - ERRORS / FEEDBACK ------------ */
@@ -164,9 +175,10 @@ form.auth-form {
     color: @basic-white;
     text-transform: uppercase;
   }
-  h3.decorated > span:before, .decorated > span:after {
+  h3.decorated > span:before, h3.decorated > span:after {
     // lines on-side "OR" text
     color: #002f4f;
+    //
   }
   .social-login {
     // wrapper

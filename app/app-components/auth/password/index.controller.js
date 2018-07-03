@@ -12,38 +12,30 @@
         vm.loading = false;
         vm.mailSent = false;
         vm.mailSentMsg = '';
+        vm.passwordReset = false;
         vm.recover = recover;
         vm.reset = reset;
 
-        // send password recover instructions via e-mail
         function recover() {
             vm.loading = true;
             AuthenticationService.recoverPassword(vm.email, function(result) {
                 if(result === true) {
-                    // indicates that the mail was sent
-                    vm.loading = false;
                     vm.mailSent = true;
-                    vm.mailSentMsg = 'A link to reset your password has been sent to provided e-mail address.';
                 }
             });
-            vm.loading = false;
-
         }
 
         function reset() {
             vm.loading = true;
-
             AuthenticationService.resetPassword($state.params.token, vm.password, vm.passwordVrf, function(result) {
                 if(result) {
                     // indicates that the mail was sent
                     vm.loading = false;
                     vm.passwordReset = true;
-                    vm.passwordResetMsg = 'Your password is now changed';
+                } else {
+                    vm.loading = false;
                 }
             });
-            vm.loading = false;
-
         }
     }
-
 })();
