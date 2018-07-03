@@ -23,6 +23,7 @@
                     vm.mailSent = true;
                 }
             });
+            vm.loading = false;
         }
 
         function reset() {
@@ -32,10 +33,9 @@
                     // indicates that the mail was sent
                     vm.loading = false;
                     vm.passwordReset = true;
-                } else {
-                    vm.loading = false;
                 }
             });
+            vm.loading = false;
         }
     }
 })();
